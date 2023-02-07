@@ -1,6 +1,7 @@
+import Link from 'next/link';
 import React from 'react';
 import { RxCross1 } from 'react-icons/rx';
-function DropDown({ showBar }) {
+function DropDown({ showBar, filtered }) {
   return (
     <div className="text-blue-900">
       <div onClick={showBar} className=" absolute right-2 p-4 cursor-pointer">
@@ -13,12 +14,18 @@ function DropDown({ showBar }) {
           placeholder=" Search..."
         />
       </div>
-      <div className=" text-center pt-10 space-y-5 text-3xl">
-        <p className="cursor-pointer">New</p>
-        <p className=" text-red-600 cursor-pointer">New Year Sale </p>
-        <p className="cursor-pointer">Tunics</p>
-        <p className="cursor-pointer">Jackets</p>
-        <p className="cursor-pointer">Knitwear</p>
+      <div className=" text-center pt-10 flex flex-col space-y-3 text-3xl">
+        <p className=" text-red-500">New Year's Sale</p>
+        {filtered?.map((e, i) => (
+          <Link href={`/category/${e.category}`}>
+            <p className="cursor-pointer" key={i}>
+              {e.category}
+            </p>
+          </Link>
+        ))}
+        <div>
+          <p>Login</p>
+        </div>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ function Carousels() {
         <Carousel
           autoPlay
           infiniteLoop
-          showArrows={false}
+          showArrows={true}
           showStatus={false}
           showThumbs={false}
           interval={3000}
@@ -28,7 +28,7 @@ function Carousels() {
         <Carousel
           autoPlay
           infiniteLoop
-          showArrows={false}
+          showArrows={true}
           showStatus={false}
           showThumbs={false}
           interval={3000}

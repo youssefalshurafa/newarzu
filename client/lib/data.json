@@ -1,193 +1,272 @@
 [
   {
     "id": 1,
-    "title": "Spaghetti Strap Vest",
-    "description": "An apple mobile which is nothing like apple",
-    "price": 79,
-    "discountPercentage": 12.96,
-    "rating": 4.69,
-    "stock": 94,
-    "category": "Tops & Tshirts",
-    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/04/spaghetti-strap-vest2-1.jpg",
+    "title": "Belted-Waist Cotton Dress",
+    "description": "Summer’s correct answer has to be this cotton jumpsuit. This lightweight design is detailed with a waist-cinching drawstring cord. Rest with short sleeves, and a shawl lapel.",
+    "price": 139,
+    "material": "100% Cotton",
+    "stock": 139,
+    "category": "Home Wear",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/01/jhnqhzZEKJ7WoqAcdyYozEqtN8AliCz8J4XctJVL.jpg",
     "images": [
-      "https://naploungewear.com/wp-content/uploads/2022/04/spaghetti-strap-vest3.jpg"
+      "https://naploungewear.com/wp-content/uploads/2022/01/wm9ja8fucueoxgFbSIwOdG1ooAunNAUgCxUUQSrL.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/6Q6jy0uL7Asx2PbxEpk4PPEhRNAueYBPE73EGCsw.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/YZHZp7bSnMS90v5f2FC4hO0v7GZYSekuVV8cleN1.jpg"
     ]
   },
   {
     "id": 2,
-    "title": "iPhone X",
-    "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-    "price": 899,
-    "discountPercentage": 17.94,
-    "rating": 4.44,
-    "stock": 34,
-    "brand": "Apple",
-    "category": "smartphones",
-    "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+    "title": "Cotton Hooded Sweatshirt Dress",
+    "description": "ARZU keeps making items that can be an ideal pick for relaxed days. This piece has a cocooning hood that crosses over at the front, then is completed with draped shoulder and long sleeves.",
+    "price": 79,
+    "material": "100% Cotton",
+    "stock": 139,
+    "category": "Home Wear",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/08/cotton-hooded-sweatshirt-dress0.jpg",
     "images": [
-      "https://i.dummyjson.com/data/products/2/1.jpg",
-      "https://i.dummyjson.com/data/products/2/2.jpg",
-      "https://i.dummyjson.com/data/products/2/3.jpg",
-      "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+      "https://naploungewear.com/wp-content/uploads/2022/08/cotton-hooded-sweatshirt-dress4.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/08/cotton-hooded-sweatshirt-dress1.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/08/cotton-hooded-sweatshirt-dress3.jpg"
     ]
   },
   {
     "id": 3,
-    "title": "Samsung Universe 9",
-    "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
-    "price": 1249,
-    "discountPercentage": 15.46,
-    "rating": 4.09,
-    "stock": 36,
-    "brand": "Samsung",
-    "category": "smartphones",
-    "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-    "images": ["https://i.dummyjson.com/data/products/3/1.jpg"]
+    "title": "Ruffle Tiered Cotton Dress",
+    "description": "Presents a new take on the latest collection. Crafted from cotton and cut to a tiered look. The drawstring sleeve design pair with slight ruffle detail.",
+    "price": 159,
+    "material": "100% Cotton",
+    "stock": 139,
+    "category": "Home Wear",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/01/1jo4WnMQaTt0WCwv7Dbm3BqrUySDur5NLaWrCxW1.jpg",
+    "images": [
+      "https://naploungewear.com/wp-content/uploads/2022/01/d3f7ku6vIXF1XOK1WPdgUIuztfDV0SmHh0Me5bTT.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/qQp5VtQFlUKbTgjm2rrFwraRLTtMnaSfvykI2RTm.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/7U8P1TIvDv05C2jsKANzXwBTU4zaUkfozaazCIGW.jpg"
+    ]
   },
   {
     "id": 4,
-    "title": "OPPOF19",
-    "description": "OPPO F19 is officially announced on April 2021.",
-    "price": 280,
-    "discountPercentage": 17.91,
-    "rating": 4.3,
-    "stock": 123,
-    "brand": "OPPO",
-    "category": "smartphones",
-    "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+    "title": "Short-Sleeved Cotton Hoodie",
+    "description": "Refined casual silhouette, as proven by this hoodie. Constructed with short sleeves, and drawstring hood. The kangaroo pocket can take your belonging conveniently.",
+    "price": 79,
+    "material": "100% Cotton",
+    "stock": 159,
+    "category": "Home Wear",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/01/fLwX0vucJo3PhDpKZlGqGRrDDU7lTRejyJvFjVx2.jpg",
     "images": [
-      "https://i.dummyjson.com/data/products/4/1.jpg",
-      "https://i.dummyjson.com/data/products/4/2.jpg",
-      "https://i.dummyjson.com/data/products/4/3.jpg",
-      "https://i.dummyjson.com/data/products/4/4.jpg",
-      "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+      "https://naploungewear.com/wp-content/uploads/2022/01/JqGpkTCk48HDGQuCbsTlZtOdXSb3TsLbg5Wm5LiM.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/uv4er5lQe05yxuP1perbaCSLOMpESh3Cr2AuGlm5.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/hNQk1zOyYwzV1qrv6lVMrs1X36imQPYR8CNO879Y.jpg"
     ]
   },
   {
     "id": 5,
-    "title": "Huawei P30",
-    "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
-    "price": 499,
-    "discountPercentage": 10.58,
-    "rating": 4.09,
-    "stock": 32,
-    "brand": "Huawei",
-    "category": "smartphones",
-    "thumbnail": "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
+    "title": "Cinched-Waist Zip Hoodie",
+    "description": "Performance a slouchy look and create a more subtle appearance. The cinched detail at the waist can show a perfect body curve. Then finished with a drawstring hood, and ribbed edge.",
+    "price": 144,
+    "material": "100% Cotton",
+    "stock": 139,
+    "category": "Home Wear",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/08/cinched-waist-zip-hoodie0.jpg",
     "images": [
-      "https://i.dummyjson.com/data/products/5/1.jpg",
-      "https://i.dummyjson.com/data/products/5/2.jpg",
-      "https://i.dummyjson.com/data/products/5/3.jpg"
+      "https://naploungewear.com/wp-content/uploads/2022/08/cinched-waist-zip-hoodie3.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/08/cinched-waist-zip-hoodie1.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/08/cinched-waist-zip-hoodie4.jpg"
     ]
   },
   {
     "id": 6,
-    "title": "MacBook Pro",
-    "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
-    "price": 1749,
-    "discountPercentage": 11.02,
-    "rating": 4.57,
-    "stock": 83,
-    "brand": "APPle",
-    "category": "laptops",
-    "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+    "title": "Boxy Turtleneck Sweatshirt",
+    "description": " This top is framed to an oversized silhouette from cotton, which is soft-to-touch. Designing with puffed sleeves and a turtleneck makes a slouchy mood for your daily outlook.",
+    "price": 79,
+    "material": "100% Cotton",
+    "stock": 139,
+    "category": "Home Wear",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2021/11/Boxy-Turtleneck-Sweatshirt-Ivory-2.jpg",
     "images": [
-      "https://i.dummyjson.com/data/products/6/1.png",
-      "https://i.dummyjson.com/data/products/6/2.jpg",
-      "https://i.dummyjson.com/data/products/6/3.png",
-      "https://i.dummyjson.com/data/products/6/4.jpg"
+      "https://naploungewear.com/wp-content/uploads/2021/11/Boxy-Turtleneck-Sweatshirt-Ivory-6.jpg",
+      "https://naploungewear.com/wp-content/uploads/2021/11/Boxy-Turtleneck-Sweatshirt-Ivory-3.jpg",
+      "https://naploungewear.com/wp-content/uploads/2021/11/Boxy-Turtleneck-Sweatshirt-Ivory-5.jpg"
     ]
   },
   {
     "id": 7,
-    "title": "Samsung Galaxy Book",
-    "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
-    "price": 1499,
-    "discountPercentage": 4.15,
-    "rating": 4.25,
-    "stock": 50,
-    "brand": "Samsung",
-    "category": "laptops",
-    "thumbnail": "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
+    "title": "Oversized Zip Up Hoodie",
+    "description": "Update your casual wear collection with NAP. This zipped hoodie is a safe choice for keeping cozy. Featuring a drawstring hood, dropped shoulder, zipped front fastening, side pockets. You must have a garment on a cold day.",
+    "price": 89,
+    "material": "100% Cotton",
+    "stock": 139,
+    "category": "Knit Wear",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2021/10/Oversized-Zip-Up-Hoodie-Stone-Blue-1-1.jpg",
     "images": [
-      "https://i.dummyjson.com/data/products/7/1.jpg",
-      "https://i.dummyjson.com/data/products/7/2.jpg",
-      "https://i.dummyjson.com/data/products/7/3.jpg",
-      "https://i.dummyjson.com/data/products/7/thumbnail.jpg"
+      "https://naploungewear.com/wp-content/uploads/2021/10/Oversized-Zip-Up-Hoodie-Stone-Blue-6.jpg",
+      "https://naploungewear.com/wp-content/uploads/2021/10/Oversized-Zip-Up-Hoodie-Stone-Blue-2.jpg",
+      "https://naploungewear.com/wp-content/uploads/2021/10/Oversized-Zip-Up-Hoodie-Stone-Blue-4.jpg"
     ]
   },
   {
     "id": 8,
-    "title": "Microsoft Surface Laptop 4",
-    "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
-    "price": 1499,
-    "discountPercentage": 10.23,
-    "rating": 4.43,
-    "stock": 68,
-    "brand": "Microsoft Surface",
-    "category": "laptops",
-    "thumbnail": "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
+    "title": "Box-Cut Ample Cardi",
+    "description": "A box-cut oversize classic drapes beautifully in 100% stockinette woven wool. Offering a mock neck design, long sleeves with two substantial-sized front pockets, and jumbo buttons. Rib-trim hemmed.",
+    "price": 79,
+    "material": "100% Wool",
+    "stock": 339,
+    "category": "Knit Wear",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2021/01/20201211nap3366.jpg",
     "images": [
-      "https://i.dummyjson.com/data/products/8/1.jpg",
-      "https://i.dummyjson.com/data/products/8/2.jpg",
-      "https://i.dummyjson.com/data/products/8/3.jpg",
-      "https://i.dummyjson.com/data/products/8/4.jpg",
-      "https://i.dummyjson.com/data/products/8/thumbnail.jpg"
+      "https://naploungewear.com/wp-content/uploads/2021/01/20201211nap3415.jpg",
+      "https://naploungewear.com/wp-content/uploads/2021/01/20201211nap3416.jpg",
+      "https://naploungewear.com/wp-content/uploads/2021/01/20201211nap3411.jpg"
     ]
   },
   {
     "id": 9,
-    "title": "Infinix INBOOK",
-    "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
-    "price": 1099,
-    "discountPercentage": 11.83,
-    "rating": 4.54,
-    "stock": 96,
-    "brand": "Infinix",
-    "category": "laptops",
-    "thumbnail": "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
+    "title": "Plush Cashmere Rib-Knit Cardigan",
+    "description": "Classic rib-knit cardigan with an oversized, gently draped, body-hugging fit. Plush and fleecy-soft, letting you stay comfy-warm whilst being effortlessly trendy. An easy throw-on winter essential.",
+    "price": 399,
+    "material": "100% CASHMERE",
+    "stock": 139,
+    "category": "Knit Wear",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2021/11/Plush-Cashmere-Rib-Knit-Cardiganhazel1.jpeg",
     "images": [
-      "https://i.dummyjson.com/data/products/9/1.jpg",
-      "https://i.dummyjson.com/data/products/9/2.png",
-      "https://i.dummyjson.com/data/products/9/3.png",
-      "https://i.dummyjson.com/data/products/9/4.jpg",
-      "https://i.dummyjson.com/data/products/9/thumbnail.jpg"
+      "https://naploungewear.com/wp-content/uploads/2021/11/Plush-Cashmere-Rib-Knit-Cardiganhazel3.jpeg",
+      "https://naploungewear.com/wp-content/uploads/2021/11/Plush-Cashmere-Rib-Knit-Cardiganhazel6.jpeg",
+      "https://naploungewear.com/wp-content/uploads/2021/11/Plush-Cashmere-Rib-Knit-Cardiganhazel7.jpeg"
     ]
   },
   {
     "id": 10,
-    "title": "HP Pavilion 15-DK1056WM",
-    "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
-    "price": 1099,
-    "discountPercentage": 6.18,
-    "rating": 4.43,
-    "stock": 89,
-    "brand": "HP Pavilion",
-    "category": "laptops",
-    "thumbnail": "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
+    "title": "Wrap-Effect Cropped Top",
+    "description": "Crop it like it’s hot. This tank top is designed with thin shoulder straps. Pick waist ribbon to secure the vest for a wrap-effect. Knot a bow tie!",
+    "price": 79,
+    "material": "100% Polyester",
+    "stock": 139,
+    "category": "Tops & Tshirts",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/01/ssCv2Y6pjsjbSLd9BdKGp1XXs5bN4N99qfrQNXXV.jpg",
     "images": [
-      "https://i.dummyjson.com/data/products/10/1.jpg",
-      "https://i.dummyjson.com/data/products/10/2.jpg",
-      "https://i.dummyjson.com/data/products/10/3.jpg",
-      "https://i.dummyjson.com/data/products/10/thumbnail.jpeg"
+      "https://naploungewear.com/wp-content/uploads/2022/01/OGgpqux35YA9kHG1uQYtSgAlcyvbXBhU8Da1jnOp.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/x2aPjDdnpNihO1vgC4F8qELyvbUENrqB6U4RCgZF-1.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/h3dJDNLHXlAyUdh2BFFQ55zy34bYFJYOfbQwGi4F.jpg"
     ]
   },
   {
     "id": 11,
-    "title": "perfume Oil",
-    "description": "Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar perfume Oil",
-    "price": 13,
-    "discountPercentage": 8.4,
-    "rating": 4.26,
-    "stock": 65,
-    "brand": "Impression of Acqua Di Gio",
-    "category": "fragrances",
-    "thumbnail": "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
+    "title": "Asymmetric Knitted Sleeveless Top",
+    "description": "-Slim fit -Oblique V-neck -Irregular cuff -High stretch",
+    "price": 99,
+    "material": "96% Acetate 4% Spandex",
+    "stock": 139,
+    "category": "Tops & Tshirts",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/01/jXWm7nJZmG60QiZGwHZCh4o2akRAPUleuY1oRZvb.jpg",
     "images": [
-      "https://i.dummyjson.com/data/products/11/1.jpg",
-      "https://i.dummyjson.com/data/products/11/2.jpg",
-      "https://i.dummyjson.com/data/products/11/3.jpg",
-      "https://i.dummyjson.com/data/products/11/thumbnail.jpg"
+      "https://naploungewear.com/wp-content/uploads/2022/01/jkKZ0RfkAmxAxOT9u0t7YvWw71u3eGFu3UrHWUXR.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/XgMUtkzJQaOtWMVTZ65BoRpronkzLeZ4P8QmI2pU.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/bkoqpvIiRy2G173QjsJGUjn8CwVtPHilvnmazfsC.jpg"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Round Neck Sleeveless Top",
+    "description": "Remaining true to its timeless aesthetic. This soft pull-on chamber sleeveless tops with a relaxed fit. Decorates with Vertical Stripes.",
+    "price": 59,
+    "material": "92%Cotton 6%Polyester 2%Spandex",
+    "stock": 139,
+    "category": "Tops & Tshirts",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/03/round-neck-sleeveless-top0.jpg",
+    "images": [
+      "https://naploungewear.com/wp-content/uploads/2022/03/round-neck-sleeveless-top3-1.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/03/round-neck-sleeveless-top4-1.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/03/round-neck-sleeveless-top1-1.jpg"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Irregular Hem Self Tie Top",
+    "description": "-Loose fit-Round neck-Spaghetti strap -Irregular hem",
+    "price": 149,
+    "material": "100% Polyester",
+    "stock": 139,
+    "category": "Tops & Tshirts",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/04/irregular-hem-self-tie-top0-1.jpg",
+    "images": [
+      "https://naploungewear.com/wp-content/uploads/2022/04/irregular-hem-self-tie-top3.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/04/irregular-hem-self-tie-top1.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/04/irregular-hem-self-tie-top5.jpg"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Ribbed Turtleneck Knit Top",
+    "description": "This piece is cool girl’s essential. Cut to a cropped and skinny fit. Pair with long sleeves and a turtleneck. The asymmetric hem is its special point.",
+    "price": 79,
+    "material": "92% Rayon 8% Spandex",
+    "stock": 139,
+    "category": "Tops & Tshirts",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/01/vsaw8jDzNPjJXTjIyNGRshBL4HMucWPHg3z0eiDn.jpg",
+    "images": [
+      "https://naploungewear.com/wp-content/uploads/2022/01/FPXvW1UguOR32pe9Crg0OSJwwH27S4gCVfblsrN0.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/T430aevVc0ve9C3MEUrrK4aKnBPOfA7N4DEit7hx.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/24TPfcWs3Qw1hinqI2ApySsTYurFQZsOCPGlnT3i.jpg"
+    ]
+  },
+  {
+    "id": 15,
+    "title": "A-Line Lounge Set",
+    "description": "This set features a unique design of slant cut and A-line detail. It offers a tight-stitch stockinette weave with a comfy-thick feel, finished with rib-trim hemming.",
+    "price": 299,
+    "material": "100% Cotton",
+    "stock": 139,
+    "category": "Sets",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2021/11/A-Line-Lounge-Set12.jpeg",
+    "images": [
+      "https://naploungewear.com/wp-content/uploads/2021/11/A-Line-Lounge-Set10.jpeg",
+      "https://naploungewear.com/wp-content/uploads/2021/11/A-Line-Lounge-Set4.jpeg",
+      "https://naploungewear.com/wp-content/uploads/2021/11/A-Line-Lounge-Set11.jpeg"
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Flowy Cardigan Set",
+    "description": "All you need, NAP will provide for you. This cardigan is made from Modal and built into a longline cut. The shoulder has a pleated design with puff sleeves. Open-front can let you feel flowing.",
+    "price": 259,
+    "material": "100% Cotton",
+    "stock": 139,
+    "category": "Sets",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/04/flowy-cardigan-set-orange-1.jpg",
+    "images": [
+      "https://naploungewear.com/wp-content/uploads/2022/04/flowy-cardigan-set-orange-5.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/04/flowy-cardigan-set-orange-3.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/04/flowy-cardigan-set-orange-6.jpg"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Belted-Waist Cotton Dress",
+    "description": "Summer’s correct answer has to be this cotton jumpsuit. This lightweight design is detailed with a waist-cinching drawstring cord. Rest with short sleeves, and a shawl lapel.",
+    "price": 79,
+    "material": "100% Cotton",
+    "stock": 139,
+    "category": "Sets",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2022/01/jhnqhzZEKJ7WoqAcdyYozEqtN8AliCz8J4XctJVL.jpg",
+    "images": [
+      "https://naploungewear.com/wp-content/uploads/2022/01/wm9ja8fucueoxgFbSIwOdG1ooAunNAUgCxUUQSrL.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/6Q6jy0uL7Asx2PbxEpk4PPEhRNAueYBPE73EGCsw.jpg",
+      "https://naploungewear.com/wp-content/uploads/2022/01/YZHZp7bSnMS90v5f2FC4hO0v7GZYSekuVV8cleN1.jpg"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Recliner Classic PJ Set",
+    "description": "We want nothing more than to just lounge around in a comfy set of PJ’s! So if you have tried those old fashion pajamas, this one is for you!",
+    "price": 79,
+    "material": " 86%Rayon 14%Polyester",
+    "stock": 139,
+    "category": "Sets",
+    "thumbnail": "https://naploungewear.com/wp-content/uploads/2021/09/Recliner-Classic-PJ-Set-Ivory-1.jpg",
+    "images": [
+      "https://naploungewear.com/wp-content/uploads/2021/09/Recliner-Classic-PJ-Set-Ivory-5.jpg",
+      "https://naploungewear.com/wp-content/uploads/2021/09/Recliner-Classic-PJ-Set-Ivory-6.jpg",
+      "https://naploungewear.com/wp-content/uploads/2021/09/Recliner-Classic-PJ-Set-Ivory-3.jpg"
     ]
   }
 ]
