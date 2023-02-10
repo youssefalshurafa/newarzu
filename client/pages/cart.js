@@ -79,6 +79,7 @@ function Cart() {
                     <p>Subtotal</p>
                     <p>${total}</p>
                   </div>
+
                   {shippingRate > 0 ? (
                     <div className="flex justify-between mx-4 py-4">
                       <p>Shipping</p>
@@ -91,9 +92,15 @@ function Cart() {
                   ) : (
                     <></>
                   )}
+
                   <div className="py-4 flex justify-between mx-4">
                     <p>Total</p>
                     <p>${total + shippingRate}</p>
+                  </div>
+                  <div className=" text-center pb-4">
+                    <button className="  border border-solid font-poppins border-neutral-700 px-2 bg-neutral-700 text-white hover:bg-white hover:text-neutral-700">
+                      Proceed To Checkout
+                    </button>
                   </div>
                 </div>
               ) : (
