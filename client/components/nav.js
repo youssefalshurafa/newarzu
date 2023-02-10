@@ -22,7 +22,7 @@ function NavBar({ showBar, filtered }) {
             : 'flex w-full pl-5 pt-1 justify-between text-neutral-700 '
         }
       >
-        <div className="text-xl font-poppins font-semibold  tracking-wider justify-between ">
+        <div className="text-2xl font-poppins font-semibold  tracking-wider justify-between ">
           <Link href="/">
             <h1>Arzu</h1>
           </Link>

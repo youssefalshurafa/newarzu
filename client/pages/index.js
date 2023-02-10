@@ -6,8 +6,9 @@ import NavBar from '@/components/nav';
 import Head from 'next/head';
 import data from '../lib/data.json';
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 
-export default function Home() {
+function Home() {
   const homeWear = data.find((product) => {
     return product.category == 'Home Wear';
   });
@@ -80,3 +81,5 @@ export default function Home() {
     </>
   );
 }
+
+export default dynamic(() => Promise.resolve(Home), { ssr: false });

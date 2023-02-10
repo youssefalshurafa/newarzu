@@ -10,7 +10,8 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import data from '../../lib/data.json';
 import { addToBag } from '@/slices/bagSlice';
-export default function ProductPage() {
+import dynamic from 'next/dynamic';
+function ProductPage() {
   const { query } = useRouter();
   const { product } = query;
   const productName = data.find((x) => x.title == product);
@@ -137,3 +138,5 @@ export default function ProductPage() {
     </>
   );
 }
+
+export default dynamic(() => Promise.resolve(ProductPage), { ssr: false });

@@ -3,12 +3,13 @@ import Footer from '@/components/footer';
 
 import NavBar from '@/components/nav';
 import { Card, CardContent } from '@mui/material';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import data from '../../lib/data.json';
-export default function CategoryPage() {
+function CategoryPage() {
   const { query } = useRouter();
   const { category } = query;
   const catName = data.filter((x) => x.category == category);
@@ -81,3 +82,4 @@ export default function CategoryPage() {
     </>
   );
 }
+export default dynamic(() => Promise.resolve(CategoryPage), { ssr: false });
