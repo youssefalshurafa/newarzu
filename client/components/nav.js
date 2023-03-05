@@ -12,7 +12,6 @@ function NavBar({ showBar, filtered }) {
   const [bagItems, setBagItems] = useState(0);
   const total = items.map((item, i) => item.cartQuantity * 1);
   const sum = total.reduce((sum, a) => sum + a, 0);
-  console.log(sum);
   return (
     <div>
       <div
@@ -40,7 +39,9 @@ function NavBar({ showBar, filtered }) {
         </div>
         <div className="flex  space-x-3 px-8">
           <div className="cursor-pointer">
-            <HiUser size={28} />
+            <Link href={'/login'}>
+              <HiUser size={28} />
+            </Link>
           </div>
           <div className="cursor-pointer">
             <Link href={'/cart'}>

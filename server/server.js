@@ -2,20 +2,25 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import connect from './database/conn.js';
+import router from './router/routes.js';
+import * as dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
+dotenv.config();
 const app = express();
 
 app.use(express.json());
 app.use(morgan('tiny'));
+app.use(cors());
+app.use(cookieParser());
 const port = 5000;
 
-app.get('/', (req, res) => {
-  res.status(201).json('HOME GET REQUEST');
-});
+app.use('/', router);
 
 connect()
   .then(() => {
     try {
+      console.log('DB connected');
       app.listen(port, () => {
         console.log(`server connected to http://localhost:${port}`);
       });
