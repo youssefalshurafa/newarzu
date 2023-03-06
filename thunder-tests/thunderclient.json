@@ -31,12 +31,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-02-23T12:28:27.537Z",
-    "modified": "2023-03-02T13:53:47.736Z",
+    "modified": "2023-03-06T18:15:22.333Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"username\": \"Walt\",\n  \"email\": \"walt@gmail.com\",\n  \"pwd\": \"Aa@12345\"\n}",
+      "raw": "{\n  \"username\": \"noor2\",\n  \"email\": \"noor2@gmail.com\",\n  \"pwd\": \"Aa@12345\"\n}",
       "form": []
     },
     "tests": []
@@ -68,12 +68,12 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2023-02-27T17:10:14.725Z",
-    "modified": "2023-03-02T14:26:39.319Z",
+    "modified": "2023-03-06T18:21:01.411Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"username\": \"youssef\",\n  \"pwd\": \"Aa@12345\"\n}",
+      "raw": "{\n  \"username\": \"noor2\",\n  \"pwd\": \"Aa@12345345\"\n}",
       "form": []
     },
     "tests": []

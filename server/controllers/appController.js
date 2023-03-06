@@ -15,7 +15,7 @@ export async function Register(req, res) {
   if (duplicateUser)
     return res.status(409).json({ message: 'Username already exists' });
   if (duplicateEmail)
-    return res.status(409).json({ message: 'Email address already exists' });
+    return res.status(408).json({ message: 'Email address already exists' });
 
   try {
     const hashedPwd = await bcrypt.hash(pwd, 10);
@@ -33,45 +33,51 @@ export async function Register(req, res) {
 export async function Login(req, res) {
   const { username, pwd } = req.body;
   if (!username || !pwd)
-    return res
-      .sendStatus(400)
-      .json({ msg: 'username and password are required' });
+    return res.status(400).json({ msg: 'username and password are required' });
   const foundUser = await UserModel.findOne({ username: username }).exec();
   if (!foundUser) return res.status(404).json({ msg: 'User Not Found!' });
-  const match = bcrypt.compare(pwd, foundUser.password);
-  if (match) {
-    const roles = Object.values(foundUser.roles).filter(Boolean);
-    const accessToken = jwt.sign(
-      {
-        UserInfo: {
-          username: foundUser.username,
-          roles: roles,
-        },
-      },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '30s' }
-    );
-    const refreshToken = jwt.sign(
-      {
-        username: foundUser.username,
-      },
-      process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: '1d' }
-    );
+  bcrypt
+    .compare(pwd, foundUser.password)
+    .then(async (match) => {
+      if (match) {
+        const roles = Object.values(foundUser.roles).filter(Boolean);
+        const accessToken = jwt.sign(
+          {
+            UserInfo: {
+              username: foundUser.username,
+              roles: roles,
+            },
+          },
+          process.env.ACCESS_TOKEN_SECRET,
+          { expiresIn: '30s' }
+        );
+        const refreshToken = jwt.sign(
+          {
+            username: foundUser.username,
+          },
+          process.env.REFRESH_TOKEN_SECRET,
+          { expiresIn: '1d' }
+        );
 
-    foundUser.refreshToken = refreshToken;
-    const result = await foundUser.save();
-    console.log(result);
+        foundUser.refreshToken = refreshToken;
+        const result = await foundUser.save();
+        console.log(result);
 
-    res.cookie('jwt', refreshToken, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
+        res.cookie('jwt', refreshToken, {
+          httpOnly: true,
+          maxAge: 24 * 60 * 60 * 1000,
+          secure: true,
+          sameSite: 'None',
+        });
+
+        res.json({ accessToken, roles });
+      } else {
+        res.status(401).json({ msg: 'Password Incorrect!' });
+      }
+    })
+    .catch((error) => {
+      res.status(500);
     });
-
-    res.json({ accessToken });
-  } else {
-    res.sendStatus(401);
-  }
 }
 export async function Logout(req, res) {
   const cookies = req.cookies;
@@ -86,7 +92,7 @@ export async function Logout(req, res) {
   foundUser.refreshToken = '';
   const result = await foundUser.save();
 
-  res.clearCookie('jwt', { httpOnly: true });
+  res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' });
   res.sendStatus(204);
 }
 

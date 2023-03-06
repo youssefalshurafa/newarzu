@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
+import axios from './api/axios';
 import { library } from '@fortawesome/fontawesome-svg-core';
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -57,6 +58,40 @@ const Register = () => {
   const showPwdHandler = () => {
     setShowPwd(!showPwd);
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        REGISTER_URL,
+        JSON.stringify({ username: user, pwd, email }),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        }
+      );
+
+      console.log(JSON.stringify(response?.data));
+
+      setAuth({ user, pwd, email });
+      setUser('');
+      setPwd('');
+      setMatchPwd('');
+      setEmail('');
+      setSuccess(true);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('No server response');
+      } else if (err.response?.status === 409) {
+        setErrMsg('Username already exists');
+        setValidName(false);
+      } else if (err.response?.status === 408) {
+        setErrMsg('Email address already exists');
+      } else {
+        setErrMsg('Login Failed');
+      }
+    }
+  };
   return (
     <>
       <Head>
@@ -71,7 +106,8 @@ const Register = () => {
         </div>
         <div className=" mx-auto bg-gray-100 m-9 font-poppins  px-8  pb-4 rounded-md border shadow-md">
           <h1 className=" font-serif text-center pt-4 text-2xl">Register</h1>
-          <form className=" pt-3 text-lg">
+          <p className=" text-center text-red-500">{errMsg}</p>
+          <form onSubmit={handleSubmit} className=" pt-3 text-lg">
             <label htmlFor="username">Username:</label>
             <span className={validName ? 'text-lime-500 ml-1' : ' hidden'}>
               <FontAwesomeIcon icon="check" size="lg" />
