@@ -3,21 +3,25 @@ import NavBar from '@/components/nav';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState, useContext, useEffect } from 'react';
-import AuthContext from '@/context/AuthProvider';
+import { useState, useEffect } from 'react';
 import axios from './api/axios';
+import { useRouter } from 'next/router';
+import useAuth from '@/hooks/useAuth';
+import Cookies from 'js-cookie';
 
 const LOGIN_URL = '/login';
 
 function Login() {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
+  const { auth } = useAuth();
   const [visible, setVisible] = useState(false);
+  const router = useRouter();
   const showBar = () => setVisible(!visible);
 
   const [user, setUser] = useState('');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState(false);
+
   useEffect(() => {
     setErrMsg('');
   }, [user, pwd]);
@@ -35,13 +39,14 @@ function Login() {
         }
       );
 
-      console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
+      const username = response?.data?.user;
       setAuth({ user, pwd, roles, accessToken });
+      router.push('/');
       setUser('');
       setPwd('');
-      setSuccess(true);
+      Cookies.set('username', user);
     } catch (err) {
       if (!err?.response) {
         setErrMsg('No server response');
@@ -71,6 +76,7 @@ function Login() {
         </div>
         <div className="relative top-20  mx-auto bg-gray-100  font-poppins px-4 pb-4 rounded-md border shadow-md">
           <h1 className=" font-serif text-center pt-4 text-2xl">Login</h1>
+
           <p className="text-center text-red-500">{errMsg}</p>
           <form onSubmit={handleSubmit} className=" space-y-4">
             <label htmlFor="username">Username :</label>

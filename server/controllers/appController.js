@@ -30,6 +30,7 @@ export async function Register(req, res) {
     res.status(500).json({ message: err.message });
   }
 }
+
 export async function Login(req, res) {
   const { username, pwd } = req.body;
   if (!username || !pwd)
@@ -49,7 +50,7 @@ export async function Login(req, res) {
             },
           },
           process.env.ACCESS_TOKEN_SECRET,
-          { expiresIn: '30s' }
+          { expiresIn: '1d' }
         );
         const refreshToken = jwt.sign(
           {
@@ -66,8 +67,6 @@ export async function Login(req, res) {
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
           maxAge: 24 * 60 * 60 * 1000,
-          secure: true,
-          sameSite: 'None',
         });
 
         res.json({ accessToken, roles });
@@ -81,6 +80,7 @@ export async function Login(req, res) {
 }
 export async function Logout(req, res) {
   const cookies = req.cookies;
+  console.log(cookies);
   if (!cookies?.jwt) return res.sendStatus(204); //no content
   const refreshToken = cookies.jwt;
   const foundUser = await UserModel.findOne({ refreshToken }).exec();
@@ -92,7 +92,7 @@ export async function Logout(req, res) {
   foundUser.refreshToken = '';
   const result = await foundUser.save();
 
-  res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: 'None' });
+  res.clearCookie('jwt', { httpOnly: true });
   res.sendStatus(204);
 }
 
@@ -103,6 +103,15 @@ export async function getUsers(req, res) {
   res.json(users);
 }
 
+export async function getUser(req, res) {
+  const cookies = req.cookies;
+  if (!cookies?.jwt) return res.sendStatus(404);
+  const refreshToken = cookies.jwt;
+
+  const foundUser = await UserModel.findOne({ refreshToken }).exec();
+  if (!foundUser) return res.sendStatus(403);
+  res.json(foundUser);
+}
 /* DELETE Methods */
 export async function deleteUser(req, res) {
   if (!req?.body?.id) return res.status(400).json({ msg: 'User ID required' });
@@ -110,4 +119,26 @@ export async function deleteUser(req, res) {
   if (!foundUser) return res.status(404).json({ msg: 'User ID not found!' });
   await UserModel.deleteOne({ foundUser });
   res.status(200).json({ msg: `deleted user:${foundUser.username}` });
+}
+
+/* PUT Methods */
+export async function updateUser(req, res) {
+  const cookies = req.cookies;
+  if (!cookies?.jwt) return res.sendStatus(403);
+  const refreshToken = cookies.jwt;
+
+  const foundUser = await UserModel.findOne({ refreshToken }).exec();
+  if (!foundUser) return res.sendStatus(403);
+
+  try {
+    const body = req.body;
+
+    UserModel.updateOne({ refreshToken }, body, function (err, data) {
+      if (err) throw err;
+
+      return res.status(201).send({ msg: 'Record updated' });
+    });
+  } catch (error) {
+    return res.status(401).send({ error });
+  }
 }

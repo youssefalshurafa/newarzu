@@ -31,12 +31,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-02-23T12:28:27.537Z",
-    "modified": "2023-03-06T18:15:22.333Z",
+    "modified": "2023-03-10T11:02:06.992Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"username\": \"noor2\",\n  \"email\": \"noor2@gmail.com\",\n  \"pwd\": \"Aa@12345\"\n}",
+      "raw": "{\n  \"username\": \"noor4\",\n  \"email\": \"noor4@gmail.com\",\n  \"firstName\": \"Noor\",\n  \"lastName\": \"Hassan\",\n  \"pwd\": \"Aa@12345\"\n}",
       "form": []
     },
     "tests": []
@@ -50,12 +50,12 @@
     "method": "GET",
     "sortNum": 30000,
     "created": "2023-02-23T12:28:41.405Z",
-    "modified": "2023-03-02T14:24:11.362Z",
+    "modified": "2023-03-08T15:14:34.620Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY3Nzc2NzA0MiwiZXhwIjoxNjc3NzY3MDcyfQ.pLkQx-iAbOeL1XTa3yQ_ZWElN-pUVafMlnLUdzpartI"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY3ODI4ODQ2NSwiZXhwIjoxNjc4Mjg4NDk1fQ.Az2JUiBgrIGM0mutbuUnl_qFCUMjC-yol_vJyQIdmNc"
     },
     "tests": []
   },
@@ -68,12 +68,12 @@
     "method": "POST",
     "sortNum": 40000,
     "created": "2023-02-27T17:10:14.725Z",
-    "modified": "2023-03-06T18:21:01.411Z",
+    "modified": "2023-03-10T12:18:47.506Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"username\": \"noor2\",\n  \"pwd\": \"Aa@12345345\"\n}",
+      "raw": "{\n  \"username\": \"noor2\",\n  \"pwd\": \"Aa@12345\"\n}",
       "form": []
     },
     "tests": []
@@ -102,6 +102,43 @@
     "sortNum": 60000,
     "created": "2023-02-28T18:25:46.023Z",
     "modified": "2023-02-28T18:25:46.023Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "a00173cb-ad91-4c11-bf6b-685a7241c355",
+    "colId": "efb08442-c399-4484-958e-6934af526e73",
+    "containerId": "",
+    "name": "updateUser",
+    "url": "http://localhost:5000/updateUser",
+    "method": "PUT",
+    "sortNum": 70000,
+    "created": "2023-03-10T11:36:26.161Z",
+    "modified": "2023-03-10T14:18:25.239Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"fullName\": \"noor hassanss\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6Im5vb3IyIiwicm9sZXMiOlsyMDAxXX0sImlhdCI6MTY3ODQ1Nzg4MiwiZXhwIjoxNjc4NTQ0MjgyfQ.hqPrwlDNuaXZsmcoTluLGFU5kNZf3Y4RFpL3xHGnwmM"
+    },
+    "tests": []
+  },
+  {
+    "_id": "e2995518-6b29-4ea1-89b2-c433de56592e",
+    "colId": "efb08442-c399-4484-958e-6934af526e73",
+    "containerId": "",
+    "name": "getUser",
+    "url": "http://localhost:5000/user",
+    "method": "GET",
+    "sortNum": 80000,
+    "created": "2023-03-10T11:46:36.983Z",
+    "modified": "2023-03-10T12:15:54.312Z",
     "headers": [],
     "params": [],
     "tests": []

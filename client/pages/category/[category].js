@@ -2,13 +2,14 @@ import DropDown from '@/components/dropDown';
 import Footer from '@/components/footer';
 
 import NavBar from '@/components/nav';
-import { Card, CardContent } from '@mui/material';
+import { CardContent } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import data from '../../lib/data.json';
+
 function CategoryPage() {
   const { query } = useRouter();
   const { category } = query;

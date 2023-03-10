@@ -125,5 +125,42 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "b88e728f-cf77-4654-9dd1-2a2971ad1f42",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/updateUser",
+    "url": "http://localhost:5000/updateUser",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-10T11:34:11.903Z",
+    "modified": "2023-03-10T11:35:33.061Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"fullName\": \"noora\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "68923bd5-e7b3-4475-ad65-a9a42d66dadc",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/user",
+    "url": "http://localhost:5000/user",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-10T11:42:59.712Z",
+    "modified": "2023-03-10T11:45:24.340Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6Im5vb3IiLCJyb2xlcyI6WzIwMDFdfSwiaWF0IjoxNjc4NDQ4NzE1LCJleHAiOjE2Nzg0NDg3NDV9.KGk0BbJmxf9VGuunx2oj_TJkO5Bi_zo-CoMI48YZDzc"
+    },
+    "tests": []
   }
 ]
