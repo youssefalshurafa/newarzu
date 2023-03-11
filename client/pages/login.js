@@ -43,6 +43,7 @@ function Login() {
       const roles = response?.data?.roles;
       const username = response?.data?.user;
       setAuth({ user, pwd, roles, accessToken });
+      console.log(response.data);
       router.push('/');
       setUser('');
       setPwd('');

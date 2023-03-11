@@ -18,6 +18,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const REGISTER_URL = '/register';
 library.add(faCheck, faTimes, faInfoCircle, faEye);
+
 const Register = () => {
   const [visible, setVisible] = useState(false);
   const showBar = () => setVisible(!visible);

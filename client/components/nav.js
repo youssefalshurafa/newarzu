@@ -3,7 +3,7 @@ import useLogout from '@/hooks/useLogout';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { selectItems } from '@/slices/bagSlice';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { HiShoppingBag } from 'react-icons/hi';
 import { HiUser } from 'react-icons/hi';
@@ -13,13 +13,13 @@ function NavBar({ showBar, filtered }) {
   const scrollPosition = useScrollPosition();
   const logout = useLogout();
   const items = useSelector(selectItems);
-  const [bagItems, setBagItems] = useState(0);
   const total = items.map((item, i) => item.cartQuantity * 1);
   const sum = total.reduce((sum, a) => sum + a, 0);
   const { auth } = useAuth();
-
+  const router = useRouter();
   const signout = async () => {
     await logout();
+    router.push('/');
   };
 
   return (
@@ -48,6 +48,13 @@ function NavBar({ showBar, filtered }) {
           </div>
         </div>
         <div className="flex  space-x-3 px-8">
+          <div>
+            <Link href={'/admin'}>
+              <p className=" hover:bg-black hover:text-white active:bg-black active:text-white font-poppins font-semibold bg-white text-black p-1 rounded-md">
+                Admin
+              </p>
+            </Link>
+          </div>
           <div className="cursor-pointer">
             <Link href={'/login'}>
               <HiUser size={28} />

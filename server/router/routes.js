@@ -21,7 +21,7 @@ router.route('/refresh').get(refreshTokenController);
 /* Private routes */
 router.route('/updateUser').put(verifyJWT, updateUser);
 router.route('/user').get(verifyJWT, getUser);
-router.route('/users').get(verifyJWT, getUsers);
+router.route('/users').get(verifyJWT, verifyRoles(ROLES_LIST.Admin), getUsers);
 router.route('/logout').get(Logout);
 router
   .route('/delete')

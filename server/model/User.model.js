@@ -25,7 +25,7 @@ export const UserSchema = new mongoose.Schema({
     unique: false,
   },
   fullName: { type: String },
-  mobile: { type: Number },
+  mobile: { type: String },
   address: { type: String },
   profile: { type: String },
   refreshToken: String,
