@@ -1,4 +1,5 @@
 import axios from '@/pages/api/axios';
+import Cookies from 'js-cookie';
 import useAuth from './useAuth';
 
 const useLogout = () => {
@@ -6,6 +7,10 @@ const useLogout = () => {
 
   const logout = async () => {
     setAuth({});
+    Cookies.remove('username');
+    Cookies.remove('admin');
+    Cookies.remove('editor');
+    Cookies.remove('user');
     try {
       const response = await axios('/logout', {
         withCredentials: true,

@@ -13,11 +13,9 @@ const LOGIN_URL = '/login';
 
 function Login() {
   const { setAuth } = useAuth();
-  const { auth } = useAuth();
   const [visible, setVisible] = useState(false);
   const router = useRouter();
   const showBar = () => setVisible(!visible);
-
   const [user, setUser] = useState('');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
@@ -41,12 +39,18 @@ function Login() {
 
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
-      const username = response?.data?.user;
       setAuth({ user, pwd, roles, accessToken });
-      console.log(response.data);
+
+      roles?.includes(5150)
+        ? Cookies.set('admin', true)
+        : roles?.includes(1984)
+        ? Cookies.set('editor', true)
+        : Cookies.set('user', true);
+
       router.push('/');
       setUser('');
       setPwd('');
+
       Cookies.set('username', user);
     } catch (err) {
       if (!err?.response) {

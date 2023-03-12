@@ -50,12 +50,12 @@
     "method": "GET",
     "sortNum": 30000,
     "created": "2023-02-23T12:28:41.405Z",
-    "modified": "2023-03-11T14:56:29.867Z",
+    "modified": "2023-03-12T16:02:44.059Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY3ODU0NjU4MSwiZXhwIjoxNjc4NTQ2NjExfQ.6H1KxMLCCrGoGmue2fUXGW1MYs1riQfJyG31LEPE4qA"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY3ODYzNjk1NSwiZXhwIjoxNjc4NjM2OTg1fQ.vqgpeWCFwOI8QZU9i8tzb99jrr5GEAHb2kAbJU0-tjw"
     },
     "tests": []
   },

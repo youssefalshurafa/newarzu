@@ -50,14 +50,14 @@ export async function Login(req, res) {
             },
           },
           process.env.ACCESS_TOKEN_SECRET,
-          { expiresIn: '30s' }
+          { expiresIn: '15m' }
         );
         const refreshToken = jwt.sign(
           {
             username: foundUser.username,
           },
           process.env.REFRESH_TOKEN_SECRET,
-          { expiresIn: '1h' }
+          { expiresIn: '1d' }
         );
 
         foundUser.refreshToken = refreshToken;

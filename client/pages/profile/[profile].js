@@ -2,15 +2,13 @@ import DropDown from '@/components/dropDown';
 import Footer from '@/components/footer';
 import NavBar from '@/components/nav';
 import useAuth from '@/hooks/useAuth';
-import useRefreshToken from '@/hooks/useRefreshToken';
+import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import axios from '../api/axios';
 
 function Profile() {
-  const { auth } = useAuth();
   const { query } = useRouter();
   const { user } = query;
   !user ? <div>User not Found</div> : <></>;
@@ -23,18 +21,16 @@ function Profile() {
   const [errMsg, setErrMsg] = useState('');
   const [visible, setVisible] = useState(false);
   const showBar = () => setVisible(!visible);
-  const router = useRouter();
 
+  const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
 
     const getUser = async () => {
       try {
-        const response = await axios.get('/user', {
+        const response = await axiosPrivate.get('/user', {
           signal: controller.signal,
-          headers: { Authorization: `Bearer ${auth.accessToken}` },
-          withCredentials: true,
         });
         isMounted && setData(response.data);
         isMounted && setUsername(response.data.username);
@@ -57,20 +53,24 @@ function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.put(
-      '/updateUser',
-      {
-        username: username,
-        fullName: fullName,
-        email: email,
-        mobile: mobile,
-        address: address,
-      },
-      {
-        headers: { Authorization: `Bearer ${auth.accessToken}` },
-        withCredentials: true,
-      }
-    );
+    const controller = new AbortController();
+
+    await axiosPrivate
+      .put(
+        '/updateUser',
+        {
+          fullName: fullName,
+          email: email,
+          mobile: mobile,
+          address: address,
+        },
+        {
+          signal: controller.signal,
+        }
+      )
+      .then(() => {
+        window.location.reload(false);
+      });
   };
 
   return (
@@ -108,12 +108,10 @@ function Profile() {
               </label>
               <br />
               <input
-                className="bg-gray-100  ml-2 rounded-md  "
+                className="bg-gray-100  ml-2 rounded-md cursor-default outline-none"
                 type="text"
-                defaultValue={data.username || ''}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
+                value={data.username || ''}
+                readOnly={true}
               />
             </div>
             <br />

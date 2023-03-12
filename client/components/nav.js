@@ -1,9 +1,12 @@
 import useAuth from '@/hooks/useAuth';
+import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import useLogout from '@/hooks/useLogout';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { selectItems } from '@/slices/bagSlice';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { HiShoppingBag } from 'react-icons/hi';
 import { HiUser } from 'react-icons/hi';
@@ -15,12 +18,38 @@ function NavBar({ showBar, filtered }) {
   const items = useSelector(selectItems);
   const total = items.map((item, i) => item.cartQuantity * 1);
   const sum = total.reduce((sum, a) => sum + a, 0);
-  const { auth } = useAuth();
+  const [data, setData] = useState({});
   const router = useRouter();
   const signout = async () => {
     await logout();
+    setData({});
     router.push('/');
   };
+  const axiosPrivate = useAxiosPrivate();
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getUser = async () => {
+      try {
+        const response = await axiosPrivate.get('/user', {
+          signal: controller.signal,
+        });
+
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUser();
+
+    return () => {
+      isMounted = false;
+      isMounted && controller.abort();
+    };
+  }, []);
+
+  const rolesObject = data.roles;
 
   return (
     <main>
@@ -48,24 +77,29 @@ function NavBar({ showBar, filtered }) {
           </div>
         </div>
         <div className="flex  space-x-3 px-8">
-          <div>
-            <Link href={'/admin'}>
-              <p className=" hover:bg-black hover:text-white active:bg-black active:text-white font-poppins font-semibold bg-white text-black p-1 rounded-md">
-                Admin
-              </p>
-            </Link>
-          </div>
+          {rolesObject?.hasOwnProperty('Admin') ? (
+            <div>
+              <Link href={'/admin'}>
+                <p className=" hover:bg-black hover:text-white active:bg-black active:text-white font-poppins font-semibold bg-white text-black p-1 rounded-md">
+                  Admin
+                </p>
+              </Link>
+            </div>
+          ) : (
+            <></>
+          )}
+
           <div className="cursor-pointer">
             <Link href={'/login'}>
               <HiUser size={28} />
             </Link>
           </div>
-          {auth.accessToken ? (
+          {data.username ? (
             <div className=" flex space-x-4">
               <div className="flex space-x-2">
                 <p className=" relative top-1 font-poppins">Hi</p>
                 <p className=" relative top-1 font-poppins font-semibold">
-                  {auth.user}
+                  {data.username}
                 </p>
               </div>
               <div>
