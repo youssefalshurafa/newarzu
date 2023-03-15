@@ -1,6 +1,7 @@
 import UserModel from '../model/User.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import CategoryModel from '../model/Category.model.js';
 
 /* POST Methods */
 export async function Register(req, res) {
@@ -30,7 +31,6 @@ export async function Register(req, res) {
     res.status(500).json({ message: err.message });
   }
 }
-
 export async function Login(req, res) {
   const { username, pwd } = req.body;
   if (!username || !pwd)
@@ -94,6 +94,14 @@ export async function Logout(req, res) {
 
   res.clearCookie('jwt', { httpOnly: true });
   res.sendStatus(204);
+}
+export async function createCategory(req, res) {
+  try {
+    const category = await CategoryModel.create(req.body);
+    res.status(201).json({ success: true, category });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 /* GET Methods */

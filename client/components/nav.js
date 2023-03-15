@@ -77,6 +77,11 @@ function NavBar({ showBar, filtered }) {
           </div>
         </div>
         <div className="flex  space-x-3 px-8">
+          <div>
+            <Link href={'/createProduct'}>
+              <p>Create Product</p>
+            </Link>
+          </div>
           {rolesObject?.hasOwnProperty('Admin') ? (
             <div>
               <Link href={'/admin'}>

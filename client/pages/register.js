@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import axios from './api/axios';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import useAuth from '@/hooks/useAuth';
+import { useRouter } from 'next/router';
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -20,6 +22,9 @@ const REGISTER_URL = '/register';
 library.add(faCheck, faTimes, faInfoCircle, faEye);
 
 const Register = () => {
+  const { setAuth } = useAuth();
+  const router = useRouter();
+
   const [visible, setVisible] = useState(false);
   const showBar = () => setVisible(!visible);
 
@@ -37,7 +42,6 @@ const Register = () => {
   const [validMatch, setValidMatch] = useState(false);
 
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     const result = USER_REGEX.test(user);
@@ -79,7 +83,7 @@ const Register = () => {
       setPwd('');
       setMatchPwd('');
       setEmail('');
-      setSuccess(true);
+      router.push('/login');
     } catch (err) {
       if (!err?.response) {
         setErrMsg('No server response');
@@ -174,17 +178,20 @@ const Register = () => {
               <FontAwesomeIcon icon="times" size="lg" />
             </span>
             <br />
-            <input
-              className="bg-gray-100 border  rounded-md text-center "
-              type={showPwd ? 'text' : 'password'}
-              id="password"
-              autoComplete="off"
-              onChange={(e) => setPwd(e.target.value)}
-              required
-            />
-            <span className="relative left-2" onClick={showPwdHandler}>
-              <FontAwesomeIcon icon="eye" size="sm" />
-            </span>
+            <div className=" flex">
+              <input
+                className="bg-gray-100 border  rounded-md text-center "
+                type={showPwd ? 'text' : 'password'}
+                id="password"
+                autoComplete="off"
+                onChange={(e) => setPwd(e.target.value)}
+                required
+              />
+              <span className="relative right-6" onClick={showPwdHandler}>
+                <FontAwesomeIcon icon="eye" size="sm" />
+              </span>
+            </div>
+
             <br />
             <p
               id="pwdnote"
@@ -221,20 +228,23 @@ const Register = () => {
               <FontAwesomeIcon icon="times" size="lg" />
             </span>
             <br />
-            <input
-              className="bg-gray-100 border  rounded-md text-center "
-              type={showPwd ? 'text' : 'password'}
-              id="confirmPassword"
-              autoComplete="off"
-              onChange={(e) => setMatchPwd(e.target.value)}
-              required
-            />
-            <span
-              className="relative left-2 hover:text-blue-500 active:text-blue-500"
-              onClick={showPwdHandler}
-            >
-              <FontAwesomeIcon icon="eye" size="sm" />
-            </span>
+            <div className="flex">
+              <input
+                className="bg-gray-100 border  rounded-md text-center "
+                type={showPwd ? 'text' : 'password'}
+                id="confirmPassword"
+                autoComplete="off"
+                onChange={(e) => setMatchPwd(e.target.value)}
+                required
+              />
+              <span
+                className=" relative right-6 hover:text-blue-500 active:text-blue-500"
+                onClick={showPwdHandler}
+              >
+                <FontAwesomeIcon icon="eye" size="sm" />
+              </span>
+            </div>
+
             <br />
             <p
               id="pwdnote"

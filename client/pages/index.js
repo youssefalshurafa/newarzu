@@ -79,6 +79,7 @@ function Home() {
             />
           </div>
         </div>
+
         <div className="mt-8">
           <Footer />
         </div>

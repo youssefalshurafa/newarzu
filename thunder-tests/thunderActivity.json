@@ -162,5 +162,43 @@
       "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6Im5vb3IiLCJyb2xlcyI6WzIwMDFdfSwiaWF0IjoxNjc4NDQ4NzE1LCJleHAiOjE2Nzg0NDg3NDV9.KGk0BbJmxf9VGuunx2oj_TJkO5Bi_zo-CoMI48YZDzc"
     },
     "tests": []
+  },
+  {
+    "_id": "87b90e55-c502-4427-98ac-2869caff6ad7",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/createCategory",
+    "url": "http://localhost:5000/createCategory",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-15T17:19:33.077Z",
+    "modified": "2023-03-15T17:19:33.077Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"category\": \"basics\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "7294a139-0a91-4f1e-86f9-22d278ba52c4",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/createCategory",
+    "url": "http://localhost:5000/createCategory",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-15T17:19:49.418Z",
+    "modified": "2023-03-15T17:20:31.522Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Knit wear\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

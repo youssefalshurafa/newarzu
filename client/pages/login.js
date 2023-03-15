@@ -8,6 +8,7 @@ import axios from './api/axios';
 import { useRouter } from 'next/router';
 import useAuth from '@/hooks/useAuth';
 import Cookies from 'js-cookie';
+import { toast, Toaster } from 'react-hot-toast';
 
 const LOGIN_URL = '/login';
 
@@ -47,6 +48,8 @@ function Login() {
         ? Cookies.set('editor', true)
         : Cookies.set('user', true);
 
+      toast.success('Logged In');
+
       router.push('/');
       setUser('');
       setPwd('');
@@ -76,6 +79,7 @@ function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen flex flex-col justify-between">
+        <Toaster position="top-center"></Toaster>
         <div className=" fixed top-0 z-10 w-full">
           <NavBar showBar={showBar} />
         </div>
