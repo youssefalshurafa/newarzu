@@ -2,24 +2,15 @@ import ProductModel from '../model/Product.model.js';
 import { v2 as cloudinary } from 'cloudinary';
 
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_KEY,
-  api_secret: process.env.CLOUD_KEY_SECRET,
+  cloud_name: 'duo5kgnop',
+  api_key: '795842468561665',
+  api_secret: 'b97XsvtYfZ81hMitSDw_CLQricw',
 });
 
 export async function createProduct(req, res) {
-  const {
-    title,
-    code,
-    description,
-    price,
-    material,
-    stock,
-    thumbnail,
-    images,
-  } = req.body;
-  if (!title || !code || price || category)
-    return res.status(400).json({ msg: 'Details missing' });
+  const { title, code, description, price, material, stock, thumbnail, image } =
+    req.body;
+  if (!title || !price) return res.status(400).json({ msg: 'Details missing' });
   try {
     const result = await cloudinary.uploader.upload(image, {
       folder: 'products',
@@ -29,7 +20,7 @@ export async function createProduct(req, res) {
       description,
       price,
 
-      thumbnail: {
+      image: {
         public_id: result.public_id,
         url: result.secure_url,
       },
@@ -38,4 +29,9 @@ export async function createProduct(req, res) {
   } catch (error) {
     console.log(error);
   }
+}
+export async function getAllProducts(req, res) {
+  const products = await ProductModel.find();
+  if (!products) return res.status(404);
+  res.json(products);
 }

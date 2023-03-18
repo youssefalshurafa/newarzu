@@ -13,7 +13,10 @@ import verifyJWT from '../middleware/verifyJWT.js';
 import refreshTokenController from '../controllers/refreshTokenController.js';
 import ROLES_LIST from '../config/roles_list.js';
 import verifyRoles from '../middleware/verifyRoles.js';
-import { createProduct } from '../controllers/productController.js';
+import {
+  createProduct,
+  getAllProducts,
+} from '../controllers/productController.js';
 const router = Router();
 
 /* Public routes */
@@ -23,6 +26,7 @@ router.route('/refresh').get(refreshTokenController);
 /* Private routes */
 router.route('/createCategory').post(createCategory);
 router.route('/createProduct').post(createProduct);
+router.route('/getAllProducts').get(getAllProducts);
 router.route('/updateUser').put(verifyJWT, updateUser);
 router.route('/user').get(verifyJWT, getUser);
 router.route('/users').get(verifyJWT, verifyRoles(ROLES_LIST.Admin), getUsers);

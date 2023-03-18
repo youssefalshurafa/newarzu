@@ -161,5 +161,19 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "3d2181ae-a854-4be0-97e8-2493489d50fe",
+    "colId": "70164f75-9c9d-4715-8593-5d036fc0c9ca",
+    "containerId": "",
+    "name": "getAllProducts",
+    "url": "http://localhost:5000/getAllProducts",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-03-18T13:53:42.128Z",
+    "modified": "2023-03-18T13:53:42.128Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

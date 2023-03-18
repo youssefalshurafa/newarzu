@@ -16,12 +16,8 @@ export const ProductSchema = new mongoose.Schema({
     type: String,
   },
   stock: { type: String },
-  category: {
-    type: ObjectId,
-    ref: 'Category',
-    required: [true, 'product must belong to a category'],
-  },
-  thumbnail: {
+
+  image: {
     public_id: {
       type: String,
       required: true,
@@ -31,18 +27,6 @@ export const ProductSchema = new mongoose.Schema({
       required: true,
     },
   },
-  images: [
-    {
-      public_id: {
-        type: String,
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
 });
 
 export default mongoose.model.Products ||

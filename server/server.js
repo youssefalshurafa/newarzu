@@ -7,10 +7,13 @@ import * as dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import corsOptions from './config/corsOptions.js';
 import credentials from './middleware/credentials.js';
+import bodyParser from 'body-parser';
 
 dotenv.config();
 const app = express();
 
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(credentials);
