@@ -1,15 +1,20 @@
-import useAuth from '@/hooks/useAuth';
+import AdminNavbar from '@/components/adminNavbar';
+import AdminSidebar from '@/components/adminSidebar';
+import CreateProduct from '@/components/createProduct';
+import { useStateContext } from '@/context/ContextProvider';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import useLogout from '@/hooks/useLogout';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 const Admin = () => {
-  const { auth } = useAuth();
+  const { isActiveMenu, isClicked } = useStateContext();
+
   const [users, setUsers] = useState('');
   const axiosPrivate = useAxiosPrivate();
   const router = useRouter();
   const logout = useLogout();
+  console.log(isClicked.CreateProduct);
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
@@ -36,17 +41,19 @@ const Admin = () => {
   }, []);
   return (
     <div>
-      <h1>admin page</h1>
       <div>
-        {users?.length ? (
-          <ul>
-            {users.map((user, i) => (
-              <li key={i}>{user?.username}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>No users to display</p>
-        )}
+        <AdminNavbar />
+      </div>
+      <div className="flex">
+        {isActiveMenu && <AdminSidebar />}
+
+        <div>
+          {isClicked.createProduct && (
+            <div>
+              <CreateProduct />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

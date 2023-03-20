@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from './api/axios';
+import { useEffect, useState } from 'react';
+import axios from '../pages/api/axios';
 
 const CreateProduct = () => {
   const [title, setTitle] = useState('');

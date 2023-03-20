@@ -1,9 +1,8 @@
-import useAuth from '@/hooks/useAuth';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import useLogout from '@/hooks/useLogout';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { selectItems } from '@/slices/bagSlice';
-import Cookies from 'js-cookie';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -77,11 +76,6 @@ function NavBar({ showBar, filtered }) {
           </div>
         </div>
         <div className="flex  space-x-3 px-8">
-          <div>
-            <Link href={'/createProduct'}>
-              <p>Create Product</p>
-            </Link>
-          </div>
           {rolesObject?.hasOwnProperty('Admin') ? (
             <div>
               <Link href={'/admin'}>
