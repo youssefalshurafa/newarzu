@@ -62,14 +62,13 @@ export async function Login(req, res) {
 
         foundUser.refreshToken = refreshToken;
         const result = await foundUser.save();
-        console.log(result);
 
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
           maxAge: 24 * 60 * 60 * 1000,
         });
 
-        res.json({ accessToken, roles });
+        res.json({ accessToken, roles, username });
       } else {
         res.status(401).json({ msg: 'Password Incorrect!' });
       }

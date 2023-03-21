@@ -35,3 +35,21 @@ export async function getAllProducts(req, res) {
   if (!products) return res.status(404);
   res.json(products);
 }
+export async function deleteProduct(req, res) {
+  if (!req?.body?.id) return res.status(400).json({ msg: 'id missing' });
+  try {
+    const foundProduct = await ProductModel.findOne({
+      _id: req.body.id,
+    }).exec();
+    if (!foundProduct)
+      return res.status(404).json({ msg: 'Product ID not found!' });
+    const imgId = foundProduct.image.public_id;
+    if (imgId) {
+      await cloudinary.uploader.destroy(imgId);
+    }
+    await ProductModel.deleteOne({ _id: foundProduct._id });
+    res.status(200).json({ success: true, foundProduct });
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -6,7 +6,7 @@ const initialState = {
   customers: false,
   employees: false,
   orders: false,
-  createProduct: false,
+  products: false,
   charts: false,
 };
 

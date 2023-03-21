@@ -1,7 +1,8 @@
 import AdminNavbar from '@/components/adminNavbar';
 import AdminSidebar from '@/components/adminSidebar';
-import CreateProduct from '@/components/createProduct';
+import AdminProducts from '@/components/adminProducts';
 import { useStateContext } from '@/context/ContextProvider';
+
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import useLogout from '@/hooks/useLogout';
 import { useRouter } from 'next/router';
@@ -45,12 +46,13 @@ const Admin = () => {
         <AdminNavbar />
       </div>
       <div className="flex">
-        {isActiveMenu && <AdminSidebar />}
-
+        <div className="absolute left-0 z-10">
+          {isActiveMenu && <AdminSidebar />}
+        </div>
         <div>
-          {isClicked.createProduct && (
-            <div>
-              <CreateProduct />
+          {isClicked.products && (
+            <div className="">
+              <AdminProducts />
             </div>
           )}
         </div>

@@ -40,7 +40,7 @@ function Login() {
 
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
-      setAuth({ user, pwd, roles, accessToken });
+      setAuth({ user, roles, accessToken });
 
       roles?.includes(5150)
         ? Cookies.set('admin', true)

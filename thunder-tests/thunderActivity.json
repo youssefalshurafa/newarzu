@@ -214,5 +214,24 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "b60c68f2-e9bf-445d-a752-073179a9acd4",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/deleteProduct",
+    "url": "http://localhost:5000/deleteProduct",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-03-21T18:19:33.477Z",
+    "modified": "2023-03-21T18:24:00.022Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\" : \"6415c031e2df0b31fc47fd9b\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

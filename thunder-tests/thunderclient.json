@@ -167,13 +167,37 @@
     "colId": "70164f75-9c9d-4715-8593-5d036fc0c9ca",
     "containerId": "",
     "name": "getAllProducts",
-    "url": "http://localhost:5000/getAllProducts",
-    "method": "GET",
+    "url": "http://localhost:5000/deleteProduct",
+    "method": "DELETE",
     "sortNum": 20000,
     "created": "2023-03-18T13:53:42.128Z",
-    "modified": "2023-03-18T13:53:42.128Z",
+    "modified": "2023-03-21T18:18:34.247Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n\"_id\" : \"6415c031e2df0b31fc47fd9b\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "9356ea32-6a48-4343-b105-d696053717b1",
+    "colId": "70164f75-9c9d-4715-8593-5d036fc0c9ca",
+    "containerId": "",
+    "name": "deleteProduct",
+    "url": "http://localhost:5000/deleteProduct",
+    "method": "DELETE",
+    "sortNum": 30000,
+    "created": "2023-03-21T18:25:32.893Z",
+    "modified": "2023-03-21T20:37:56.673Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\" : \"641a15543f07a738a50b72a7\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]
