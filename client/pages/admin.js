@@ -15,7 +15,7 @@ const Admin = () => {
   const axiosPrivate = useAxiosPrivate();
   const router = useRouter();
   const logout = useLogout();
-  console.log(isClicked.CreateProduct);
+
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();

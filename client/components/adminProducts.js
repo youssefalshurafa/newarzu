@@ -3,14 +3,19 @@ import axios from '../pages/api/axios';
 import { AiFillEdit } from 'react-icons/ai';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { CardContent } from '@mui/material';
+import { toast, Toaster } from 'react-hot-toast';
 
 const AdminProducts = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [images, setImages] = useState([]);
   const [products, setProducts] = useState([]);
   const [confirm, setConfirm] = useState(false);
+  const [productId, setProductId] = useState('');
+  const [pName, setPname] = useState('');
+
   const handleImage = (e) => {
     const file = e.target.files[0];
     setFileToBase(file);
@@ -25,8 +30,10 @@ const AdminProducts = () => {
     };
   };
 
+  /* Create a new Product */
   const handleSubmit = async (e) => {
     e.preventDefault();
+    toast.loading('uploading');
     try {
       const response = await axios.post('/createProduct', {
         title,
@@ -34,7 +41,10 @@ const AdminProducts = () => {
         price,
         image,
       });
+
       if (response?.data?.success === true) {
+        toast.dismiss();
+        toast.success('uploaded');
         setTitle('');
         setDescription('');
         setPrice('');
@@ -45,6 +55,8 @@ const AdminProducts = () => {
       console.error(error);
     }
   };
+
+  /* Getting Products */
   useEffect(() => {
     const getAllproducts = async () => {
       const response = await axios.get('/getAllProducts');
@@ -52,24 +64,28 @@ const AdminProducts = () => {
       setProducts(response.data);
     };
     getAllproducts();
-  }, []);
-  // const handleDeleteButton = (product) => {
-  //   setConfirm(true);
-  //   setProductId(product._id);
-  //   console.log(productId);
-  // };
+  }, [products]);
+  const handleDelButton = (product) => {
+    setConfirm(true);
+    setProductId(product._id);
+    setPname(product.title);
+  };
 
-  const handleDelete = async (product) => {
+  const handleDelete = async (productId) => {
+    toast.loading('Deleting...');
     try {
-      // await axios.delete('/deleteProduct', { data: { id: product._id } });
-      console.log(product._id);
+      await axios.delete('/deleteProduct', { data: { id: productId } });
+      setConfirm(false);
+      toast.dismiss();
+      toast.success('Deleted');
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div>
+    <div className="relative">
       <div className=" relative">
+        <Toaster position="top-center"></Toaster>
         <h1 className="font-poppins font-semibold text-2xl m-4 ">
           All Products
         </h1>
@@ -84,7 +100,7 @@ const AdminProducts = () => {
                   <AiFillEdit />
                 </button>
                 <button
-                  onClick={() => handleDelete(product)}
+                  onClick={() => handleDelButton(product)}
                   className=" hover:text-red-400"
                 >
                   <RiDeleteBin5Fill />
@@ -98,21 +114,26 @@ const AdminProducts = () => {
           ))}
         </div>
         {confirm && (
-          <div className="absolute m-auto left-0 right-0 top-20 text-sm bg-gray-100 font-poppins text-center shadow-lg p-2 space-y-2 rounded-md w-max h-max overflow-hidden ">
-            <div>
-              <p>Are you sure</p>
-              <p> you want to delete?</p>
-            </div>
-            <div className=" space-x-4">
-              <button className=" p-1 drop-shadow-md w-10 bg-green-300 rounded-md hover:text-white active:text-white hover:bg-green-800 active:bg-green-800">
-                Yes
-              </button>
-              <button
-                onClick={() => setConfirm(false)}
-                className=" p-1 drop-shadow-md w-10 bg-red-300 rounded-md hover:text-white active:text-white hover:bg-red-800 active:bg-red-800"
-              >
-                No
-              </button>
+          <div className="fixed z-50 inset-0 bg-gray-500 bg-opacity-75">
+            <div className="absolute space-y-2 text-xs md:text-lg top-1/2 left-1/2 transform text-center font-poppins -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded shadow-lg">
+              <div>
+                <p>Are you sure you want to delete </p>
+                <p className="font-bold">{pName}?</p>
+              </div>
+              <div className=" space-x-4">
+                <button
+                  onClick={() => handleDelete(productId)}
+                  className=" p-1 drop-shadow-md w-10 bg-green-300 rounded-md hover:text-white active:text-white hover:bg-green-800 active:bg-green-800"
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={() => setConfirm(false)}
+                  className=" p-1 drop-shadow-md w-10 bg-red-300 rounded-md hover:text-white active:text-white hover:bg-red-800 active:bg-red-800"
+                >
+                  No
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -143,6 +164,8 @@ const AdminProducts = () => {
         <label htmlFor="file">image:</label>
         <input type="file" placeholder="upload image" onChange={handleImage} />
         <br />
+        <br />
+
         <button>Submit</button>
       </form>
     </div>

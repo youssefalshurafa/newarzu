@@ -5,14 +5,10 @@ import Footer from '@/components/footer';
 import NavBar from '@/components/nav';
 import Head from 'next/head';
 import data from '../lib/data.json';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import useAuth from '@/hooks/useAuth';
-import Cookies from 'js-cookie';
 
 function Home() {
-  const { auth } = useAuth();
-  const { setAuth } = useAuth();
   const homeWear = data.find((product) => {
     return product.category == 'Home Wear';
   });

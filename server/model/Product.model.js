@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-const { ObjectId } = mongoose.Schema;
 
 export const ProductSchema = new mongoose.Schema({
   title: {
