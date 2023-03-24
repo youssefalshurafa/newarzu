@@ -33,8 +33,9 @@ const AdminProducts = () => {
   /* Create a new Product */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    toast.loading('uploading');
+
     try {
+      toast.loading('Creating Product...');
       const response = await axios.post('/createProduct', {
         title,
         description,
@@ -44,27 +45,33 @@ const AdminProducts = () => {
 
       if (response?.data?.success === true) {
         toast.dismiss();
-        toast.success('uploaded');
+        toast.success('Created Successfully');
         setTitle('');
         setDescription('');
         setPrice('');
         setImage('');
+        getAllproducts();
       }
       console.log(response.data);
     } catch (error) {
       console.error(error);
+      toast.dismiss();
+      toast.error('Error while Uploading');
     }
   };
 
   /* Getting Products */
-  useEffect(() => {
-    const getAllproducts = async () => {
-      const response = await axios.get('/getAllProducts');
 
-      setProducts(response.data);
-    };
+  const getAllproducts = async () => {
+    const response = await axios.get('/getAllProducts');
+
+    setProducts(response.data);
+  };
+
+  useEffect(() => {
     getAllproducts();
-  }, [products]);
+  }, []);
+
   const handleDelButton = (product) => {
     setConfirm(true);
     setProductId(product._id);
@@ -78,6 +85,7 @@ const AdminProducts = () => {
       setConfirm(false);
       toast.dismiss();
       toast.success('Deleted');
+      getAllproducts();
     } catch (error) {
       console.log(error);
     }

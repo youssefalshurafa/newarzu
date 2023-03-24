@@ -8,18 +8,7 @@ cloudinary.config({
 });
 
 export async function createProduct(req, res) {
-  const {
-    title,
-    code,
-    description,
-    price,
-    material,
-    stock,
-    firstImage,
-    secondImage,
-    thirdImage,
-    image,
-  } = req.body;
+  const { title, code, description, price, material, stock, image } = req.body;
   if (!title || !price) return res.status(400).json({ msg: 'Details missing' });
   try {
     const result = await cloudinary.uploader.upload(image, {

@@ -26,6 +26,15 @@ export const ProductSchema = new mongoose.Schema({
       required: true,
     },
   },
+
+  secondImage: {
+    public_id: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+  },
 });
 
 export default mongoose.model.Products ||
