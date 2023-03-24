@@ -8,7 +8,7 @@ cloudinary.config({
 });
 
 export async function createProduct(req, res) {
-  const { title, description, price, thumbnail, images } = req.body;
+  const { title, description, price, thumbnail } = req.body;
   if (!title || !price) return res.status(400).json({ msg: 'Details missing' });
   try {
     const uploadedImage = await cloudinary.uploader.upload(thumbnail, {
@@ -17,13 +17,19 @@ export async function createProduct(req, res) {
     const imageURL = uploadedImage.secure_url;
     const imagePublicId = uploadedImage.public_id;
 
-    let imagesURL, imagesPublicId;
+    let images = [...req.body.images];
+    let imagesBuffer = [];
     if (images) {
-      const uploadedimages = await cloudinary.uploader.upload(images, {
-        folder: 'products',
-      });
-      imagesURL = uploadedimages.secure_url;
-      imagesPublicId = uploadedimages.public_id;
+      for (let i = 0; i < images.length; i++) {
+        const uploadedimages = await cloudinary.uploader.upload(images[i], {
+          folder: 'products',
+        });
+        imagesBuffer.push({
+          public_id: uploadedimages.public_id,
+          url: uploadedimages.secure_url,
+        });
+      }
+      req.body.images = imagesBuffer;
     }
     const product = await ProductModel.create({
       title,
@@ -33,10 +39,7 @@ export async function createProduct(req, res) {
         public_id: imagePublicId,
         url: imageURL,
       },
-      images: {
-        public_id: imagesPublicId,
-        url: imagesURL,
-      },
+      images: req.body.images,
     });
     res.status(201).json({ success: true, product });
   } catch (error) {

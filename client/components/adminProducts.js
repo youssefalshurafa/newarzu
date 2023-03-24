@@ -10,7 +10,7 @@ const AdminProducts = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [thumbnail, setThumbnail] = useState('');
-  const [images, setImages] = useState('');
+  const [images, setImages] = useState([]);
   const [products, setProducts] = useState([]);
   const [confirm, setConfirm] = useState(false);
   const [productId, setProductId] = useState('');
@@ -22,18 +22,16 @@ const AdminProducts = () => {
     console.log(file);
   };
   const handleImage2 = (e) => {
-    const file = e.target.files[0];
-    setFileToBase2(file);
-    console.log(file);
+    const files = Array.from(e.target.files);
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setImages((oldArray) => [...oldArray, reader.result]);
+      };
+    });
   };
 
-  const setFileToBase2 = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImages(reader.result);
-    };
-  };
   const setFileToBase = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -63,6 +61,7 @@ const AdminProducts = () => {
         setDescription('');
         setPrice('');
         setThumbnail('');
+        setImages([]);
         getAllproducts();
       }
       console.log(response.data);
@@ -186,8 +185,12 @@ const AdminProducts = () => {
         <input type="file" placeholder="upload image" onChange={handleImage} />
         <br />
         <label htmlFor="file">image2:</label>
-        <input type="file" placeholder="upload image" onChange={handleImage2} />
-        <br />
+        <input
+          type="file"
+          placeholder="upload image"
+          onChange={handleImage2}
+          multiple
+        />
         <br />
 
         <button>Submit</button>
