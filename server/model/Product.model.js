@@ -16,7 +16,7 @@ export const ProductSchema = new mongoose.Schema({
   },
   stock: { type: String },
 
-  image: {
+  thumbnail: {
     public_id: {
       type: String,
       required: true,
@@ -27,14 +27,16 @@ export const ProductSchema = new mongoose.Schema({
     },
   },
 
-  secondImage: {
-    public_id: {
-      type: String,
+  images: [
+    {
+      public_id: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
     },
-    url: {
-      type: String,
-    },
-  },
+  ],
 });
 
 export default mongoose.model.Products ||

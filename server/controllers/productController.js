@@ -8,20 +8,34 @@ cloudinary.config({
 });
 
 export async function createProduct(req, res) {
-  const { title, code, description, price, material, stock, image } = req.body;
+  const { title, description, price, thumbnail, images } = req.body;
   if (!title || !price) return res.status(400).json({ msg: 'Details missing' });
   try {
-    const result = await cloudinary.uploader.upload(image, {
+    const uploadedImage = await cloudinary.uploader.upload(thumbnail, {
       folder: 'products',
     });
+    const imageURL = uploadedImage.secure_url;
+    const imagePublicId = uploadedImage.public_id;
 
+    let imagesURL, imagesPublicId;
+    if (images) {
+      const uploadedimages = await cloudinary.uploader.upload(images, {
+        folder: 'products',
+      });
+      imagesURL = uploadedimages.secure_url;
+      imagesPublicId = uploadedimages.public_id;
+    }
     const product = await ProductModel.create({
       title,
       description,
       price,
-      image: {
-        public_id: result.public_id,
-        url: result.secure_url,
+      thumbnail: {
+        public_id: imagePublicId,
+        url: imageURL,
+      },
+      images: {
+        public_id: imagesPublicId,
+        url: imagesURL,
       },
     });
     res.status(201).json({ success: true, product });
@@ -42,9 +56,13 @@ export async function deleteProduct(req, res) {
     }).exec();
     if (!foundProduct)
       return res.status(404).json({ msg: 'Product ID not found!' });
-    const imgId = foundProduct.image.public_id;
+    const imgId = foundProduct.thumbnail.public_id;
+    const imagesId = foundProduct.images.public_id;
     if (imgId) {
       await cloudinary.uploader.destroy(imgId);
+    }
+    if (imagesId) {
+      await cloudinary.uploader.destroy(imagesId);
     }
     await ProductModel.deleteOne({ _id: foundProduct._id });
     res.status(200).json({ success: true, foundProduct });

@@ -9,8 +9,8 @@ const AdminProducts = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [image, setImage] = useState('');
-  const [images, setImages] = useState([]);
+  const [thumbnail, setThumbnail] = useState('');
+  const [images, setImages] = useState('');
   const [products, setProducts] = useState([]);
   const [confirm, setConfirm] = useState(false);
   const [productId, setProductId] = useState('');
@@ -21,12 +21,24 @@ const AdminProducts = () => {
     setFileToBase(file);
     console.log(file);
   };
+  const handleImage2 = (e) => {
+    const file = e.target.files[0];
+    setFileToBase2(file);
+    console.log(file);
+  };
 
+  const setFileToBase2 = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImages(reader.result);
+    };
+  };
   const setFileToBase = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImage(reader.result);
+      setThumbnail(reader.result);
     };
   };
 
@@ -40,7 +52,8 @@ const AdminProducts = () => {
         title,
         description,
         price,
-        image,
+        thumbnail,
+        images,
       });
 
       if (response?.data?.success === true) {
@@ -49,7 +62,7 @@ const AdminProducts = () => {
         setTitle('');
         setDescription('');
         setPrice('');
-        setImage('');
+        setThumbnail('');
         getAllproducts();
       }
       console.log(response.data);
@@ -115,7 +128,7 @@ const AdminProducts = () => {
                 </button>
               </div>
               <div className="mb-4 ">
-                <img src={product.image.url} />
+                <img src={product.thumbnail?.url} />
                 <p className="absolute bottom-0 pb-1">{product.title}</p>
               </div>
             </CardContent>
@@ -171,6 +184,9 @@ const AdminProducts = () => {
         <br />
         <label htmlFor="file">image:</label>
         <input type="file" placeholder="upload image" onChange={handleImage} />
+        <br />
+        <label htmlFor="file">image2:</label>
+        <input type="file" placeholder="upload image" onChange={handleImage2} />
         <br />
         <br />
 
