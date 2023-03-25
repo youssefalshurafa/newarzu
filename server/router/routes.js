@@ -1,7 +1,9 @@
 import { Router } from 'express';
 import {
   createCategory,
+  deleteCategory,
   deleteUser,
+  getCategories,
   getUser,
   getUsers,
   Login,
@@ -26,6 +28,8 @@ router.route('/login').post(Login);
 router.route('/refresh').get(refreshTokenController);
 /* Private routes */
 router.route('/createCategory').post(createCategory);
+router.route('/getCategories').get(getCategories);
+router.route('/deleteCategory').delete(deleteCategory);
 router.route('/createProduct').post(createProduct);
 router.route('/getAllProducts').get(getAllProducts);
 router.route('/deleteProduct').delete(deleteProduct);

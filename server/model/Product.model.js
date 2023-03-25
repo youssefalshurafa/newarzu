@@ -11,6 +11,10 @@ export const ProductSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide a price'],
   },
+  category: {
+    type: String,
+    required: [true, 'Please provide a category'],
+  },
   material: {
     type: String,
   },

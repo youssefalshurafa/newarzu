@@ -233,5 +233,38 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "f4c42ca6-c820-4379-b8f9-3d04d8e508da",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/getCategories",
+    "url": "http://localhost:5000/getCategories",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-25T20:24:17.556Z",
+    "modified": "2023-03-25T20:24:17.556Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "87c126ca-691f-4f16-b532-fb06183ec38f",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/deleteCategory",
+    "url": "http://localhost:5000/deleteCategory",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-03-25T21:42:21.771Z",
+    "modified": "2023-03-25T22:12:37.045Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\" : \"Tunics\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

@@ -148,37 +148,17 @@
     "colId": "70164f75-9c9d-4715-8593-5d036fc0c9ca",
     "containerId": "",
     "name": "createCategory",
-    "url": "http://localhost:5000/createProduct",
+    "url": "http://localhost:5000/createCategory",
     "method": "POST",
     "sortNum": 10000,
     "created": "2023-03-15T17:21:04.401Z",
-    "modified": "2023-03-24T16:04:44.231Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "multipart/form-data"
-      }
-    ],
+    "modified": "2023-03-25T20:29:09.733Z",
+    "headers": [],
     "params": [],
     "body": {
-      "type": "formdata",
-      "raw": "",
-      "form": [
-        {
-          "name": "title",
-          "value": "asfdas"
-        },
-        {
-          "name": "price",
-          "value": "51654"
-        }
-      ],
-      "files": [
-        {
-          "name": "image",
-          "value": "..\\..\\..\\..\\Pictures\\17407195_flat.webp"
-        }
-      ]
+      "type": "json",
+      "raw": "{\n  \"name\" : \"Tunics\"\n}",
+      "form": []
     },
     "tests": []
   },
@@ -216,6 +196,39 @@
     "body": {
       "type": "json",
       "raw": "{\n  \"id\" : \"641a15543f07a738a50b72a7\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "5b0c899b-b2b9-4b2c-ab85-dba20195d020",
+    "colId": "70164f75-9c9d-4715-8593-5d036fc0c9ca",
+    "containerId": "",
+    "name": "getCategories",
+    "url": "http://localhost:5000/getCategories",
+    "method": "GET",
+    "sortNum": 40000,
+    "created": "2023-03-25T20:25:01.530Z",
+    "modified": "2023-03-25T20:25:01.530Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "02ac117c-3b05-4c1d-ac80-b94ff50007aa",
+    "colId": "70164f75-9c9d-4715-8593-5d036fc0c9ca",
+    "containerId": "",
+    "name": "deleteCategory",
+    "url": "http://localhost:5000/deleteCategory",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2023-03-25T21:42:42.136Z",
+    "modified": "2023-03-25T21:42:42.136Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\" : \"641f6947a683401e5693a3d7\"\n}",
       "form": []
     },
     "tests": []

@@ -17,7 +17,7 @@ const AdminNavbar = () => {
     router.push('/');
   };
   return (
-    <div className="flex  h-12 bg-slate-100 items-center drop-shadow-md ">
+    <div className=" w-full flex h-12 bg-slate-100 items-center drop-shadow-md ">
       <div className="font-semibold font-poppins text-2xl ml-2 ">
         <Link href="/">
           <h1>Arzu</h1>

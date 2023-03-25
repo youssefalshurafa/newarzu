@@ -1,0 +1,33 @@
+Date : 2023-03-25 23:50:24
+Directory : c:\Users\Joe\Documents\Web development\ecommerce\server\model
+Total : 6 files,  46 codes, 0 comments, 2 blanks, all 48 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          6 |         46 |          0 |          2 |         48 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                               | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                  |          6 |         46 |          0 |          2 |         48 |
+| . (Files)                                                                          |          3 |         84 |          0 |         11 |         95 |
+| ..                                                                                 |          3 |        -38 |          0 |         -9 |        -47 |
+| ..\middleware                                                                      |          3 |        -38 |          0 |         -9 |        -47 |
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                           | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\Joe\Documents\Web development\ecommerce\server\middleware\credentials.js  | JavaScript |         -9 |          0 |         -3 |        -12 |
+| c:\Users\Joe\Documents\Web development\ecommerce\server\middleware\verifyJWT.js    | JavaScript |        -15 |          0 |         -4 |        -19 |
+| c:\Users\Joe\Documents\Web development\ecommerce\server\middleware\verifyRoles.js  | JavaScript |        -14 |          0 |         -2 |        -16 |
+| c:\Users\Joe\Documents\Web development\ecommerce\server\model\Category.model.js.js | JavaScript |          9 |          0 |          3 |         12 |
+| c:\Users\Joe\Documents\Web development\ecommerce\server\model\Product.model.js     | JavaScript |         43 |          0 |          5 |         48 |
+| c:\Users\Joe\Documents\Web development\ecommerce\server\model\User.model.js        | JavaScript |         32 |          0 |          3 |         35 |
+| Total                                                                              |            |         46 |          0 |          2 |         48 |
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

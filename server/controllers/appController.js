@@ -1,7 +1,7 @@
 import UserModel from '../model/User.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import CategoryModel from '../model/Category.model.js';
+import CategoryModel from '../model/Category.model.js.js';
 
 /* POST Methods */
 export async function Register(req, res) {
@@ -101,6 +101,22 @@ export async function createCategory(req, res) {
   } catch (error) {
     console.log(error);
   }
+}
+export async function getCategories(req, res) {
+  const categories = await CategoryModel.find();
+  if (!categories) return res.status(404);
+  res.json(categories);
+}
+export async function deleteCategory(req, res) {
+  if (!req?.body?.name)
+    return res.status(400).json({ msg: 'Category name required' });
+  const foundCategory = await CategoryModel.findOne({
+    name: req.body.name,
+  }).exec();
+  if (!foundCategory)
+    return res.status(404).json({ msg: 'Category name not found!' });
+  await CategoryModel.deleteOne({ foundCategory });
+  res.status(200).json({ msg: `deleted Category:${foundCategory.name}` });
 }
 
 /* GET Methods */

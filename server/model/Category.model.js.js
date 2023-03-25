@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
 export const CategorySchema = new mongoose.Schema({
-  catName: {
+  name: {
     type: String,
-    required: [true, 'Please Provide a name'],
+    required: [true, 'Please Provide a category name'],
   },
 });
 

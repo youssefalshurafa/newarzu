@@ -8,7 +8,8 @@ import { BsPieChartFill } from 'react-icons/bs';
 import { useStateContext } from '@/context/ContextProvider';
 
 const AdminSidebar = () => {
-  const { handleClick, isClicked } = useStateContext();
+  const { handleClick, isClicked, isActiveMenu, setIsActiveMenu } =
+    useStateContext();
 
   return (
     <div className="mt-1 mr-3 h-screen z-20  w-60 bg-slate-100 rounded-md shadow-md">
@@ -37,7 +38,10 @@ const AdminSidebar = () => {
           <HiShoppingCart size={18} />
         </div>
         <div
-          onClick={() => handleClick('products')}
+          onClick={() => {
+            handleClick('products');
+            setIsActiveMenu(!isActiveMenu);
+          }}
           className={
             isClicked.products
               ? ' flex justify-between px-4 cursor-pointer bg-pink-800  text-white h-8 items-center rounded-md'
