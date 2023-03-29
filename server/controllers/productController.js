@@ -61,16 +61,49 @@ export async function deleteProduct(req, res) {
     if (!foundProduct)
       return res.status(404).json({ msg: 'Product ID not found!' });
     const imgId = foundProduct.thumbnail.public_id;
-    const imagesId = foundProduct.images.public_id;
     if (imgId) {
       await cloudinary.uploader.destroy(imgId);
     }
-    if (imagesId) {
-      await cloudinary.uploader.destroy(imagesId);
-    }
+    foundProduct.images.map(
+      async (product) => await cloudinary.uploader.destroy(product.public_id)
+    );
+
     await ProductModel.deleteOne({ _id: foundProduct._id });
     res.status(200).json({ success: true, foundProduct });
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function updateProduct(req, res) {
+  const productId = req.body.id;
+  if (!productId) return res.sendStatus(405);
+
+  try {
+    const currentProduct = await ProductModel.findOne({
+      _id: productId,
+    }).exec();
+
+    const updates = req.body.updates;
+    console.log(currentProduct);
+    if (updates.thumbnail) {
+      await cloudinary.uploader.destroy(currentProduct.thumbnail.public_id);
+
+      const newImage = await cloudinary.uploader.upload(updates.thumbnail, {
+        folder: 'products',
+      });
+
+      updates.thumbnail = {
+        public_id: newImage.public_id,
+        url: newImage.secure_url,
+      };
+    }
+
+    const product = await ProductModel.findByIdAndUpdate(productId, updates, {
+      new: true,
+    });
+    res.status(201).json({ success: true, product });
+  } catch (error) {
+    console.error(error);
   }
 }

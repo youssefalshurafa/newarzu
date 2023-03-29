@@ -152,12 +152,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2023-03-15T17:21:04.401Z",
-    "modified": "2023-03-25T20:29:09.733Z",
+    "modified": "2023-03-26T19:52:57.142Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\" : \"Tunics\"\n}",
+      "raw": "{\n  \"name\" : \"Noor\"\n}",
       "form": []
     },
     "tests": []
@@ -190,12 +190,12 @@
     "method": "DELETE",
     "sortNum": 30000,
     "created": "2023-03-21T18:25:32.893Z",
-    "modified": "2023-03-21T20:37:56.673Z",
+    "modified": "2023-03-26T19:06:41.423Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"id\" : \"641a15543f07a738a50b72a7\"\n}",
+      "raw": "{\n  \"name\" : \"Tunics\"\n}",
       "form": []
     },
     "tests": []
@@ -223,12 +223,12 @@
     "method": "DELETE",
     "sortNum": 50000,
     "created": "2023-03-25T21:42:42.136Z",
-    "modified": "2023-03-25T21:42:42.136Z",
+    "modified": "2023-03-26T19:54:41.148Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"id\" : \"641f6947a683401e5693a3d7\"\n}",
+      "raw": "{\n  \"id\" : \"6420a22dc255c217fc1c69c2\"\n}",
       "form": []
     },
     "tests": []

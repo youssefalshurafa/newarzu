@@ -108,10 +108,10 @@ export async function getCategories(req, res) {
   res.json(categories);
 }
 export async function deleteCategory(req, res) {
-  if (!req?.body?.name)
+  if (!req?.body?.id)
     return res.status(400).json({ msg: 'Category name required' });
   const foundCategory = await CategoryModel.findOne({
-    name: req.body.name,
+    _id: req.body.id,
   }).exec();
   if (!foundCategory)
     return res.status(404).json({ msg: 'Category name not found!' });

@@ -6,6 +6,8 @@ import { CardContent } from '@mui/material';
 import { toast, Toaster } from 'react-hot-toast';
 import { RxCross2 } from 'react-icons/rx';
 import { AiFillPlusCircle } from 'react-icons/ai';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 const AdminProducts = () => {
   const [title, setTitle] = useState('');
@@ -21,10 +23,20 @@ const AdminProducts = () => {
   const [categories, setCategories] = useState('');
   const [category, setCategory] = useState('');
   const [newCategory, setNewCategory] = useState('');
+  const [categoryToBeDeleted, setCategoryToBeDeleted] = useState('');
+  const [updateForm, setUpdateForm] = useState(false);
+  const [productUpdate, setProductUpdate] = useState('');
+
+  const router = useRouter();
 
   const handleSelectChange = (event) => {
     setCategory(event.target.value);
   };
+  const handleSelectDelete = (event) => {
+    setCategoryToBeDeleted(event.target.value);
+    console.log(categoryToBeDeleted);
+  };
+
   const getCategories = async () => {
     const response = await axios.get('/getCategories');
     setCategories(response.data);
@@ -54,9 +66,13 @@ const AdminProducts = () => {
   const handleDeleteCategory = async (e) => {
     e.preventDefault();
     try {
-      await axios.delete('/deleteCategory', { data: { name: category } });
+      await axios.delete('/deleteCategory', {
+        data: { id: categoryToBeDeleted },
+      });
+      setCategoryToBeDeleted('');
       setCategory('');
-      toast.success('Deleted');
+      getCategories();
+      toast.success(`Deleted `);
     } catch (error) {
       console.error(error);
       toast.dismiss();
@@ -67,7 +83,6 @@ const AdminProducts = () => {
   const handleImage = (e) => {
     const file = e.target.files[0];
     setFileToBase(file);
-    console.log(file);
   };
   const handleImage2 = (e) => {
     const files = Array.from(e.target.files);
@@ -155,10 +170,42 @@ const AdminProducts = () => {
     }
   };
 
+  const handleEditButton = (product) => {
+    setUpdateForm(true);
+    setTitle(product.title);
+    setDescription(product.description);
+    setPrice(product.price);
+    setProductId(product._id);
+  };
+  const editProduct = async (productId) => {
+    try {
+      const response = await axios.put('/updateProduct', {
+        id: productId,
+        updates: {
+          title,
+          price,
+          category,
+          description,
+          thumbnail,
+        },
+      });
+      getAllproducts();
+
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleEdit = (e) => {
+    e.preventDefault();
+    editProduct(productId);
+  };
+
   return (
     <div className="relative ">
       <div className=" relative overflow-hidden">
         <Toaster position="top-center"></Toaster>
+
         {category === 'Add a new category (+)' && (
           <div className="fixed inset-0 bg-gray-800 opacity-90 z-50">
             <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-50 px-4 py-6 rounded-lg">
@@ -200,18 +247,21 @@ const AdminProducts = () => {
                 </p>
                 <form className=" space-y-3" onSubmit={handleDeleteCategory}>
                   <select
-                    defaultValue={category}
-                    onChange={handleSelectChange}
+                    defaultValue={categoryToBeDeleted}
+                    onChange={handleSelectDelete}
                     className="border w-full px-3 h-6  focus:outline-none rounded-md"
                   >
+                    <option disabled selected value="">
+                      -- Select a Category --
+                    </option>
                     {categories.map((category) => (
-                      <option key={category.name} value={category.name}>
+                      <option key={category.name} value={category._id}>
                         {category.name}
                       </option>
                     ))}
                   </select>
                   <button className="space-x-1 items-center mb-4 flex border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white">
-                    Submit
+                    Delete
                   </button>
                 </form>
               </div>
@@ -280,6 +330,9 @@ const AdminProducts = () => {
                   onChange={handleSelectChange}
                   className="border w-full px-3 h-6  cursor-pointer  focus:outline-none rounded-md"
                 >
+                  <option disabled selected value="">
+                    -- Select a Category --
+                  </option>
                   {categories.map((category) => (
                     <option
                       className=" font-poppins"
@@ -307,6 +360,103 @@ const AdminProducts = () => {
               </div>
               <div>
                 <label htmlFor="file">Images:</label>
+                <br />
+                <input
+                  type="file"
+                  placeholder="upload image"
+                  onChange={handleImage2}
+                  multiple
+                />
+              </div>
+            </div>
+            <div className=" my-4 flex border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white">
+              <button>Submit</button>
+            </div>
+          </form>
+        )}
+
+        {updateForm && (
+          <form
+            onSubmit={handleEdit}
+            className="flex flex-col font-poppins  items-center border-b border-neutral-700 "
+          >
+            <div
+              onClick={() => setUpdateForm(false)}
+              className="absolute right-5 hover:text-xl cursor-pointer"
+            >
+              <RxCross2 />
+            </div>
+            <div className=" w-4/6 space-y-4 mx-auto">
+              <h1 className="text-xl">Edit Product</h1>
+              <div>
+                <label htmlFor="title">Title:</label>
+                <input
+                  className="border w-full h-6 px-3 py-3 focus:outline-none rounded-md"
+                  type="text"
+                  value={title}
+                  placeholder="enter title"
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="description">Description:</label>
+                <input
+                  className="border w-full px-3 h-6 py-3 focus:outline-none rounded-md"
+                  type="text"
+                  value={description}
+                  placeholder="enter description"
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="price">Price:</label>
+                <input
+                  className="border w-full px-3 h-6 py-3 focus:outline-none rounded-md"
+                  type="text"
+                  value={price}
+                  placeholder="enter price"
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="category">Category:</label>
+                <select
+                  id="my-select"
+                  value={category}
+                  onChange={handleSelectChange}
+                  className="border w-full px-3 h-6  cursor-pointer  focus:outline-none rounded-md"
+                >
+                  <option disabled selected value="">
+                    -- Select a Category --
+                  </option>
+                  {categories.map((category) => (
+                    <option
+                      className=" font-poppins"
+                      key={category.name}
+                      value={category.name}
+                    >
+                      {category.name}
+                    </option>
+                  ))}
+                  <option className=" font-poppins text-green-500">
+                    Add a new category (+)
+                  </option>
+                  <option className=" font-poppins text-red-500">
+                    Delete a category (-)
+                  </option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="file">Thumbnail:</label>
+                <input
+                  type="file"
+                  placeholder="upload image"
+                  onChange={handleImage}
+                />
+              </div>
+              <div>
+                <label htmlFor="file">Images:</label>
+                <br />
                 <input
                   type="file"
                   placeholder="upload image"
@@ -328,7 +478,10 @@ const AdminProducts = () => {
               key={i}
             >
               <div className="absolute bottom-0 right-2 space-x-2">
-                <button className=" hover:text-blue-400">
+                <button
+                  onClick={() => handleEditButton(product)}
+                  className=" hover:text-blue-400"
+                >
                   <AiFillEdit />
                 </button>
                 <button

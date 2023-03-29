@@ -19,6 +19,7 @@ import {
   createProduct,
   deleteProduct,
   getAllProducts,
+  updateProduct,
 } from '../controllers/productController.js';
 const router = Router();
 
@@ -33,6 +34,7 @@ router.route('/deleteCategory').delete(deleteCategory);
 router.route('/createProduct').post(createProduct);
 router.route('/getAllProducts').get(getAllProducts);
 router.route('/deleteProduct').delete(deleteProduct);
+router.route('/updateProduct').put(updateProduct);
 router.route('/updateUser').put(verifyJWT, updateUser);
 router.route('/user').get(verifyJWT, getUser);
 router.route('/users').get(verifyJWT, verifyRoles(ROLES_LIST.Admin), getUsers);
