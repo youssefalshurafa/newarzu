@@ -6,8 +6,7 @@ import { CardContent } from '@mui/material';
 import { toast, Toaster } from 'react-hot-toast';
 import { RxCross2 } from 'react-icons/rx';
 import { AiFillPlusCircle } from 'react-icons/ai';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
+import { AiFillMinusCircle } from 'react-icons/ai';
 
 const AdminProducts = () => {
   const [title, setTitle] = useState('');
@@ -25,9 +24,7 @@ const AdminProducts = () => {
   const [newCategory, setNewCategory] = useState('');
   const [categoryToBeDeleted, setCategoryToBeDeleted] = useState('');
   const [updateForm, setUpdateForm] = useState(false);
-  const [productUpdate, setProductUpdate] = useState('');
-
-  const router = useRouter();
+  const [selectedProduct, setSelectedProduct] = useState('');
 
   const handleSelectChange = (event) => {
     setCategory(event.target.value);
@@ -176,8 +173,14 @@ const AdminProducts = () => {
     setDescription(product.description);
     setPrice(product.price);
     setProductId(product._id);
+    setThumbnail(product.thumbnail.url);
+    setSelectedProduct(product);
+    const imagesURL = product.images.map((p) => p.url);
+    setImages(imagesURL);
+    console.log(selectedProduct);
   };
   const editProduct = async (productId) => {
+    toast.loading('Updating Product...');
     try {
       const response = await axios.put('/updateProduct', {
         id: productId,
@@ -189,6 +192,8 @@ const AdminProducts = () => {
           thumbnail,
         },
       });
+      toast.dismiss();
+      toast.success('Product updated');
       getAllproducts();
 
       console.log(response.data);
@@ -199,6 +204,23 @@ const AdminProducts = () => {
   const handleEdit = (e) => {
     e.preventDefault();
     editProduct(productId);
+  };
+  const deleteImage = async (url) => {
+    const parts = url.split('/');
+    const publicIdWithExt = parts.slice(-1)[0]; // "publicid.jpg"
+    const publicIdWithoutExt = publicIdWithExt.split('.')[0]; // "publicid"
+    const publicId = parts.slice(-2, -1)[0] + '/' + publicIdWithoutExt;
+    const productId = selectedProduct?._id;
+    console.log(publicId);
+    console.log(productId);
+
+    try {
+      await axios.delete('/deleteImage', {
+        data: { publicId: publicId, productId: productId },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -359,6 +381,14 @@ const AdminProducts = () => {
                 />
               </div>
               <div>
+                <img
+                  className=" rounded-md "
+                  height={200}
+                  width={100}
+                  src={thumbnail}
+                />
+              </div>
+              <div>
                 <label htmlFor="file">Images:</label>
                 <br />
                 <input
@@ -367,6 +397,22 @@ const AdminProducts = () => {
                   onChange={handleImage2}
                   multiple
                 />
+              </div>
+              <div className="flex space-x-2">
+                {images.map((url) => (
+                  <div className=" relative">
+                    <img
+                      className=" rounded-md "
+                      height={200}
+                      width={100}
+                      src={url}
+                    />
+                    <AiFillMinusCircle
+                      onClick={() => deleteImage(url)}
+                      className="cursor-pointer hover:text-lg active:text-lg text-red-500 absolute top-1 right-1"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
             <div className=" my-4 flex border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white">
@@ -455,6 +501,14 @@ const AdminProducts = () => {
                 />
               </div>
               <div>
+                <img
+                  className=" rounded-md "
+                  height={200}
+                  width={100}
+                  src={thumbnail}
+                />
+              </div>
+              <div>
                 <label htmlFor="file">Images:</label>
                 <br />
                 <input
@@ -463,6 +517,22 @@ const AdminProducts = () => {
                   onChange={handleImage2}
                   multiple
                 />
+              </div>
+              <div className="flex space-x-2">
+                {images.map((url) => (
+                  <div className=" relative">
+                    <img
+                      className=" rounded-md "
+                      height={200}
+                      width={100}
+                      src={url}
+                    />
+                    <AiFillMinusCircle
+                      onClick={() => deleteImage(url)}
+                      className="cursor-pointer hover:text-lg active:text-lg text-red-500 absolute top-1 right-1"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
             <div className=" my-4 flex border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white">

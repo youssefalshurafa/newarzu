@@ -17,6 +17,7 @@ import ROLES_LIST from '../config/roles_list.js';
 import verifyRoles from '../middleware/verifyRoles.js';
 import {
   createProduct,
+  deleteImage,
   deleteProduct,
   getAllProducts,
   updateProduct,
@@ -34,6 +35,7 @@ router.route('/deleteCategory').delete(deleteCategory);
 router.route('/createProduct').post(createProduct);
 router.route('/getAllProducts').get(getAllProducts);
 router.route('/deleteProduct').delete(deleteProduct);
+router.route('/deleteImage').delete(deleteImage);
 router.route('/updateProduct').put(updateProduct);
 router.route('/updateUser').put(verifyJWT, updateUser);
 router.route('/user').get(verifyJWT, getUser);

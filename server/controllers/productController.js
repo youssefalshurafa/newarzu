@@ -107,3 +107,33 @@ export async function updateProduct(req, res) {
     console.error(error);
   }
 }
+
+export async function deleteImage(req, res) {
+  const productId = req.body.productId;
+  const publicId = req.body.publicId;
+  console.log(publicId);
+  try {
+    await cloudinary.uploader.destroy(publicId, (error, result) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(result);
+      }
+    });
+
+    await ProductModel.findOneAndUpdate(
+      { _id: productId },
+      { $pull: { images: { public_id: publicId } } },
+      { new: true },
+      (err, doc) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(doc);
+        }
+      }
+    ).clone();
+  } catch (error) {
+    console.error(error);
+  }
+}
