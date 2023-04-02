@@ -75,7 +75,7 @@ export async function deleteProduct(req, res) {
   }
 }
 
-export async function updateProduct(req, res) {
+export async function supdateProduct(req, res) {
   const productId = req.body.id;
   if (!productId) return res.sendStatus(405);
 
@@ -85,8 +85,8 @@ export async function updateProduct(req, res) {
     }).exec();
 
     const updates = req.body.updates;
-    console.log(currentProduct);
-    if (updates.thumbnail) {
+
+    if (updates.thumbnail !== '') {
       await cloudinary.uploader.destroy(currentProduct.thumbnail.public_id);
 
       const newImage = await cloudinary.uploader.upload(updates.thumbnail, {
@@ -100,6 +100,62 @@ export async function updateProduct(req, res) {
     }
 
     const product = await ProductModel.findByIdAndUpdate(productId, updates, {
+      new: true,
+    });
+    res.status(201).json({ success: true, product });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function updateProduct(req, res) {
+  const productId = req.body.id;
+  if (!productId) return res.sendStatus(405);
+  const data = {
+    title: req.body.title,
+    description: req.body.description,
+    price: req.body.price,
+    category: req.body.category,
+  };
+  try {
+    const currentProduct = await ProductModel.findOne({
+      _id: productId,
+    }).exec();
+
+    if (req.body.thumbnail !== '') {
+      const imgId = currentProduct.thumbnail.public_id;
+      await cloudinary.uploader.destroy(imgId);
+
+      const newImage = await cloudinary.uploader.upload(req.body.thumbnail, {
+        folder: 'products',
+      });
+
+      data.thumbnail = {
+        public_id: newImage.public_id,
+        url: newImage.secure_url,
+      };
+    }
+
+    let images = [...req.body.images];
+    let imagesBuffer = [];
+    if (images) {
+      for (let i = 0; i < images.length; i++) {
+        const uploadedimages = await cloudinary.uploader.upload(images[i], {
+          folder: 'products',
+        });
+        imagesBuffer.push({
+          public_id: uploadedimages.public_id,
+          url: uploadedimages.secure_url,
+        });
+      }
+      req.body.images = imagesBuffer;
+      await ProductModel.findOneAndUpdate(
+        { _id: productId },
+        { $push: { images: imagesBuffer } },
+        { new: true }
+      );
+    }
+    const product = await ProductModel.findByIdAndUpdate(productId, data, {
       new: true,
     });
     res.status(201).json({ success: true, product });

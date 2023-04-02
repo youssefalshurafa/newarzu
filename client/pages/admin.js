@@ -45,7 +45,7 @@ const Admin = () => {
         <AdminNavbar />
       </div>
       <div className="flex">
-        <div className="absolute left-0 z-10">
+        <div className="fixed left-0 z-10 mt-4">
           {isActiveMenu ? <AdminSidebar /> : <></>}
         </div>
         <div className="absolute top-12">
