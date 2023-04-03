@@ -16,6 +16,7 @@ const AdminNavbar = () => {
     await logout();
     router.push('/');
   };
+  console.log(auth);
   return (
     <div className=" w-full flex h-12 bg-slate-100 items-center drop-shadow-md ">
       <div className="font-semibold font-poppins text-2xl ml-2 ">

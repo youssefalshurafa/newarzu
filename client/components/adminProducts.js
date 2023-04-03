@@ -25,6 +25,8 @@ const AdminProducts = () => {
   const [categoryToBeDeleted, setCategoryToBeDeleted] = useState('');
   const [updateForm, setUpdateForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState('');
+  const [thumbPreview, setThumbPreview] = useState('');
+  const [imagesPreview, setImagesPreview] = useState([]);
 
   const handleSelectChange = (event) => {
     setCategory(event.target.value);
@@ -82,12 +84,13 @@ const AdminProducts = () => {
     setFileToBase(file);
   };
   const handleImage2 = (e) => {
-    const files = Array.from(e.target.files);
+    const files = Array.from(e.target?.files);
     files.forEach((file) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setImages((oldArray) => [...oldArray, reader.result]);
+        setImagesPreview((oldArray) => [...oldArray, reader.result]);
       };
     });
   };
@@ -97,6 +100,7 @@ const AdminProducts = () => {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setThumbnail(reader.result);
+      setThumbPreview(reader.result);
     };
   };
 
@@ -175,9 +179,11 @@ const AdminProducts = () => {
     setDescription(product.description);
     setPrice(product.price);
     setProductId(product._id);
-
+    setThumbPreview(product.thumbnail.url);
     setSelectedProduct(product);
     const imagesURL = product.images.map((p) => p.url);
+    setImagesPreview(imagesURL);
+    console.log(imagesPreview);
   };
   const editProduct = async (productId) => {
     toast.loading('Updating Product...');
@@ -211,19 +217,19 @@ const AdminProducts = () => {
     const publicIdWithoutExt = publicIdWithExt.split('.')[0]; // "publicid"
     const publicId = parts.slice(-2, -1)[0] + '/' + publicIdWithoutExt;
     const productId = selectedProduct?._id;
+    const filteredArray = imagesPreview.filter((image) => image !== url);
+    setImagesPreview(filteredArray);
+    console.log(imagesPreview);
 
     try {
-      await axios.delete('/deleteImage', {
-        data: { publicId: publicId, productId: productId },
-      });
+      await axios
+        .delete('/deleteImage', {
+          data: { publicId: publicId, productId: productId },
+        })
+        .then(toast.success('Image Deleted!'));
     } catch (error) {
       console.log(error);
     }
-    const updatedImageArray = images.filter(
-      (image) => image.public_id !== publicId
-    );
-
-    setImages(updatedImageArray);
   };
 
   return (
@@ -300,6 +306,8 @@ const AdminProducts = () => {
             onClick={() => {
               setFormActive(true);
               setUpdateForm(false);
+              setImagesPreview([]);
+              setThumbPreview('');
             }}
             className=""
           >
@@ -386,7 +394,7 @@ const AdminProducts = () => {
                 onChange={handleImage}
               />
             </div>
-            {thumbnail && (
+            {thumbPreview && (
               <div>
                 <img
                   className=" rounded-md "
@@ -408,7 +416,7 @@ const AdminProducts = () => {
               />
             </div>
             <div className="flex space-x-2">
-              {images.map((url) => (
+              {imagesPreview.map((url) => (
                 <div className=" relative">
                   <img
                     className=" rounded-md "
@@ -519,7 +527,7 @@ const AdminProducts = () => {
                 className=" rounded-md "
                 height={200}
                 width={100}
-                src={thumbnail}
+                src={thumbPreview}
               />
             </div>
             <div>
@@ -533,7 +541,7 @@ const AdminProducts = () => {
               />
             </div>
             <div className="flex space-x-2">
-              {images.map((url) => (
+              {imagesPreview.map((url) => (
                 <div className=" relative">
                   <img
                     className=" rounded-md "

@@ -19,6 +19,7 @@ function NavBar({ showBar, filtered }) {
   const sum = total.reduce((sum, a) => sum + a, 0);
   const [data, setData] = useState({});
   const router = useRouter();
+
   const signout = async () => {
     await logout();
     setData({});

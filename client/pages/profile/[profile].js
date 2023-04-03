@@ -1,7 +1,6 @@
 import DropDown from '@/components/dropDown';
 import Footer from '@/components/footer';
 import NavBar from '@/components/nav';
-import useAuth from '@/hooks/useAuth';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';

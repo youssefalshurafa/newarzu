@@ -15,30 +15,30 @@ const Admin = () => {
   const router = useRouter();
   const logout = useLogout();
 
-  useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   const controller = new AbortController();
 
-    const getUsers = async () => {
-      try {
-        const response = await axiosPrivate.get('/users', {
-          signal: controller.signal,
-        });
+  //   const getUsers = async () => {
+  //     try {
+  //       const response = await axiosPrivate.get('/users', {
+  //         signal: controller.signal,
+  //       });
 
-        isMounted && setUsers(response.data);
-      } catch (error) {
-        console.error(error);
-        await logout();
-        router.push('/login');
-      }
-    };
-    getUsers();
+  //       isMounted && setUsers(response.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //       await logout();
+  //       router.push('/login');
+  //     }
+  //   };
+  //   getUsers();
 
-    return () => {
-      isMounted = false;
-      isMounted && controller.abort();
-    };
-  }, []);
+  //   return () => {
+  //     isMounted = false;
+  //     isMounted && controller.abort();
+  //   };
+  // }, []);
   return (
     <div>
       <div className="fixed w-full z-20 ">
