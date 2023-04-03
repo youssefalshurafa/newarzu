@@ -19,7 +19,10 @@ const AdminSidebar = () => {
           <BsPieChartFill size={18} />
         </div>
         <div
-          onClick={() => handleClick('customers')}
+          onClick={() => {
+            handleClick('customers');
+            setIsActiveMenu(!isActiveMenu);
+          }}
           className={
             isClicked.customers
               ? ' flex justify-between px-4 cursor-pointer bg-pink-800  text-white h-8 items-center rounded-md'

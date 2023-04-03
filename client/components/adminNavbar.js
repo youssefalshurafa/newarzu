@@ -1,8 +1,11 @@
 import { useStateContext } from '@/context/ContextProvider';
 import useAuth from '@/hooks/useAuth';
 import useLogout from '@/hooks/useLogout';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { HiUser } from 'react-icons/hi';
 import { RxCross2 } from 'react-icons/rx';
@@ -12,11 +15,15 @@ const AdminNavbar = () => {
   const { auth } = useAuth();
   const logout = useLogout();
   const router = useRouter();
+  const [username, setUsername] = useState('');
   const signout = async () => {
     await logout();
     router.push('/');
   };
-  console.log(auth);
+  useEffect(() => {
+    setUsername(Cookies.get('username'));
+  }, []);
+
   return (
     <div className=" w-full flex h-12 bg-slate-100 items-center drop-shadow-md ">
       <div className="font-semibold font-poppins text-2xl ml-2 ">
@@ -39,7 +46,7 @@ const AdminNavbar = () => {
         <p className=" font-poppins text-slate-800">Hi, </p>
         <p className=" font-poppins text-slate-800 mx-2 font-bold">
           {' '}
-          {auth.user}
+          {username}
         </p>
         <HiUser size={24} />
         <div>
