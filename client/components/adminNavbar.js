@@ -12,7 +12,6 @@ import { RxCross2 } from 'react-icons/rx';
 const AdminNavbar = () => {
   const { isActiveMenu, setIsActiveMenu } = useStateContext();
   const handleActiveMenu = () => setIsActiveMenu(!isActiveMenu);
-  const { auth } = useAuth();
   const logout = useLogout();
   const router = useRouter();
   const [username, setUsername] = useState('');

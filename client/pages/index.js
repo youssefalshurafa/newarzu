@@ -4,24 +4,20 @@ import DropDown from '@/components/dropDown';
 import Footer from '@/components/footer';
 import NavBar from '@/components/nav';
 import Head from 'next/head';
-import data from '../lib/data.json';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import axios from './api/axios';
 
 function Home() {
-  const homeWear = data.find((product) => {
-    return product.category == 'Home Wear';
-  });
-  const sets = data.find((product) => {
-    return product.category == 'Sets';
-  });
-  const knitWear = data.find((product) => {
-    return product.category == 'Knit Wear';
-  });
-  const tT = data.find((product) => {
-    return product.category == 'Tops & Tshirts';
-  });
-  const filtered = [knitWear, tT, homeWear, sets];
+  const [products, setProducts] = useState([]);
+  const getAllproducts = async () => {
+    const response = await axios.get('/getAllProducts');
+
+    setProducts(response.data);
+  };
+  useEffect(() => {
+    getAllproducts();
+  }, []);
   const [visible, setVisible] = useState(false);
   const showBar = () => setVisible(!visible);
 
@@ -35,11 +31,11 @@ function Home() {
       </Head>
       <div className="min-h-screen flex flex-col justify-between">
         <div className=" fixed top-0 z-10 w-full">
-          <NavBar filtered={filtered} showBar={showBar} />
+          <NavBar showBar={showBar} />
         </div>
         {visible ? (
           <div className=" fixed overscroll-contain bg-opacity-80 bg-white h-screen  top-0 z-20 min-w-full">
-            <DropDown filtered={filtered} showBar={showBar} />
+            <DropDown showBar={showBar} />
           </div>
         ) : (
           <></>
@@ -48,7 +44,7 @@ function Home() {
         <div className=" relative">
           <Carousels />
         </div>
-        <CategorySection filtered={filtered} />
+        <CategorySection products={products} />
         <div className="flex justify-center">
           <h1 className=" font-poppins font-semibold text-xl">
             {' '}
