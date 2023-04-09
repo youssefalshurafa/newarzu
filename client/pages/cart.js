@@ -7,10 +7,10 @@ import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiArrowLeft } from 'react-icons/fi';
-import { RiDeleteBinLine } from 'react-icons/ri';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import CheckoutProduct from '@/components/CheckoutProduct';
+
 function Cart() {
   const [visible, setVisible] = useState(false);
   const showBar = () => setVisible(!visible);
@@ -58,14 +58,7 @@ function Cart() {
           <div className="md:grid md:grid-cols-4">
             <div className="md:col-span-3">
               {items.map((product, i) => (
-                <CheckoutProduct
-                  key={i}
-                  id={product.id}
-                  title={product.title}
-                  thumbnail={product.thumbnail}
-                  price={product.price}
-                  cartQuantity={product.cartQuantity}
-                />
+                <CheckoutProduct product={product} />
               ))}
             </div>
             <div>

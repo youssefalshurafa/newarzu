@@ -4,17 +4,28 @@ import NavBar from '@/components/nav';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import data from '../../lib/data.json';
 import { addToBag } from '@/slices/bagSlice';
 import dynamic from 'next/dynamic';
+import axios from '../api/axios';
+
 function ProductPage() {
   const { query } = useRouter();
   const { product } = query;
-  const productName = data.find((x) => x.title == product);
+  const [products, setProducts] = useState([]);
+  const getAllproducts = async () => {
+    const response = await axios.get('/getAllProducts');
+
+    setProducts(response.data);
+  };
+  useEffect(() => {
+    getAllproducts();
+  }, []);
+  const productName = products.find((x) => x.title == product);
+
   const [size, setSize] = useState('');
   const [visible, setVisible] = useState(false);
   const showBar = () => setVisible(!visible);
@@ -42,18 +53,11 @@ function ProductPage() {
         <div className="relative top-8 pb-7 md:grid grid-cols-2 container mx-auto">
           <div>
             <Carousel showArrows={false} showStatus={false} showThumbs={true}>
-              <div>
-                <img src={productName?.thumbnail} alt="" />
-              </div>
-              <div>
-                <img src={productName?.images[0]} alt="" />
-              </div>
-              <div>
-                <img src={productName?.images[1]} alt="" />
-              </div>
-              <div>
-                <img src={productName?.images[2]} alt="" />
-              </div>
+              {productName?.images?.map((image) => (
+                <div>
+                  <img src={image.url} alt="" />
+                </div>
+              ))}
             </Carousel>
           </div>
           <div className=" font-poppins pt-5 pl-5 text-xs">

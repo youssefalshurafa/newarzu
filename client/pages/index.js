@@ -10,6 +10,8 @@ import axios from './api/axios';
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   const getAllproducts = async () => {
     const response = await axios.get('/getAllProducts');
 
@@ -17,6 +19,14 @@ function Home() {
   };
   useEffect(() => {
     getAllproducts();
+  }, []);
+  const getCategories = async () => {
+    const response = await axios.get('/getCategories');
+
+    setCategories(response.data);
+  };
+  useEffect(() => {
+    getCategories();
   }, []);
   const [visible, setVisible] = useState(false);
   const showBar = () => setVisible(!visible);
@@ -44,7 +54,7 @@ function Home() {
         <div className=" relative">
           <Carousels />
         </div>
-        <CategorySection products={products} />
+        <CategorySection products={products} categories={categories} />
         <div className="flex justify-center">
           <h1 className=" font-poppins font-semibold text-xl">
             {' '}

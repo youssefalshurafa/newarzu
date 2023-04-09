@@ -7,13 +7,24 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import data from '../../lib/data.json';
+import axios from '../api/axios';
 
 function CategoryPage() {
   const { query } = useRouter();
   const { category } = query;
-  const catName = data.filter((x) => x.category == category);
+  const [products, setProducts] = useState([]);
+  const getAllproducts = async () => {
+    const response = await axios.get('/getAllProducts');
+
+    setProducts(response.data);
+  };
+  useEffect(() => {
+    getAllproducts();
+  }, []);
+  const catName = products.filter((x) => x.category == category);
+
   !category ? <div>Category not Found</div> : <></>;
   const [isHovering, setIsHovered] = useState(false);
   const onMouseEnter = (key) => () => setIsHovered({ [key]: true });
@@ -61,7 +72,9 @@ function CategoryPage() {
                       onMouseEnter={onMouseEnter(key)}
                       onMouseLeave={onMouseLeave(key)}
                       src={
-                        isHovering[key] ? product.images[1] : product.thumbnail
+                        isHovering[key]
+                          ? product.images[1].url
+                          : product.thumbnail.url
                       }
                       alt=""
                     />

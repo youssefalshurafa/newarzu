@@ -171,7 +171,7 @@ const AdminProducts = () => {
       console.log(error);
     }
   };
-
+  /* Editing product */
   const handleEditButton = (product) => {
     setFormActive(false);
     setUpdateForm(true);
@@ -211,6 +211,7 @@ const AdminProducts = () => {
     e.preventDefault();
     editProduct(productId);
   };
+  /* deleting image */
   const deleteImage = async (url) => {
     const parts = url.split('/');
     const publicIdWithExt = parts.slice(-1)[0]; // "publicid.jpg"

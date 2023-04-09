@@ -11,7 +11,7 @@ export const bagSlice = createSlice({
   reducers: {
     addToBag: (state, action) => {
       const itemIndex = state.items.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload._id
       );
       if (itemIndex >= 0) {
         state.items[itemIndex].cartQuantity += 1;
@@ -22,13 +22,13 @@ export const bagSlice = createSlice({
       Cookies.set('bag', JSON.stringify(state.items));
     },
     removeFromBag: (state, action) => {
-      const index = state.items.findIndex(
-        (bagItem) => bagItem.id === action.payload.id
+      const itemIndex = state.items.findIndex(
+        (item) => item._id === action.payload._id
       );
       let newBag = [...state.items];
 
-      if (index >= 0) {
-        newBag.splice(index, 1);
+      if (itemIndex >= 0) {
+        newBag.splice(itemIndex, 1);
       } else {
         console.warn(`cant remove product (id: ${action.payload})`);
       }
@@ -37,7 +37,7 @@ export const bagSlice = createSlice({
     },
     decrementFromBag: (state, action) => {
       const itemIndex = state.items.findIndex(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload._id
       );
       let newCart = [...state.items];
       if (state.items[itemIndex].cartQuantity > 1) {
