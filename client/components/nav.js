@@ -56,10 +56,13 @@ function NavBar({ showBar, filtered }) {
       <div
         className={
           scrollPosition > 0
-            ? 'flex w-full  pl-5 pt-1 h-10 justify-between text-neutral-700 bg-slate-100 shadow-black'
-            : 'flex w-full pl-5 pt-1 justify-between text-neutral-700 '
+            ? 'flex w-full  pl-5 pt-1 h-10 justify-between text-neutral-700  bg-slate-100 shadow-black'
+            : 'flex w-full pl-5 pt-1 justify-between text-neutral-700  '
         }
       >
+        <div className=" lg:hidden cursor-pointer mr-2" onClick={showBar}>
+          <GiHamburgerMenu size={28} />
+        </div>
         <div className="text-2xl font-poppins font-semibold  tracking-wider justify-between ">
           <Link href="/">
             <h1>Arzu</h1>
@@ -127,10 +130,6 @@ function NavBar({ showBar, filtered }) {
           ) : (
             <></>
           )}
-
-          <div className=" lg:hidden cursor-pointer" onClick={showBar}>
-            <GiHamburgerMenu size={28} />
-          </div>
         </div>
       </div>
     </main>
