@@ -21,7 +21,7 @@ function Cart() {
     total > 300 ? setShippingRate(0) : setShippingRate(15);
   });
   const dispatch = useDispatch();
-
+  console.log(items);
   return (
     <>
       <Head>

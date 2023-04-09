@@ -25,11 +25,11 @@ function ProductPage() {
     getAllproducts();
   }, []);
   const productName = products.find((x) => x.title == product);
-
   const [size, setSize] = useState('');
   const [visible, setVisible] = useState(false);
   const showBar = () => setVisible(!visible);
   const dispatch = useDispatch();
+  const updatedProduct = { ...productName, size };
 
   return (
     <>
@@ -108,7 +108,7 @@ function ProductPage() {
             </div>
             <div>
               <button
-                onClick={() => dispatch(addToBag(productName))}
+                onClick={() => dispatch(addToBag(updatedProduct))}
                 className=" text-center w-full  h-8 bg-black text-white mt-4 rounded-sm"
               >
                 ADD TO BAG

@@ -13,7 +13,10 @@ export const bagSlice = createSlice({
       const itemIndex = state.items.findIndex(
         (item) => item._id === action.payload._id
       );
-      if (itemIndex >= 0) {
+      const itemSize = state.items.findIndex(
+        (item) => item.size === action.payload.size
+      );
+      if (itemIndex >= 0 && itemSize >= 0) {
         state.items[itemIndex].cartQuantity += 1;
       } else {
         const tempProduct = { ...action.payload, cartQuantity: 1 };

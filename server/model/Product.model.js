@@ -11,6 +11,9 @@ export const ProductSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide a price'],
   },
+  size: {
+    type: String,
+  },
   category: {
     type: String,
     required: [true, 'Please provide a category'],
