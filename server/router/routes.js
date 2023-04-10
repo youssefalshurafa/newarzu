@@ -8,6 +8,7 @@ import {
   getUsers,
   Login,
   Logout,
+  newOrder,
   Register,
   updateUser,
 } from '../controllers/appController.js';
@@ -28,6 +29,7 @@ const router = Router();
 router.route('/register').post(Register);
 router.route('/login').post(Login);
 router.route('/refresh').get(refreshTokenController);
+router.route('/newOrder').post(newOrder);
 /* Private routes */
 router.route('/createCategory').post(createCategory);
 router.route('/getCategories').get(getCategories);

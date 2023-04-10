@@ -266,5 +266,43 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "75e32594-59f6-480f-b935-04811d4638ce",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/newOrder",
+    "url": "http://localhost:5000/newOrder",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-10T19:09:51.729Z",
+    "modified": "2023-04-10T19:09:51.729Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"customerName\": \"Noor\",\n  \"address\": \"waha\",\n  \"phone\": \"0123154\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "2c4b842e-c364-4167-b3f5-acb5a46098e9",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/newOrder",
+    "url": "http://localhost:5000/newOrder",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-10T19:10:46.006Z",
+    "modified": "2023-04-10T19:21:54.965Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"customerName\": \"mohsen\",\n  \"address\": \"waha\",\n  \"phone\": \"0123154\",\n  \"items\" : [\n    {\n      \"cartQuantity\": \"4\",\n      \"category\": \"basics\"\n    },\n      {\n      \"cartQuantity\": \"2\",\n      \"category\": \"tops\",\n      \"price\" : \"145\"\n    }\n    ]\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

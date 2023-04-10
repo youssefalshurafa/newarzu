@@ -1,9 +1,10 @@
 import UserModel from '../model/User.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import CategoryModel from '../model/Category.model.js.js';
+import CategoryModel from '../model/Category.model.js';
+import OrderModel from '../model/Order.model.js';
 
-/* POST Methods */
+/* Registeration controller */
 export async function Register(req, res) {
   const { username, email, pwd } = req.body;
   if (!username || !pwd)
@@ -94,6 +95,53 @@ export async function Logout(req, res) {
   res.clearCookie('jwt', { httpOnly: true });
   res.sendStatus(204);
 }
+
+export async function getUsers(req, res) {
+  const users = await UserModel.find();
+  if (!users) return res.status(404);
+  res.json(users);
+}
+
+export async function getUser(req, res) {
+  const cookies = req.cookies;
+  if (!cookies?.jwt) return res.sendStatus(404);
+  const refreshToken = cookies.jwt;
+
+  const foundUser = await UserModel.findOne({ refreshToken }).exec();
+  if (!foundUser) return res.sendStatus(403);
+  res.json(foundUser);
+}
+
+export async function deleteUser(req, res) {
+  if (!req?.body?.id) return res.status(400).json({ msg: 'User ID required' });
+  const foundUser = await UserModel.findOne({ _id: req.body.id }).exec();
+  if (!foundUser) return res.status(404).json({ msg: 'User ID not found!' });
+  await UserModel.deleteOne({ foundUser });
+  res.status(200).json({ msg: `deleted user:${foundUser.username}` });
+}
+
+export async function updateUser(req, res) {
+  const cookies = req.cookies;
+  if (!cookies?.jwt) return res.sendStatus(403);
+  const refreshToken = cookies.jwt;
+
+  const foundUser = await UserModel.findOne({ refreshToken }).exec();
+  if (!foundUser) return res.sendStatus(403);
+
+  try {
+    const body = req.body;
+
+    UserModel.updateOne({ refreshToken }, body, function (err, data) {
+      if (err) throw err;
+
+      return res.status(201).send({ msg: 'Record updated' });
+    });
+  } catch (error) {
+    return res.status(401).send({ error });
+  }
+}
+
+/* Category Controller */
 export async function createCategory(req, res) {
   try {
     const category = await CategoryModel.create(req.body);
@@ -119,49 +167,22 @@ export async function deleteCategory(req, res) {
   res.status(200).json({ msg: `deleted Category:${foundCategory.name}` });
 }
 
-/* GET Methods */
-export async function getUsers(req, res) {
-  const users = await UserModel.find();
-  if (!users) return res.status(404);
-  res.json(users);
-}
+/* Order Controller */
 
-export async function getUser(req, res) {
-  const cookies = req.cookies;
-  if (!cookies?.jwt) return res.sendStatus(404);
-  const refreshToken = cookies.jwt;
-
-  const foundUser = await UserModel.findOne({ refreshToken }).exec();
-  if (!foundUser) return res.sendStatus(403);
-  res.json(foundUser);
-}
-/* DELETE Methods */
-export async function deleteUser(req, res) {
-  if (!req?.body?.id) return res.status(400).json({ msg: 'User ID required' });
-  const foundUser = await UserModel.findOne({ _id: req.body.id }).exec();
-  if (!foundUser) return res.status(404).json({ msg: 'User ID not found!' });
-  await UserModel.deleteOne({ foundUser });
-  res.status(200).json({ msg: `deleted user:${foundUser.username}` });
-}
-
-/* PUT Methods */
-export async function updateUser(req, res) {
-  const cookies = req.cookies;
-  if (!cookies?.jwt) return res.sendStatus(403);
-  const refreshToken = cookies.jwt;
-
-  const foundUser = await UserModel.findOne({ refreshToken }).exec();
-  if (!foundUser) return res.sendStatus(403);
+export async function newOrder(req, res) {
+  const { customerName, address, phone, phoneTwo, items, subtotal } = req.body;
 
   try {
-    const body = req.body;
-
-    UserModel.updateOne({ refreshToken }, body, function (err, data) {
-      if (err) throw err;
-
-      return res.status(201).send({ msg: 'Record updated' });
+    await OrderModel.create({
+      customerName: customerName,
+      address: address,
+      phone: phone,
+      phoneTwo: phoneTwo,
+      subtotal: subtotal,
+      items: items,
     });
+    res.status(201).json({ message: 'New Order Created!' });
   } catch (error) {
-    return res.status(401).send({ error });
+    console.log(error);
   }
 }

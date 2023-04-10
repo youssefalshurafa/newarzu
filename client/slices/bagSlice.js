@@ -17,7 +17,7 @@ export const bagSlice = createSlice({
         (item) => item.size === action.payload.size
       );
       if (itemIndex >= 0 && itemSize >= 0) {
-        state.items[itemIndex].cartQuantity += 1;
+        state.items[itemSize].cartQuantity += 1;
       } else {
         const tempProduct = { ...action.payload, cartQuantity: 1 };
         state.items = [...state.items, tempProduct];
@@ -42,9 +42,12 @@ export const bagSlice = createSlice({
       const itemIndex = state.items.findIndex(
         (item) => item._id === action.payload._id
       );
+      const itemSize = state.items.findIndex(
+        (item) => item.size === action.payload.size
+      );
       let newCart = [...state.items];
       if (state.items[itemIndex].cartQuantity > 1) {
-        state.items[itemIndex].cartQuantity -= 1;
+        state.items[itemSize].cartQuantity -= 1;
       } else if (state.items[itemIndex].cartQuantity === 1) {
         newCart.splice(itemIndex, 1);
       }

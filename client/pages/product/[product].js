@@ -30,6 +30,10 @@ function ProductPage() {
   const showBar = () => setVisible(!visible);
   const dispatch = useDispatch();
   const updatedProduct = { ...productName, size };
+  delete updatedProduct.description;
+  delete updatedProduct.images;
+  delete updatedProduct.material;
+  delete updatedProduct.stock;
 
   return (
     <>

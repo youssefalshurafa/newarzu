@@ -2,10 +2,10 @@ import CheckoutWizard from '@/components/checkoutWizard';
 import DropDown from '@/components/dropDown';
 import Footer from '@/components/footer';
 import NavBar from '@/components/nav';
-import { removeFromBag, selectItems, selectTotal } from '@/slices/bagSlice';
+import { selectItems, selectTotal } from '@/slices/bagSlice';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FiArrowLeft } from 'react-icons/fi';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
@@ -20,7 +20,6 @@ function Cart() {
   useEffect(() => {
     total > 300 ? setShippingRate(0) : setShippingRate(15);
   });
-  const dispatch = useDispatch();
   console.log(items);
   return (
     <>
@@ -70,13 +69,13 @@ function Cart() {
 
                   <div className="flex justify-between mx-4 pt-4 pb-4">
                     <p>Subtotal</p>
-                    <p>${total}</p>
+                    <p>LE {total}</p>
                   </div>
 
                   {shippingRate > 0 ? (
                     <div className="flex justify-between mx-4 py-4">
                       <p>Shipping</p>
-                      <p>${shippingRate}</p>
+                      <p>LE {shippingRate}</p>
                     </div>
                   ) : shippingRate <= 0 ? (
                     <div className=" mx-4 py-4">
@@ -88,12 +87,14 @@ function Cart() {
 
                   <div className="py-4 flex justify-between mx-4">
                     <p>Total</p>
-                    <p>${total + shippingRate}</p>
+                    <p>LE {total + shippingRate}</p>
                   </div>
                   <div className=" text-center pb-4">
-                    <button className="  border border-solid font-poppins border-neutral-700 px-2 bg-neutral-700 text-white hover:bg-white hover:text-neutral-700">
-                      Proceed To Checkout
-                    </button>
+                    <Link href={'/checkout'}>
+                      <button className="  border border-solid font-poppins border-neutral-700 px-2 bg-neutral-700 text-white hover:bg-white hover:text-neutral-700">
+                        Proceed To Checkout
+                      </button>
+                    </Link>
                   </div>
                 </div>
               ) : (

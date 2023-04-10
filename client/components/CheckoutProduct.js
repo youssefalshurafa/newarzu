@@ -28,7 +28,7 @@ export default function CheckoutProduct({ product }) {
       <div className=" col-span-2 md:col-span-3 flex mx-2 md:mx-5  justify-between items-center">
         <div className="md:flex md:space-x-8 font-poppins">
           <p>{product.title}</p>
-          <p>${product.price}</p>
+          <p>LE {product.price}</p>
           <p>Size: {product.size}</p>
         </div>
         <div className="flex space-x-3 items-center">
