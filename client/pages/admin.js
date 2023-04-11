@@ -3,6 +3,7 @@ import AdminSidebar from '@/components/adminSidebar';
 import AdminProducts from '@/components/adminProducts';
 import { useStateContext } from '@/context/ContextProvider';
 import Customers from '@/components/customers';
+import AdminOrders from '@/components/adminOrders';
 
 const Admin = () => {
   const { isActiveMenu, isClicked } = useStateContext();
@@ -27,6 +28,13 @@ const Admin = () => {
           {isClicked.customers && (
             <div className="">
               <Customers />
+            </div>
+          )}
+        </div>
+        <div className="absolute top-12">
+          {isClicked.orders && (
+            <div className="">
+              <AdminOrders />
             </div>
           )}
         </div>

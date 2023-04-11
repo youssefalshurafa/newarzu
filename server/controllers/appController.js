@@ -186,3 +186,17 @@ export async function newOrder(req, res) {
     console.log(error);
   }
 }
+export async function getAllOrders(req, res) {
+  const orders = await OrderModel.find();
+  if (!orders) return res.status(404);
+  res.json(orders);
+}
+export async function deleteOrder(req, res) {
+  if (!req?.body?.id) return res.status(400).json({ msg: 'Order  required' });
+  const foundOrder = await OrderModel.findOne({
+    _id: req.body.id,
+  }).exec();
+  if (!foundOrder) return res.status(404).json({ msg: 'Order not found!' });
+  await OrderModel.deleteOne({ foundOrder });
+  res.status(200).json({ msg: `deleted Order:${foundOrder.customerName}` });
+}

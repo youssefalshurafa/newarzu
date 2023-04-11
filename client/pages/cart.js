@@ -20,7 +20,7 @@ function Cart() {
   useEffect(() => {
     total > 300 ? setShippingRate(0) : setShippingRate(15);
   });
-  console.log(items);
+
   return (
     <>
       <Head>

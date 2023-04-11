@@ -1,7 +1,6 @@
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import useLogout from '@/hooks/useLogout';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import { useState, useEffect } from 'react';
 

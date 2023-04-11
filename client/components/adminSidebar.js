@@ -36,7 +36,17 @@ const AdminSidebar = () => {
           <p className=" font-poppins font-semibold">Employees</p>
           <FaUserTie size={18} />
         </div>
-        <div className="flex justify-between px-4 cursor-pointer hover:bg-pink-800  hover:text-white h-8 items-center rounded-md">
+        <div
+          onClick={() => {
+            handleClick('orders');
+            setIsActiveMenu(!isActiveMenu);
+          }}
+          className={
+            isClicked.orders
+              ? ' flex justify-between px-4 cursor-pointer bg-pink-800  text-white h-8 items-center rounded-md'
+              : 'flex justify-between px-4 cursor-pointer hover:bg-pink-800  hover:text-white h-8 items-center rounded-md'
+          }
+        >
           <p className=" font-poppins font-semibold">Orders</p>
           <HiShoppingCart size={18} />
         </div>

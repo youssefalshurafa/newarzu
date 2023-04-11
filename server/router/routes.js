@@ -2,7 +2,9 @@ import { Router } from 'express';
 import {
   createCategory,
   deleteCategory,
+  deleteOrder,
   deleteUser,
+  getAllOrders,
   getCategories,
   getUser,
   getUsers,
@@ -29,16 +31,22 @@ const router = Router();
 router.route('/register').post(Register);
 router.route('/login').post(Login);
 router.route('/refresh').get(refreshTokenController);
+
 router.route('/newOrder').post(newOrder);
-/* Private routes */
-router.route('/createCategory').post(createCategory);
-router.route('/getCategories').get(getCategories);
-router.route('/deleteCategory').delete(deleteCategory);
-router.route('/createProduct').post(createProduct);
+
 router.route('/getAllProducts').get(getAllProducts);
-router.route('/deleteProduct').delete(deleteProduct);
-router.route('/deleteImage').delete(deleteImage);
-router.route('/updateProduct').put(updateProduct);
+router.route('/getCategories').get(getCategories);
+/* Private routes */
+router.route('/deleteOrder').delete(verifyJWT, deleteOrder);
+router.route('/getAllOrders').get(verifyJWT, getAllOrders);
+
+router.route('/createCategory').post(verifyJWT, createCategory);
+router.route('/deleteCategory').delete(verifyJWT, deleteCategory);
+router.route('/createProduct').post(verifyJWT, createProduct);
+router.route('/deleteProduct').delete(verifyJWT, deleteProduct);
+router.route('/deleteImage').delete(verifyJWT, deleteImage);
+router.route('/updateProduct').put(verifyJWT, updateProduct);
+
 router.route('/updateUser').put(verifyJWT, updateUser);
 router.route('/user').get(verifyJWT, getUser);
 router.route('/users').get(verifyJWT, verifyRoles(ROLES_LIST.Admin), getUsers);
