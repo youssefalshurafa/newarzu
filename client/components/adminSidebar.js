@@ -36,34 +36,32 @@ const AdminSidebar = () => {
           <p className=" font-poppins font-semibold">Employees</p>
           <FaUserTie size={18} />
         </div>
-        <div
-          onClick={() => {
-            handleClick('orders');
-            setIsActiveMenu(!isActiveMenu);
-          }}
-          className={
-            isClicked.orders
-              ? ' flex justify-between px-4 cursor-pointer bg-pink-800  text-white h-8 items-center rounded-md'
-              : 'flex justify-between px-4 cursor-pointer hover:bg-pink-800  hover:text-white h-8 items-center rounded-md'
-          }
-        >
-          <p className=" font-poppins font-semibold">Orders</p>
-          <HiShoppingCart size={18} />
-        </div>
-        <div
-          onClick={() => {
-            handleClick('products');
-            setIsActiveMenu(!isActiveMenu);
-          }}
-          className={
-            isClicked.products
-              ? ' flex justify-between px-4 cursor-pointer bg-pink-800  text-white h-8 items-center rounded-md'
-              : 'flex justify-between px-4 cursor-pointer hover:bg-pink-800  hover:text-white h-8 items-center rounded-md'
-          }
-        >
-          <p className=" font-poppins font-semibold">Products</p>
-          <AiFillPlusCircle size={18} />
-        </div>
+        <Link href={'/adminOrders'}>
+          <div
+            onClick={() => {
+              handleClick('orders');
+              setIsActiveMenu(!isActiveMenu);
+            }}
+            className="  flex justify-between px-4 cursor-pointer hover:bg-pink-800 hover:text-white active:bg-pink-800  active:text-white h-8 items-center rounded-md"
+          >
+            <p className=" font-poppins font-semibold">Orders</p>
+
+            <HiShoppingCart size={18} />
+          </div>
+        </Link>
+        <Link href={'/adminProducts'}>
+          <div
+            onClick={() => {
+              handleClick('products');
+              setIsActiveMenu(!isActiveMenu);
+            }}
+            className="  flex justify-between px-4 cursor-pointer hover:bg-pink-800 hover:text-white active:bg-pink-800  active:text-white h-8 items-center rounded-md"
+          >
+            <p className=" font-poppins font-semibold">Products</p>
+
+            <AiFillPlusCircle size={18} />
+          </div>
+        </Link>
       </div>
     </div>
   );

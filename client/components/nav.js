@@ -82,7 +82,7 @@ function NavBar({ showBar, filtered }) {
         <div className="flex  space-x-3 px-8">
           {rolesObject?.hasOwnProperty('Admin') ? (
             <div>
-              <Link href={'/admin'}>
+              <Link href={'/adminProducts'}>
                 <p className=" hover:bg-black hover:text-white active:bg-black active:text-white font-poppins font-semibold bg-white text-black pt-1 rounded-md">
                   Admin
                 </p>

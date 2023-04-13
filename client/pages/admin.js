@@ -1,9 +1,9 @@
 import AdminNavbar from '@/components/adminNavbar';
 import AdminSidebar from '@/components/adminSidebar';
-import AdminProducts from '@/components/adminProducts';
+import AdminProducts from '@/pages/adminProducts';
 import { useStateContext } from '@/context/ContextProvider';
-import Customers from '@/components/customers';
-import AdminOrders from '@/components/adminOrders';
+import Customers from '@/pages/customers';
+import AdminOrders from '@/pages/adminOrders';
 
 const Admin = () => {
   const { isActiveMenu, isClicked } = useStateContext();
