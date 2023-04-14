@@ -6,6 +6,7 @@ import axios from './api/axios';
 import Head from 'next/head';
 import NavBar from '@/components/nav';
 import DropDown from '@/components/dropDown';
+import dynamic from 'next/dynamic';
 
 const Checkout = () => {
   const items = useSelector(selectItems);
@@ -142,4 +143,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default dynamic(() => Promise.resolve(Checkout), { ssr: false });

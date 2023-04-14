@@ -60,7 +60,7 @@ function NavBar({ showBar, filtered }) {
             : 'flex w-full pl-5 pt-1 justify-between text-neutral-700  '
         }
       >
-        <div className=" lg:hidden cursor-pointer mr-2" onClick={showBar}>
+        <div className=" lg:hidden cursor-pointer mr-2 " onClick={showBar}>
           <GiHamburgerMenu size={28} />
         </div>
         <div className="text-2xl font-poppins font-semibold  tracking-wider justify-between ">

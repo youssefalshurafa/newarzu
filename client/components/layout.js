@@ -6,11 +6,21 @@ const Layout = ({ children }) => {
   const { isActiveMenu, isClicked } = useStateContext();
   return (
     <>
-      <AdminNavbar />
-      <div className="fixed left-0 z-10 mt-4">
-        {isActiveMenu ? <AdminSidebar /> : <></>}
+      <div className="fixed w-full z-20">
+        <AdminNavbar />
       </div>
-      <div>{children}</div>
+      <div>
+        <div
+          className={`fixed left-0 z-10 mt-4 ${
+            isActiveMenu
+              ? ' transform translate-x-0 duration-500'
+              : 'transform  -translate-x-full duration-500'
+          }`}
+        >
+          <AdminSidebar />
+        </div>
+        <div className="absolute top-14">{children}</div>
+      </div>
     </>
   );
 };

@@ -8,6 +8,7 @@ import { RxCross2 } from 'react-icons/rx';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { AiFillMinusCircle } from 'react-icons/ai';
 import Layout from '../components/layout';
+import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 
 const AdminProducts = () => {
   const [title, setTitle] = useState('');
@@ -29,11 +30,13 @@ const AdminProducts = () => {
   const [thumbPreview, setThumbPreview] = useState('');
   const [imagesPreview, setImagesPreview] = useState([]);
 
+  const axiosPrivate = useAxiosPrivate();
   const handleSelectChange = (event) => {
     setCategory(event.target.value);
   };
+
   const handleSelectDelete = (event) => {
-    setCategoryToBeDeleted(event.target.value);
+    setCategoryToBeDeleted(event?.target.value);
     console.log(categoryToBeDeleted);
   };
 
@@ -48,7 +51,7 @@ const AdminProducts = () => {
   const handleNewCategory = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/createCategory', {
+      const response = await axiosPrivate.post('/createCategory', {
         name: newCategory,
       });
       if (response?.data?.success === true) {
@@ -66,7 +69,7 @@ const AdminProducts = () => {
   const handleDeleteCategory = async (e) => {
     e.preventDefault();
     try {
-      await axios.delete('/deleteCategory', {
+      await axiosPrivate.delete('/deleteCategory', {
         data: { id: categoryToBeDeleted },
       });
       setCategoryToBeDeleted('');
@@ -111,7 +114,7 @@ const AdminProducts = () => {
 
     try {
       toast.loading('Creating Product...');
-      const response = await axios.post('/createProduct', {
+      const response = await axiosPrivate.post('/createProduct', {
         title,
         description,
         price,
@@ -162,7 +165,7 @@ const AdminProducts = () => {
   const handleDelete = async (productId) => {
     toast.loading('Deleting...');
     try {
-      await axios.delete('/deleteProduct', { data: { id: productId } });
+      await axiosPrivate.delete('/deleteProduct', { data: { id: productId } });
       setConfirm(false);
       toast.dismiss();
       toast.success('Deleted');
@@ -590,7 +593,9 @@ const AdminProducts = () => {
               </div>
               <div className="mb-4 ">
                 <img src={product.thumbnail?.url} />
-                <p className="absolute bottom-0 pb-1">{product.title}</p>
+                <p className="absolute text-xs bottom-0 pb-1">
+                  {product.title}
+                </p>
               </div>
             </CardContent>
           ))}

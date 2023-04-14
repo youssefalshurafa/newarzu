@@ -4,38 +4,47 @@ import Layout from '../components/layout';
 import { CiUser, CiLocationOn, CiPhone, CiSearch } from 'react-icons/ci';
 import { BsThreeDots } from 'react-icons/bs';
 import { Card, CardContent } from '@mui/material';
+import { toast, Toaster } from 'react-hot-toast';
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [orderId, setOrderId] = useState('');
   const axiosPrivate = useAxiosPrivate();
 
-  const [dotsClicked, setDotsClicked] = useState(false);
+  const [dotsClicked, setDotsClicked] = useState(null);
+
+  const handleDots = (order) => {
+    setOrderId(order?.invoiceNumber);
+    setDotsClicked(dotsClicked === order?._id ? null : order?._id);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosPrivate.delete('/deleteOrder', { data: { invNum: orderId } });
+      handleDots();
+      toast.success(`Deleted `);
+      getAllOrders();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getAllOrders = async () => {
+    try {
+      const response = await axiosPrivate.get('/getAllOrders');
+
+      setOrders(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-
-    const getAllOrders = async () => {
-      try {
-        const response = await axiosPrivate.get('/getAllOrders', {
-          signal: controller.signal,
-        });
-
-        isMounted && setOrders(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     getAllOrders();
-
-    return () => {
-      isMounted = false;
-      isMounted && controller.abort();
-    };
   }, []);
 
   return (
     <Layout>
       <div>
+        <Toaster position="top-center"></Toaster>
         <h1 className=" font-poppins m-3 text-lg">{orders.length} Orders</h1>
 
         <div className=" relative space-y-6 mx-5 my-5 ">
@@ -55,12 +64,12 @@ const AdminOrders = () => {
               <CardContent>
                 <div className="relative font-poppins space-y-2 ">
                   <span
-                    onClick={() => setDotsClicked(!dotsClicked)}
+                    onClick={() => handleDots(order)}
                     className=" absolute right-2 bottom-2 cursor-pointer"
                   >
                     <BsThreeDots size={22} />
                   </span>
-                  {dotsClicked && (
+                  {dotsClicked === order._id && (
                     <div className=" absolute right-10 bottom-0 space-y-2  shadow-md bg-white p-3 rounded-md">
                       <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
                         Show Order
@@ -71,7 +80,10 @@ const AdminOrders = () => {
                       <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
                         Edit Order
                       </p>
-                      <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer  text-red-500">
+                      <p
+                        onClick={() => handleDelete()}
+                        className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer  text-red-500"
+                      >
                         Delete Order
                       </p>
                     </div>
