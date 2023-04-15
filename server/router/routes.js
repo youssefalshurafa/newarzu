@@ -4,6 +4,7 @@ import {
   deleteCategory,
   deleteOrder,
   deleteUser,
+  editOrder,
   getAllOrders,
   getCategories,
   getUser,
@@ -39,6 +40,7 @@ router.route('/getCategories').get(getCategories);
 /* Private routes */
 router.route('/deleteOrder').delete(verifyJWT, deleteOrder);
 router.route('/getAllOrders').get(verifyJWT, getAllOrders);
+router.route('/editOrder').put(verifyJWT, editOrder);
 
 router.route('/createCategory').post(verifyJWT, createCategory);
 router.route('/deleteCategory').delete(verifyJWT, deleteCategory);

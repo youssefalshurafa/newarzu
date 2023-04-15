@@ -328,21 +328,21 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:5000/deleteOrder",
-    "url": "http://localhost:5000/deleteOrder",
-    "method": "DELETE",
+    "url": "http://localhost:5000/editOrder",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2023-04-14T11:30:33.773Z",
-    "modified": "2023-04-14T11:30:44.660Z",
+    "modified": "2023-04-15T19:55:52.879Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"id\" : \"6435b7e06f3007f94d929e80\"\n}",
+      "raw": "{\n  \"invNum\" : \"INV-725061\",\n  \"phone\": \"77777\",\n  \"shipped\": false\n}",
       "form": []
     },
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4MTQ3MTgwNiwiZXhwIjoxNjgxNDcyNzA2fQ.Zt7A8_4VOtSPAE2z1PYXfqUngdnEs1UReEGNhLLRnBc"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4MTU4ODUzNiwiZXhwIjoxNjgxNTg5NDM2fQ.4vERjx99GUvcHwR3QxxyQDV8UYcw9vJurcPMjaS4j-U"
     },
     "tests": []
   }

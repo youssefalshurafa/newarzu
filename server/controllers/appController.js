@@ -95,13 +95,11 @@ export async function Logout(req, res) {
   res.clearCookie('jwt', { httpOnly: true });
   res.sendStatus(204);
 }
-
 export async function getUsers(req, res) {
   const users = await UserModel.find();
   if (!users) return res.status(404);
   res.json(users);
 }
-
 export async function getUser(req, res) {
   const cookies = req.cookies;
   if (!cookies?.jwt) return res.sendStatus(404);
@@ -111,7 +109,6 @@ export async function getUser(req, res) {
   if (!foundUser) return res.sendStatus(403);
   res.json(foundUser);
 }
-
 export async function deleteUser(req, res) {
   if (!req?.body?.id) return res.status(400).json({ msg: 'User ID required' });
   const foundUser = await UserModel.findOne({ _id: req.body.id }).exec();
@@ -119,7 +116,6 @@ export async function deleteUser(req, res) {
   await UserModel.deleteOne({ foundUser });
   res.status(200).json({ msg: `deleted user:${foundUser.username}` });
 }
-
 export async function updateUser(req, res) {
   const cookies = req.cookies;
   if (!cookies?.jwt) return res.sendStatus(403);
@@ -208,6 +204,34 @@ export async function deleteOrder(req, res) {
       }
     );
   } catch (error) {
-    console.error(error);
+    return res.status(401).send({ error });
+  }
+}
+export async function editOrder(req, res) {
+  const data = {
+    customerName: req.body.customerName,
+    address: req.body.address,
+    phone: req.body.phone,
+    phoneTwo: req.body.phoneTwo,
+    items: req.body.items,
+    subtotal: req.body.subtotal,
+    shipped: req.body.shipped,
+  };
+  try {
+    OrderModel.findOneAndUpdate(
+      { invoiceNumber: req.body.invNum },
+      data,
+      { new: true },
+      (error, order) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(order);
+        }
+      }
+    );
+    return res.status(201).send({ msg: 'Record updated' });
+  } catch (error) {
+    return res.status(401).send({ error });
   }
 }

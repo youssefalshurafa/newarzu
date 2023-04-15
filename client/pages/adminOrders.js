@@ -41,6 +41,30 @@ const AdminOrders = () => {
     getAllOrders();
   }, []);
 
+  const handleShipped = async () => {
+    try {
+      await axiosPrivate.put('/editOrder', {
+        invNum: orderId,
+        shipped: true,
+      });
+      setDotsClicked(false);
+      getAllOrders();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleNotShipped = async () => {
+    try {
+      await axiosPrivate.put('/editOrder', {
+        invNum: orderId,
+        shipped: false,
+      });
+      setDotsClicked(false);
+      getAllOrders();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Layout>
       <div>
@@ -74,9 +98,22 @@ const AdminOrders = () => {
                       <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
                         Show Order
                       </p>
-                      <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                        Mark as Shipped
-                      </p>
+                      {order.shipped ? (
+                        <p
+                          onClick={handleNotShipped}
+                          className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer"
+                        >
+                          Mark as Not Shipped
+                        </p>
+                      ) : (
+                        <p
+                          onClick={handleShipped}
+                          className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer"
+                        >
+                          Mark as Shipped
+                        </p>
+                      )}
+
                       <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
                         Edit Order
                       </p>

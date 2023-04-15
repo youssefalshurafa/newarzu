@@ -192,7 +192,7 @@ const AdminProducts = () => {
   const editProduct = async (productId) => {
     toast.loading('Updating Product...');
     try {
-      await axios.put('/updateProduct', {
+      await axiosPrivate.put('/updateProduct', {
         id: productId,
         images,
         title,
