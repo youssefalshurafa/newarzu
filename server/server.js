@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 import corsOptions from './config/corsOptions.js';
 import credentials from './middleware/credentials.js';
 import bodyParser from 'body-parser';
-import ProductModel from './model/Product.model.js';
+import OrderModel from './model/Order.model.js';
 
 dotenv.config();
 const app = express();
