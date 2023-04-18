@@ -12,9 +12,13 @@ const AdminSidebar = () => {
     useStateContext();
 
   return (
-    <div className="mt-1 mr-3 h-screen z-20  w-60 bg-slate-100 rounded-md shadow-md">
-      <div className="pt-12 space-y-4">
-        <div className="flex justify-between px-4 cursor-pointer hover:bg-pink-800  hover:text-white h-8 items-center rounded-md">
+    <div className="mt-1 mr-3 h-screen z-20 text-zinc-400  w-60  bg-gray-800 rounded-md shadow-md">
+      <div className="pt-12 ">
+        <div
+          className={`mt-3 flex justify-between px-4 cursor-pointer hover:bg-indigo-500 hover:text-white  h-8 items-center rounded-md ${
+            isClicked.dashboard && 'bg-indigo-500 text-white '
+          }`}
+        >
           <p className=" font-poppins font-semibold">Dashboard</p>
           <BsPieChartFill size={18} />
         </div>
@@ -23,16 +27,18 @@ const AdminSidebar = () => {
             handleClick('customers');
             setIsActiveMenu(!isActiveMenu);
           }}
-          className={
-            isClicked.customers
-              ? ' flex justify-between px-4 cursor-pointer bg-pink-800  text-white h-8 items-center rounded-md'
-              : 'flex justify-between px-4 cursor-pointer hover:bg-pink-800  hover:text-white h-8 items-center rounded-md'
-          }
+          className={`mt-3 flex justify-between px-4 cursor-pointer hover:bg-indigo-500 hover:text-white  h-8 items-center rounded-md ${
+            isClicked.customers && 'bg-indigo-500 text-white '
+          }`}
         >
           <p className=" font-poppins font-semibold">Customers</p>
           <ImUsers size={18} />
         </div>
-        <div className="flex justify-between px-4 cursor-pointer hover:bg-pink-800  hover:text-white h-8 items-center rounded-md">
+        <div
+          className={`mt-3 flex justify-between px-4 cursor-pointer hover:bg-indigo-500 hover:text-white  h-8 items-center rounded-md ${
+            isClicked.employees && 'bg-indigo-500 text-white '
+          }`}
+        >
           <p className=" font-poppins font-semibold">Employees</p>
           <FaUserTie size={18} />
         </div>
@@ -42,7 +48,9 @@ const AdminSidebar = () => {
               handleClick('orders');
               setIsActiveMenu(!isActiveMenu);
             }}
-            className="  flex justify-between px-4 cursor-pointer hover:bg-pink-800 hover:text-white active:bg-pink-800  active:text-white h-8 items-center rounded-md"
+            className={`mt-3 flex justify-between px-4 cursor-pointer hover:bg-indigo-500 hover:text-white  h-8 items-center rounded-md ${
+              isClicked.orders && 'bg-indigo-500 text-white '
+            }`}
           >
             <p className=" font-poppins font-semibold">Orders</p>
 
@@ -55,7 +63,9 @@ const AdminSidebar = () => {
               handleClick('products');
               setIsActiveMenu(!isActiveMenu);
             }}
-            className="  flex justify-between px-4 cursor-pointer hover:bg-pink-800 hover:text-white active:bg-pink-800  active:text-white h-8 items-center rounded-md"
+            className={`mt-3 flex justify-between px-4 cursor-pointer hover:bg-indigo-500 hover:text-white  h-8 items-center rounded-md ${
+              isClicked.products && 'bg-indigo-500 text-white '
+            }`}
           >
             <p className=" font-poppins font-semibold">Products</p>
 

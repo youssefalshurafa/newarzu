@@ -20,8 +20,6 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { applyPagination } from '@/utils/apply-pagination';
-import { Scrollbar } from '@/components/scrollbar';
 import useOrders from '@/hooks/useOrders';
 
 const useOrdersInv = (orders) => {
@@ -121,7 +119,7 @@ const AdminOrders = () => {
 
           {screenSize <= 900 ? (
             <div>
-              {theOrders.map((order) => (
+              {orders.map((order) => (
                 <Card className="hover:bg-gray-100 ">
                   <CardContent>
                     <div className="relative font-poppins space-y-2 ">
@@ -214,24 +212,37 @@ const AdminOrders = () => {
             </div>
           ) : (
             <Card>
-              <Box sx={{ minWidth: 800 }}>
+              <Box sx={{ minWidth: 1000 }}>
                 <Table>
                   <TableHead>
                     <TableRow>
                       <TableCell padding="checkbox">
                         <Checkbox />
                       </TableCell>
-                      <TableCell>Name</TableCell>
-                      <TableCell>Invoice</TableCell>
-                      <TableCell>Location</TableCell>
-                      <TableCell>Phone</TableCell>
-                      <TableCell>Status</TableCell>
+                      <TableCell className=" font-poppins font-semibold">
+                        CUSTOMER
+                      </TableCell>
+                      <TableCell className=" font-poppins font-semibold">
+                        INVOICE
+                      </TableCell>
+                      <TableCell className=" font-poppins font-semibold">
+                        ADDRESS
+                      </TableCell>
+                      <TableCell className=" font-poppins font-semibold">
+                        PHONE
+                      </TableCell>
+                      <TableCell className=" font-poppins font-semibold">
+                        STATUS
+                      </TableCell>
+                      <TableCell className=" font-poppins font-semibold">
+                        SETTINGS
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {theOrders.map((customer) => {
+                    {orders.map((order) => {
                       return (
-                        <TableRow hover key={customer._id}>
+                        <TableRow hover key={order._id}>
                           <TableCell padding="checkbox">
                             <Checkbox />
                           </TableCell>
@@ -242,15 +253,55 @@ const AdminOrders = () => {
                               spacing={2}
                             >
                               <Typography variant="subtitle2">
-                                {customer.customerName}
+                                {order.customerName}
                               </Typography>
                             </Stack>
                           </TableCell>
-                          <TableCell>{customer.invoiceNumber}</TableCell>
-                          <TableCell>{customer.address}</TableCell>
-                          <TableCell>{customer.phone}</TableCell>
+                          <TableCell>{order.invoiceNumber}</TableCell>
+                          <TableCell>{order.address}</TableCell>
+                          <TableCell>{order.phone}</TableCell>
                           <TableCell>
-                            {customer.shipped ? 'Shipped' : 'Not Shipped'}
+                            {order.shipped ? 'Shipped' : 'Not Shipped'}
+                          </TableCell>
+                          <TableCell>
+                            <span
+                              onClick={() => handleDots(order)}
+                              className="cursor-pointer"
+                            >
+                              <BsThreeDots size={22} />
+                            </span>
+                            {dotsClicked === order._id && (
+                              <div className="absolute w-max z-20  space-y-2  shadow-md bg-white p-3 rounded-md">
+                                <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                                  Show Order
+                                </p>
+                                {order.shipped ? (
+                                  <p
+                                    onClick={handleNotShipped}
+                                    className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer"
+                                  >
+                                    Mark as Not Shipped
+                                  </p>
+                                ) : (
+                                  <p
+                                    onClick={handleShipped}
+                                    className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer"
+                                  >
+                                    Mark as Shipped
+                                  </p>
+                                )}
+
+                                <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                                  Edit Order
+                                </p>
+                                <p
+                                  onClick={() => handleDelete()}
+                                  className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer  text-red-500"
+                                >
+                                  Delete Order
+                                </p>
+                              </div>
+                            )}
                           </TableCell>
                         </TableRow>
                       );

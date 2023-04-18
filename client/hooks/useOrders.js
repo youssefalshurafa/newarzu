@@ -2,7 +2,7 @@ import { useStateContext } from '@/context/ContextProvider';
 import { applyPagination } from '@/utils/apply-pagination';
 import { useMemo } from 'react';
 
-const useOrders = () => {
+const UseOrders = () => {
   const { orders } = useStateContext();
 
   const ordersPage = (page, rowsPerPage) => {
@@ -14,4 +14,4 @@ const useOrders = () => {
   return ordersPage;
 };
 
-export default useOrders;
+export default UseOrders;

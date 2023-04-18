@@ -24,8 +24,8 @@ const AdminNavbar = () => {
   }, []);
 
   return (
-    <div className=" w-full flex h-12 bg-slate-100 items-center drop-shadow-md ">
-      <div className="font-semibold font-poppins text-2xl ml-2 ">
+    <div className=" w-full bg-gray-800 flex h-12 text-zinc-400 items-center  ">
+      <div className="font-semibold font-poppins text-2xl ml-6 ">
         <Link href="/">
           <h1>Arzu</h1>
         </Link>
@@ -42,8 +42,8 @@ const AdminNavbar = () => {
         )}
       </div>
       <div className="absolute right-2 p-2 flex">
-        <p className=" font-poppins text-slate-800">Hi, </p>
-        <p className=" font-poppins text-slate-800 mx-2 font-bold">
+        <p className=" font-poppins text-zinc-400">Hi, </p>
+        <p className=" font-poppins text-zinc-400 mx-2 font-bold">
           {' '}
           {username}
         </p>
