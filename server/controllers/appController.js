@@ -172,7 +172,7 @@ export async function newOrder(req, res) {
   const { customerName, address, phone, phoneTwo, items, subtotal } = req.body;
 
   try {
-    await OrderModel.create({
+    const newOrder = await OrderModel.create({
       customerName: customerName,
       address: address,
       phone: phone,
@@ -181,6 +181,14 @@ export async function newOrder(req, res) {
       items: items,
     });
     res.status(201).json({ message: 'New Order Created!' });
+    OrderModel.find({}, function (err, orders) {
+      if (err) {
+        console.log(err);
+      } else {
+        orders.unshift(newOrder);
+        console.log(orders);
+      }
+    });
   } catch (error) {
     console.log(error);
   }

@@ -26,7 +26,7 @@ const Checkout = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('/newOrder', {
+      const response = await axios.post('/newOrder', {
         customerName,
         phone,
         phoneTwo,
@@ -35,6 +35,7 @@ const Checkout = () => {
         items,
         subtotal,
       });
+      console.log(response);
     } catch (error) {
       console.log(error);
     }

@@ -20,7 +20,8 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import useOrders from '@/hooks/useOrders';
+import { useSelection } from '@/hooks/useSelection';
+import OrdersTable from '@/components/ordersTable';
 
 const useOrdersInv = (orders) => {
   return useMemo(() => {
@@ -34,15 +35,27 @@ const AdminOrders = () => {
   const [dotsClicked, setDotsClicked] = useState(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const ordersPage = useOrders();
-  const theOrders = ordersPage(page, rowsPerPage);
+  const [theOrders, setTheOrders] = useState([]);
   const orderIds = useOrdersInv(theOrders);
+  const orderSelection = useSelection(orderIds);
   const count = orders.length;
 
   const handleDots = (order) => {
     setOrderId(order?.invoiceNumber);
     setDotsClicked(dotsClicked === order?._id ? null : order?._id);
+    orderSelection.handleDeselectAll();
+    orderSelection.handleSelectOne(order?.invoiceNumber);
   };
+
+  const setTheOrdersHandler = () => {
+    setTheOrders(
+      orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    );
+  };
+  useMemo(() => {
+    setTheOrdersHandler();
+  }, [orders, page, rowsPerPage]);
+
   const handlePageChange = useCallback((event, value) => {
     setPage(value);
   }, []);
@@ -51,9 +64,13 @@ const AdminOrders = () => {
     setRowsPerPage(event.target.value);
   }, []);
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     try {
-      await axiosPrivate.delete('/deleteOrder', { data: { invNum: orderId } });
+      orderSelection?.selected?.map(async (order) => {
+        return await axiosPrivate.delete('/deleteOrder', {
+          data: { invNum: order },
+        });
+      });
       handleDots();
       toast.success(`Deleted `);
       getAllOrders();
@@ -66,6 +83,7 @@ const AdminOrders = () => {
     try {
       const response = await axiosPrivate.get('/getAllOrders');
       setOrders(response.data);
+      setTheOrdersHandler();
     } catch (error) {
       console.error(error);
     }
@@ -116,10 +134,23 @@ const AdminOrders = () => {
               <CiSearch size={22} />
             </span>
           </div>
+          {orderSelection.selected.length >= 1 && (
+            <div className="flex mb-2">
+              <div className="shadow-md border p-1  font-poppins">
+                {orderSelection.selected.length} Marked
+              </div>
+              <button
+                onClick={handleDelete}
+                className=" shadow-md border p-1  font-poppins text-red-500"
+              >
+                Delete
+              </button>
+            </div>
+          )}
 
-          {screenSize <= 900 ? (
+          {screenSize <= 1000 ? (
             <div>
-              {orders.map((order) => (
+              {theOrders.map((order) => (
                 <Card className="hover:bg-gray-100 ">
                   <CardContent>
                     <div className="relative font-poppins space-y-2 ">
@@ -211,114 +242,23 @@ const AdminOrders = () => {
               />
             </div>
           ) : (
-            <Card>
-              <Box sx={{ minWidth: 1000 }}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell padding="checkbox">
-                        <Checkbox />
-                      </TableCell>
-                      <TableCell className=" font-poppins font-semibold">
-                        CUSTOMER
-                      </TableCell>
-                      <TableCell className=" font-poppins font-semibold">
-                        INVOICE
-                      </TableCell>
-                      <TableCell className=" font-poppins font-semibold">
-                        ADDRESS
-                      </TableCell>
-                      <TableCell className=" font-poppins font-semibold">
-                        PHONE
-                      </TableCell>
-                      <TableCell className=" font-poppins font-semibold">
-                        STATUS
-                      </TableCell>
-                      <TableCell className=" font-poppins font-semibold">
-                        SETTINGS
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {orders.map((order) => {
-                      return (
-                        <TableRow hover key={order._id}>
-                          <TableCell padding="checkbox">
-                            <Checkbox />
-                          </TableCell>
-                          <TableCell>
-                            <Stack
-                              alignItems="center"
-                              direction="row"
-                              spacing={2}
-                            >
-                              <Typography variant="subtitle2">
-                                {order.customerName}
-                              </Typography>
-                            </Stack>
-                          </TableCell>
-                          <TableCell>{order.invoiceNumber}</TableCell>
-                          <TableCell>{order.address}</TableCell>
-                          <TableCell>{order.phone}</TableCell>
-                          <TableCell>
-                            {order.shipped ? 'Shipped' : 'Not Shipped'}
-                          </TableCell>
-                          <TableCell>
-                            <span
-                              onClick={() => handleDots(order)}
-                              className="cursor-pointer"
-                            >
-                              <BsThreeDots size={22} />
-                            </span>
-                            {dotsClicked === order._id && (
-                              <div className="absolute w-max z-20  space-y-2  shadow-md bg-white p-3 rounded-md">
-                                <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                                  Show Order
-                                </p>
-                                {order.shipped ? (
-                                  <p
-                                    onClick={handleNotShipped}
-                                    className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer"
-                                  >
-                                    Mark as Not Shipped
-                                  </p>
-                                ) : (
-                                  <p
-                                    onClick={handleShipped}
-                                    className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer"
-                                  >
-                                    Mark as Shipped
-                                  </p>
-                                )}
-
-                                <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                                  Edit Order
-                                </p>
-                                <p
-                                  onClick={() => handleDelete()}
-                                  className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer  text-red-500"
-                                >
-                                  Delete Order
-                                </p>
-                              </div>
-                            )}
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </Box>
-              <TablePagination
-                component="div"
-                count={count}
-                onPageChange={handlePageChange}
-                onRowsPerPageChange={handleRowsPerPageChange}
-                page={page}
-                rowsPerPage={rowsPerPage}
-                rowsPerPageOptions={[5, 10, 25]}
-              />
-            </Card>
+            <OrdersTable
+              count={count}
+              theOrders={theOrders}
+              onSelectAll={orderSelection.handleSelectAll}
+              onDeselectAll={orderSelection.handleDeselectAll}
+              selected={orderSelection.selected}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              onPageChange={handlePageChange}
+              onRowsPerPageChange={handleRowsPerPageChange}
+              onSelectOne={orderSelection.handleSelectOne}
+              onDeselectOne={orderSelection.handleDeselectOne}
+              dotsClicked={dotsClicked}
+              handleDots={handleDots}
+              handleNotShipped={handleNotShipped}
+              handleShipped={handleShipped}
+            />
           )}
         </div>
       </div>

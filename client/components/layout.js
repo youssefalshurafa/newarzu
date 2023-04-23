@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
           <AdminSidebar />
         </div>
         <div
-          className={`absolute top-14  ${
+          className={`absolute top-14   ${
             isActiveMenu
               ? ' transform translate-x-0 duration-500 ml-60'
               : 'transform  duration-500'
