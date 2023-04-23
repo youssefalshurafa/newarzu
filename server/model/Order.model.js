@@ -39,9 +39,6 @@ export const OrderSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now,
-    get: function (date) {
-      return moment(date).format('DD MMM h:mm A');
-    },
   },
   invoiceNumber: {
     type: String,
