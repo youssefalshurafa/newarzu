@@ -5,23 +5,10 @@ import { CiUser, CiLocationOn, CiPhone, CiSearch } from 'react-icons/ci';
 import { BsThreeDots } from 'react-icons/bs';
 import { toast, Toaster } from 'react-hot-toast';
 import { useStateContext } from '@/context/ContextProvider';
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  Checkbox,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Typography,
-} from '@mui/material';
+import { Card, CardContent, TablePagination } from '@mui/material';
 import { useSelection } from '@/hooks/useSelection';
 import OrdersTable from '@/components/ordersTable';
+import Link from 'next/link';
 
 const useOrdersInv = (orders) => {
   return useMemo(() => {
@@ -39,7 +26,18 @@ const AdminOrders = () => {
   const orderIds = useOrdersInv(theOrders);
   const orderSelection = useSelection(orderIds);
   const count = orders.length;
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredOrders, setFilteredOrders] = useState([]);
 
+  useEffect(() => {
+    setFilteredOrders(
+      orders.filter(
+        (order) =>
+          order.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          order.phone.includes(searchTerm)
+      )
+    );
+  }, [searchTerm]);
   const handleDots = (order) => {
     setOrderId(order?.invoiceNumber);
     setDotsClicked(dotsClicked === order?._id ? null : order?._id);
@@ -49,12 +47,12 @@ const AdminOrders = () => {
 
   const setTheOrdersHandler = () => {
     setTheOrders(
-      orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      filteredOrders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     );
   };
   useMemo(() => {
     setTheOrdersHandler();
-  }, [orders, page, rowsPerPage]);
+  }, [filteredOrders, page, rowsPerPage]);
 
   const handlePageChange = useCallback((event, value) => {
     setPage(value);
@@ -82,7 +80,8 @@ const AdminOrders = () => {
   const getAllOrders = async () => {
     try {
       const response = await axiosPrivate.get('/getAllOrders');
-      setOrders(response.data);
+      const allOrders = [...response.data].reverse();
+      setOrders(allOrders);
       setTheOrdersHandler();
     } catch (error) {
       console.error(error);
@@ -117,41 +116,46 @@ const AdminOrders = () => {
     }
   };
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  console.log(theOrders);
   return (
     <Layout>
       <div>
         <Toaster position="top-center"></Toaster>
-        <h1 className=" font-poppins m-3 text-lg">{count} Orders</h1>
-
+        {orderSelection.selected.length >= 1 ? (
+          <div className="flex  ml-6 my-2">
+            <div className="shadow-md border p-1  font-poppins">
+              {orderSelection.selected.length} Marked
+            </div>
+            <button
+              onClick={handleDelete}
+              className=" shadow-md border p-1  font-poppins text-red-500"
+            >
+              Delete
+            </button>
+          </div>
+        ) : (
+          <h1 className=" font-poppins ml-6 my-2 text-lg">{count} Orders</h1>
+        )}
         <div className=" w-full space-y-6 mx-5 my-5 ">
           <div className="relative flex">
             <input
+              onChange={handleSearch}
               className=" border mx-auto rounded-md w-full p-2"
               type="search"
-              placeholder="    Search Orders"
+              placeholder="    Search Orders by Customer Name or by Phone"
             />
             <span className=" absolute right-2 top-2">
               <CiSearch size={22} />
             </span>
           </div>
-          {orderSelection.selected.length >= 1 && (
-            <div className="flex mb-2">
-              <div className="shadow-md border p-1  font-poppins">
-                {orderSelection.selected.length} Marked
-              </div>
-              <button
-                onClick={handleDelete}
-                className=" shadow-md border p-1  font-poppins text-red-500"
-              >
-                Delete
-              </button>
-            </div>
-          )}
 
           {screenSize <= 1000 ? (
             <div>
               {theOrders.map((order) => (
-                <Card className="hover:bg-gray-100 ">
+                <Card key={order.invoiceNumber} className="hover:bg-gray-100 ">
                   <CardContent>
                     <div className="relative font-poppins space-y-2 ">
                       <span
@@ -162,9 +166,11 @@ const AdminOrders = () => {
                       </span>
                       {dotsClicked === order._id && (
                         <div className=" absolute right-10 bottom-0 space-y-2  shadow-md bg-white p-3 rounded-md">
-                          <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                            Show Order
-                          </p>
+                          <Link href={`/order/${order.customerName}`}>
+                            <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                              Show Order
+                            </p>
+                          </Link>
                           {order.shipped ? (
                             <p
                               onClick={handleNotShipped}
@@ -181,9 +187,6 @@ const AdminOrders = () => {
                             </p>
                           )}
 
-                          <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                            Edit Order
-                          </p>
                           <p
                             onClick={() => handleDelete()}
                             className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer  text-red-500"
@@ -195,7 +198,14 @@ const AdminOrders = () => {
 
                       <div className="flex justify-between">
                         <p className=" text-cyan-500">{order.invoiceNumber}</p>
-                        <p className=" text-gray-400">{order.date}</p>
+                        <div>
+                          <p className=" text-gray-400 ">
+                            {order.date.slice(0, 10)}
+                          </p>
+                          <p className=" text-gray-400 absolute right-0">
+                            {order.date.slice(11, 16)}
+                          </p>
+                        </div>
                       </div>
 
                       <div className="flex items-center space-x-2 text-gray-600">

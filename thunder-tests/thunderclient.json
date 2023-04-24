@@ -246,12 +246,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2023-04-10T19:22:41.434Z",
-    "modified": "2023-04-14T19:45:10.586Z",
+    "modified": "2023-04-24T15:13:28.126Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"customerName\": \"noor\",\n  \"address\": \"waha\",\n  \"phone\": \"0123154\",\n  \"items\" : [\n    {\n      \"cartQuantity\": \"4\",\n      \"category\": \"basics\"\n    },\n      {\n      \"cartQuantity\": \"2\",\n      \"category\": \"tops\",\n      \"price\" : \"145\"\n    }\n    ]\n}",
+      "raw": "{\n  \"customerName\": \"Hany\",\n  \"address\": \"Cairo\",\n  \"phone\": \"012312e354\",\n  \"items\" : [\n    {\n      \"cartQuantity\": \"4\",\n      \"category\": \"basics\"\n    },\n      {\n      \"cartQuantity\": \"2\",\n      \"category\": \"tops\",\n      \"price\" : \"145\"\n    }\n    ]\n}",
       "form": []
     },
     "auth": {

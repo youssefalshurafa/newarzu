@@ -181,6 +181,9 @@ export async function newOrder(req, res) {
       items: items,
     });
     res.status(201).json({ message: 'New Order Created!' });
+    await OrderModel.updateOne(newOrder, {
+      $push: { orders: { $each: [newOrder], $position: 0 } },
+    });
     OrderModel.find({}, function (err, orders) {
       if (err) {
         console.log(err);

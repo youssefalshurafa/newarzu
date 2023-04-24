@@ -13,11 +13,14 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import Link from 'next/link';
+import { useState } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
 
 const OrdersTable = (props) => {
   const {
     count = 0,
+
     theOrders = [],
     onSelectAll,
     onSelectOne,
@@ -39,6 +42,7 @@ const OrdersTable = (props) => {
 
   const selectedAll =
     theOrders.length > 0 && selected.length === theOrders.length;
+
   return (
     <>
       <Card>
@@ -66,6 +70,9 @@ const OrdersTable = (props) => {
                   INVOICE
                 </TableCell>
                 <TableCell className=" font-poppins font-semibold">
+                  DATE
+                </TableCell>
+                <TableCell className=" font-poppins font-semibold">
                   ADDRESS
                 </TableCell>
                 <TableCell className=" font-poppins font-semibold">
@@ -82,7 +89,9 @@ const OrdersTable = (props) => {
             <TableBody>
               {theOrders.map((order) => {
                 const isSelected = selected.includes(order.invoiceNumber);
-                // const createdAt = format(order.createdAt, 'dd/MM/yyyy');
+                const index = order.address.lastIndexOf(',');
+                const slicedAddress = order.address.slice(index + 1);
+
                 return (
                   <TableRow hover key={order._id}>
                     <TableCell padding="checkbox">
@@ -99,20 +108,33 @@ const OrdersTable = (props) => {
                     </TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
-                        <Typography variant="subtitle2">
+                        <Typography
+                          className=" font-poppins"
+                          variant="subtitle2"
+                        >
                           {order.customerName}
                         </Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell>{order.invoiceNumber}</TableCell>
-                    <TableCell>{order.address}</TableCell>
-                    <TableCell>{order.phone}</TableCell>
+                    <TableCell className=" font-poppins">
+                      {order.invoiceNumber}
+                    </TableCell>
+                    <TableCell className=" font-poppins">
+                      <p>{order.date.slice(5, 10)}</p>
+                      <p> {order.date.slice(11, 16)}</p>
+                    </TableCell>
+                    <TableCell className=" font-poppins">
+                      {slicedAddress}
+                    </TableCell>
+                    <TableCell className=" font-poppins">
+                      {order.phone}
+                    </TableCell>
                     <TableCell>
                       <p
                         className={
                           order.shipped
-                            ? ' text-green-400 w-max rounded-md text-sm '
-                            : ' text-purple-400 w-max rounded-md text-sm '
+                            ? ' text-green-400 w-max rounded-md text-sm font-poppins'
+                            : ' text-purple-400 w-max rounded-md text-sm font-poppins'
                         }
                       >
                         {order.shipped ? 'Shipped' : 'Not Shipped'}
@@ -127,9 +149,11 @@ const OrdersTable = (props) => {
                       </span>
                       {dotsClicked === order._id && (
                         <div className="absolute w-max z-20  space-y-2  shadow-md bg-white p-3 rounded-md">
-                          <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                            Show Order
-                          </p>
+                          <Link href={`/order/${order.customerName}`}>
+                            <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                              Show Order
+                            </p>
+                          </Link>
                           {order.shipped ? (
                             <p
                               onClick={handleNotShipped}
@@ -146,9 +170,6 @@ const OrdersTable = (props) => {
                             </p>
                           )}
 
-                          <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                            Edit Order
-                          </p>
                           <p
                             onClick={() => handleDelete()}
                             className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer  text-red-500"
