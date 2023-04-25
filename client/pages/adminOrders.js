@@ -52,8 +52,9 @@ const AdminOrders = () => {
   };
   useMemo(() => {
     setTheOrdersHandler();
-  }, [filteredOrders, page, rowsPerPage]);
+  }, [orders, filteredOrders, page, rowsPerPage]);
 
+  console.log(filteredOrders);
   const handlePageChange = useCallback((event, value) => {
     setPage(value);
   }, []);
@@ -119,7 +120,7 @@ const AdminOrders = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-  console.log(theOrders);
+
   return (
     <Layout>
       <div>

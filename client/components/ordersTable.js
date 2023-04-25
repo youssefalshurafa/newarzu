@@ -20,7 +20,6 @@ import { BsThreeDots } from 'react-icons/bs';
 const OrdersTable = (props) => {
   const {
     count = 0,
-
     theOrders = [],
     onSelectAll,
     onSelectOne,
