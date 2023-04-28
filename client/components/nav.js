@@ -37,6 +37,7 @@ function NavBar({ showBar, filtered }) {
         });
 
         setData(response.data);
+        console.log(data);
       } catch (error) {
         console.error(error);
       }

@@ -11,6 +11,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { addToBag } from '@/slices/bagSlice';
 import dynamic from 'next/dynamic';
 import axios from '../api/axios';
+import MainLayout from '@/components/mainLayout';
 
 function ProductPage() {
   const { query } = useRouter();
@@ -26,8 +27,7 @@ function ProductPage() {
   }, []);
   const productName = products.find((x) => x.title == product);
   const [size, setSize] = useState('');
-  const [visible, setVisible] = useState(false);
-  const showBar = () => setVisible(!visible);
+
   const dispatch = useDispatch();
   const updatedProduct = { ...productName, size };
 
@@ -39,106 +39,98 @@ function ProductPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen flex flex-col justify-between">
-        <div className=" fixed top-0 z-10 w-full">
-          <NavBar showBar={showBar} />
-        </div>
-        {visible ? (
-          <div className=" fixed overscroll-contain bg-opacity-80 bg-white h-screen  top-0 z-20 min-w-full">
-            <DropDown showBar={showBar} />
-          </div>
-        ) : (
-          <></>
-        )}
-        <div className="relative top-8 pb-7 md:grid grid-cols-2 container mx-auto">
-          <div>
-            <Carousel showArrows={false} showStatus={false} showThumbs={true}>
-              {productName?.images?.map((image) => (
-                <div>
-                  <img src={image.url} alt="" />
-                </div>
-              ))}
-            </Carousel>
-          </div>
-          <div className=" font-poppins pt-5 pl-5 text-xs">
-            <p className="text-sm ">{productName?.title}</p>
-            <p>${productName?.price}</p>
-            <p className="pt-2">{`Size: ${size}`}</p>
-            <div className="flex  space-x-4  pt-2">
-              <button
-                onClick={() => setSize('S')}
-                className={
-                  size == 'S'
-                    ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
-                    : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
-                }
-              >
-                S
-              </button>
-              <button
-                onClick={() => setSize('M')}
-                className={
-                  size == 'M'
-                    ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
-                    : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
-                }
-              >
-                M
-              </button>
-              <button
-                onClick={() => setSize('L')}
-                className={
-                  size == 'L'
-                    ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
-                    : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
-                }
-              >
-                L
-              </button>
-              <button
-                onClick={() => setSize('XL')}
-                className={
-                  size == 'XL'
-                    ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
-                    : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
-                }
-              >
-                XL
-              </button>
-            </div>
+      <MainLayout>
+        <div className="min-h-screen flex flex-col justify-between">
+          <div className="relative top-8 pb-7 md:grid grid-cols-2 container mx-auto">
             <div>
-              <button
-                onClick={() => dispatch(addToBag(updatedProduct))}
-                className=" text-center w-full  h-8 bg-black text-white mt-4 rounded-sm"
-              >
-                ADD TO BAG
-              </button>
+              <Carousel showArrows={false} showStatus={false} showThumbs={true}>
+                {productName?.images?.map((image) => (
+                  <div>
+                    <img src={image.url} alt="" />
+                  </div>
+                ))}
+              </Carousel>
             </div>
-            <div className="mt-5">
-              <p className=" font-serif">Description</p>
-              <p className="pt-4 font-xs font-extralight font-sans">
-                {productName?.description}
-              </p>
-            </div>
-            <div className="mt-5">
-              <p className=" font-serif">Material</p>
-              <p className="pt-4 font-xs font-extralight font-sans">
-                {productName?.material}
-              </p>
-            </div>
-            <Link href={`/category/${productName?.category}`}>
-              <div className="mt-5">
-                <button className="bg-gray-200 h-8 w-full cursor-pointer">
-                  Back To Products
+            <div className=" font-poppins pt-5 pl-5 text-xs">
+              <p className="text-sm ">{productName?.title}</p>
+              <p>${productName?.price}</p>
+              <p className="pt-2">{`Size: ${size}`}</p>
+              <div className="flex  space-x-4  pt-2">
+                <button
+                  onClick={() => setSize('S')}
+                  className={
+                    size == 'S'
+                      ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
+                      : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
+                  }
+                >
+                  S
+                </button>
+                <button
+                  onClick={() => setSize('M')}
+                  className={
+                    size == 'M'
+                      ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
+                      : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
+                  }
+                >
+                  M
+                </button>
+                <button
+                  onClick={() => setSize('L')}
+                  className={
+                    size == 'L'
+                      ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
+                      : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
+                  }
+                >
+                  L
+                </button>
+                <button
+                  onClick={() => setSize('XL')}
+                  className={
+                    size == 'XL'
+                      ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
+                      : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
+                  }
+                >
+                  XL
                 </button>
               </div>
-            </Link>
+              <div>
+                <button
+                  onClick={() => dispatch(addToBag(updatedProduct))}
+                  className=" text-center w-full  h-8 bg-black text-white mt-4 rounded-sm"
+                >
+                  ADD TO BAG
+                </button>
+              </div>
+              <div className="mt-5">
+                <p className=" font-serif">Description</p>
+                <p className="pt-4 font-xs font-extralight font-sans">
+                  {productName?.description}
+                </p>
+              </div>
+              <div className="mt-5">
+                <p className=" font-serif">Material</p>
+                <p className="pt-4 font-xs font-extralight font-sans">
+                  {productName?.material}
+                </p>
+              </div>
+              <Link href={`/category/${productName?.category}`}>
+                <div className="mt-5">
+                  <button className="bg-gray-200 h-8 w-full cursor-pointer">
+                    Back To Products
+                  </button>
+                </div>
+              </Link>
+            </div>
+          </div>
+          <div className="mt-8">
+            <Footer />
           </div>
         </div>
-        <div className="mt-8">
-          <Footer />
-        </div>
-      </div>
+      </MainLayout>
     </>
   );
 }

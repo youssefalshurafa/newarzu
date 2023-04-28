@@ -15,6 +15,7 @@ import axios from './api/axios';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/router';
+import MainLayout from '@/components/mainLayout';
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -24,9 +25,6 @@ library.add(faCheck, faTimes, faInfoCircle, faEye);
 const Register = () => {
   const { setAuth } = useAuth();
   const router = useRouter();
-
-  const [visible, setVisible] = useState(false);
-  const showBar = () => setVisible(!visible);
 
   const [user, setUser] = useState('');
   const [validName, setValidName] = useState(false);
@@ -105,179 +103,180 @@ const Register = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen flex flex-col justify-between">
-        <div className="  w-full">
-          <NavBar showBar={showBar} />
-        </div>
-        <div className=" mx-auto bg-gray-100 m-9 font-poppins  px-8  pb-4 rounded-md border shadow-md">
-          <h1 className=" font-serif text-center pt-4 text-2xl">Register</h1>
-          <p className=" text-center text-red-500">{errMsg}</p>
-          <form onSubmit={handleSubmit} className=" pt-3 text-lg">
-            <label htmlFor="username">Username:</label>
-            <span className={validName ? 'text-lime-500 ml-1' : ' hidden'}>
-              <FontAwesomeIcon icon="check" size="lg" />
-            </span>
-            <span
-              className={validName || !user ? 'hidden' : ' text-red-500 ml-1'}
-            >
-              <FontAwesomeIcon icon="times" size="lg" />
-            </span>
-            <br />
-            <input
-              className="bg-gray-100 border  rounded-md  text-center "
-              type="text"
-              id="username"
-              autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              required
-            />
-
-            <br />
-            <p
-              id="uidnote"
-              className={
-                user && !validName
-                  ? ' bg-black text-white text-xs p-1  mt-4 rounded-md'
-                  : 'hidden'
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              4 to 24 characters.
-              <br />
-              Must Begin with a letter.
-              <br />
-              Letters, numbers, underscores, hyphens allowed.
-            </p>
-            <label htmlFor="email">Email address:</label>
-            <span className={validEmail ? 'text-lime-500 ml-1' : ' hidden'}>
-              <FontAwesomeIcon icon="check" size="lg" />
-            </span>
-            <span
-              className={validEmail || !email ? 'hidden' : ' text-red-500 ml-1'}
-            >
-              <FontAwesomeIcon icon="times" size="lg" />
-            </span>
-            <br />
-
-            <input
-              className="bg-gray-100 border  rounded-md  text-center"
-              type="text"
-              id="email"
-              autoComplete="off"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <br />
-            <label htmlFor="password">Password:</label>
-            <span className={validPwd ? 'text-lime-500 ml-1' : ' hidden'}>
-              <FontAwesomeIcon icon="check" size="lg" />
-            </span>
-            <span
-              className={validPwd || !pwd ? 'hidden' : ' text-red-500 ml-1'}
-            >
-              <FontAwesomeIcon icon="times" size="lg" />
-            </span>
-            <br />
-            <div className=" flex">
-              <input
-                className="bg-gray-100 border  rounded-md text-center "
-                type={showPwd ? 'text' : 'password'}
-                id="password"
-                autoComplete="off"
-                onChange={(e) => setPwd(e.target.value)}
-                required
-              />
-              <span className="relative right-6" onClick={showPwdHandler}>
-                <FontAwesomeIcon icon="eye" size="sm" />
+      <MainLayout>
+        <div className="min-h-screen flex flex-col justify-between">
+          <div className=" mx-auto bg-gray-100 m-9 font-poppins  px-8  pb-4 rounded-md border shadow-md">
+            <h1 className=" font-serif text-center pt-4 text-2xl">Register</h1>
+            <p className=" text-center text-red-500">{errMsg}</p>
+            <form onSubmit={handleSubmit} className=" pt-3 text-lg">
+              <label htmlFor="username">Username:</label>
+              <span className={validName ? 'text-lime-500 ml-1' : ' hidden'}>
+                <FontAwesomeIcon icon="check" size="lg" />
               </span>
-            </div>
-
-            <br />
-            <p
-              id="pwdnote"
-              className={
-                !validPwd && pwd
-                  ? 'bg-black text-white text-xs p-1  mt-4 rounded-md'
-                  : 'hidden'
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              8 to 24 characters.
-              <br />
-              Must include uppercase and lowercase letters,
-              <br />
-              a number and a special character.
-              <br />
-              Allowed special characters:{' '}
-            </p>
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <span
-              className={
-                validMatch && matchpwd && validPwd
-                  ? 'text-lime-500 ml-1'
-                  : ' hidden'
-              }
-            >
-              <FontAwesomeIcon icon="check" size="lg" />
-            </span>
-            <span
-              className={
-                validMatch || !matchpwd ? 'hidden' : ' text-red-500 ml-1'
-              }
-            >
-              <FontAwesomeIcon icon="times" size="lg" />
-            </span>
-            <br />
-            <div className="flex">
-              <input
-                className="bg-gray-100 border  rounded-md text-center "
-                type={showPwd ? 'text' : 'password'}
-                id="confirmPassword"
-                autoComplete="off"
-                onChange={(e) => setMatchPwd(e.target.value)}
-                required
-              />
               <span
-                className=" relative right-6 hover:text-blue-500 active:text-blue-500"
-                onClick={showPwdHandler}
+                className={validName || !user ? 'hidden' : ' text-red-500 ml-1'}
               >
-                <FontAwesomeIcon icon="eye" size="sm" />
+                <FontAwesomeIcon icon="times" size="lg" />
               </span>
-            </div>
+              <br />
+              <input
+                className="bg-gray-100 border  rounded-md  text-center "
+                type="text"
+                id="username"
+                autoComplete="off"
+                onChange={(e) => setUser(e.target.value)}
+                required
+              />
 
-            <br />
-            <p
-              id="pwdnote"
-              className={
-                !validMatch && matchpwd
-                  ? 'bg-black text-white text-xs p-1  mt-4 rounded-md'
-                  : 'hidden'
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              Must match the first password
               <br />
-              input field
-              <br />
-            </p>
-            <div className="text-center pt-3">
-              <button
-                disabled={
-                  !validName || !validEmail || !validPwd || !validMatch
-                    ? true
-                    : false
+              <p
+                id="uidnote"
+                className={
+                  user && !validName
+                    ? ' bg-black text-white text-xs p-1  mt-4 rounded-md'
+                    : 'hidden'
                 }
-                className=" cursor-pointer bg-blue-500 text-white rounded-md w-full py-2 active:bg-black active:text-white disabled:cursor-not-allowed disabled:opacity-25 "
               >
-                Sign Up
-              </button>
-            </div>
-          </form>
+                <FontAwesomeIcon icon={faInfoCircle} />
+                4 to 24 characters.
+                <br />
+                Must Begin with a letter.
+                <br />
+                Letters, numbers, underscores, hyphens allowed.
+              </p>
+              <label htmlFor="email">Email address:</label>
+              <span className={validEmail ? 'text-lime-500 ml-1' : ' hidden'}>
+                <FontAwesomeIcon icon="check" size="lg" />
+              </span>
+              <span
+                className={
+                  validEmail || !email ? 'hidden' : ' text-red-500 ml-1'
+                }
+              >
+                <FontAwesomeIcon icon="times" size="lg" />
+              </span>
+              <br />
+
+              <input
+                className="bg-gray-100 border  rounded-md  text-center"
+                type="text"
+                id="email"
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <br />
+              <label htmlFor="password">Password:</label>
+              <span className={validPwd ? 'text-lime-500 ml-1' : ' hidden'}>
+                <FontAwesomeIcon icon="check" size="lg" />
+              </span>
+              <span
+                className={validPwd || !pwd ? 'hidden' : ' text-red-500 ml-1'}
+              >
+                <FontAwesomeIcon icon="times" size="lg" />
+              </span>
+              <br />
+              <div className=" flex">
+                <input
+                  className="bg-gray-100 border  rounded-md text-center "
+                  type={showPwd ? 'text' : 'password'}
+                  id="password"
+                  autoComplete="off"
+                  onChange={(e) => setPwd(e.target.value)}
+                  required
+                />
+                <span className="relative right-6" onClick={showPwdHandler}>
+                  <FontAwesomeIcon icon="eye" size="sm" />
+                </span>
+              </div>
+
+              <br />
+              <p
+                id="pwdnote"
+                className={
+                  !validPwd && pwd
+                    ? 'bg-black text-white text-xs p-1  mt-4 rounded-md'
+                    : 'hidden'
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                8 to 24 characters.
+                <br />
+                Must include uppercase and lowercase letters,
+                <br />
+                a number and a special character.
+                <br />
+                Allowed special characters:{' '}
+              </p>
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <span
+                className={
+                  validMatch && matchpwd && validPwd
+                    ? 'text-lime-500 ml-1'
+                    : ' hidden'
+                }
+              >
+                <FontAwesomeIcon icon="check" size="lg" />
+              </span>
+              <span
+                className={
+                  validMatch || !matchpwd ? 'hidden' : ' text-red-500 ml-1'
+                }
+              >
+                <FontAwesomeIcon icon="times" size="lg" />
+              </span>
+              <br />
+              <div className="flex">
+                <input
+                  className="bg-gray-100 border  rounded-md text-center "
+                  type={showPwd ? 'text' : 'password'}
+                  id="confirmPassword"
+                  autoComplete="off"
+                  onChange={(e) => setMatchPwd(e.target.value)}
+                  required
+                />
+                <span
+                  className=" relative right-6 hover:text-blue-500 active:text-blue-500"
+                  onClick={showPwdHandler}
+                >
+                  <FontAwesomeIcon icon="eye" size="sm" />
+                </span>
+              </div>
+
+              <br />
+              <p
+                id="pwdnote"
+                className={
+                  !validMatch && matchpwd
+                    ? 'bg-black text-white text-xs p-1  mt-4 rounded-md'
+                    : 'hidden'
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Must match the first password
+                <br />
+                input field
+                <br />
+              </p>
+              <div className="text-center pt-3">
+                <button
+                  disabled={
+                    !validName || !validEmail || !validPwd || !validMatch
+                      ? true
+                      : false
+                  }
+                  className=" cursor-pointer bg-blue-500 text-white rounded-md w-full py-2 active:bg-black active:text-white disabled:cursor-not-allowed disabled:opacity-25 "
+                >
+                  Sign Up
+                </button>
+              </div>
+            </form>
+          </div>
+          <div className="">
+            <Footer />
+          </div>
         </div>
-        <div className="">
-          <Footer />
-        </div>
-      </div>
+      </MainLayout>
     </>
   );
 };

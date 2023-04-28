@@ -1,5 +1,6 @@
 import DropDown from '@/components/dropDown';
 import Footer from '@/components/footer';
+import MainLayout from '@/components/mainLayout';
 import NavBar from '@/components/nav';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import dynamic from 'next/dynamic';
@@ -18,8 +19,6 @@ function Profile() {
   const [mobile, setMobile] = useState(null);
   const [address, setAddress] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const [visible, setVisible] = useState(false);
-  const showBar = () => setVisible(!visible);
 
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
@@ -80,107 +79,99 @@ function Profile() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen flex flex-col ">
-        <div className="fixed top-0 z-10 w-full">
-          <NavBar showBar={showBar} />
-        </div>
-        {visible ? (
-          <div className=" fixed overscroll-contain bg-opacity-80 bg-white h-screen  top-0 z-20 min-w-full">
-            <DropDown showBar={showBar} />
+      <MainLayout>
+        <div className="min-h-screen flex flex-col ">
+          <div className="relative top-10">
+            <h1 className=" text-center text-3xl m-2 font-poppins">
+              {data.fullName}'s Profile Page
+            </h1>
+            <p className="text-center text-red-500">{errMsg}</p>
+
+            <form
+              className=" mx-4 bg-gray-100 font-poppins p-4 rounded-md"
+              onSubmit={handleSubmit}
+            >
+              <div>
+                <label className="font-bold " htmlFor="fullName">
+                  Username:{' '}
+                </label>
+                <br />
+                <input
+                  className="bg-gray-100  ml-2 rounded-md cursor-default outline-none"
+                  type="text"
+                  value={data.username || ''}
+                  readOnly={true}
+                />
+              </div>
+              <br />
+              <div>
+                <label className="font-bold " htmlFor="fullName">
+                  Full name:{' '}
+                </label>
+                <br />
+                <input
+                  className="bg-gray-100  ml-2 rounded-md  "
+                  type="text"
+                  defaultValue={data.fullName || ''}
+                  onChange={(e) => {
+                    setFullName(e.target.value);
+                  }}
+                />
+              </div>
+
+              <br />
+              <div>
+                <label className="font-bold " htmlFor="email">
+                  Email:{' '}
+                </label>
+                <br />
+                <input
+                  className="bg-gray-100  ml-2 rounded-md  "
+                  type="text"
+                  defaultValue={data.email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <br />
+              <div>
+                <label className="font-bold " htmlFor="mobile">
+                  Mobile:{' '}
+                </label>
+                <br />
+                <input
+                  className="bg-gray-100  ml-2 rounded-md  "
+                  type="text"
+                  defaultValue={data.mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                />
+              </div>
+              <br />
+              <div>
+                <label className="font-bold " htmlFor="address">
+                  Address:{' '}
+                </label>
+                <br />
+                <input
+                  className="bg-gray-100  ml-2 rounded-md  "
+                  type="text"
+                  defaultValue={data.address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </div>
+
+              <br />
+              <button className=" bg-gray-300 rounded-md w-max p-2 active:bg-black active:text-white">
+                Update
+              </button>
+            </form>
           </div>
-        ) : (
-          <></>
-        )}
-        <div className="relative top-10">
-          <h1 className=" text-center text-3xl m-2 font-poppins">
-            {data.fullName}'s Profile Page
-          </h1>
-          <p className="text-center text-red-500">{errMsg}</p>
+          <br />
 
-          <form
-            className=" mx-4 bg-gray-100 font-poppins p-4 rounded-md"
-            onSubmit={handleSubmit}
-          >
-            <div>
-              <label className="font-bold " htmlFor="fullName">
-                Username:{' '}
-              </label>
-              <br />
-              <input
-                className="bg-gray-100  ml-2 rounded-md cursor-default outline-none"
-                type="text"
-                value={data.username || ''}
-                readOnly={true}
-              />
-            </div>
-            <br />
-            <div>
-              <label className="font-bold " htmlFor="fullName">
-                Full name:{' '}
-              </label>
-              <br />
-              <input
-                className="bg-gray-100  ml-2 rounded-md  "
-                type="text"
-                defaultValue={data.fullName || ''}
-                onChange={(e) => {
-                  setFullName(e.target.value);
-                }}
-              />
-            </div>
-
-            <br />
-            <div>
-              <label className="font-bold " htmlFor="email">
-                Email:{' '}
-              </label>
-              <br />
-              <input
-                className="bg-gray-100  ml-2 rounded-md  "
-                type="text"
-                defaultValue={data.email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <br />
-            <div>
-              <label className="font-bold " htmlFor="mobile">
-                Mobile:{' '}
-              </label>
-              <br />
-              <input
-                className="bg-gray-100  ml-2 rounded-md  "
-                type="text"
-                defaultValue={data.mobile}
-                onChange={(e) => setMobile(e.target.value)}
-              />
-            </div>
-            <br />
-            <div>
-              <label className="font-bold " htmlFor="address">
-                Address:{' '}
-              </label>
-              <br />
-              <input
-                className="bg-gray-100  ml-2 rounded-md  "
-                type="text"
-                defaultValue={data.address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-
-            <br />
-            <button className=" bg-gray-300 rounded-md w-max p-2 active:bg-black active:text-white">
-              Update
-            </button>
-          </form>
+          <div className="fixed bottom-0 w-full mt-8">
+            <Footer />
+          </div>
         </div>
-        <br />
-
-        <div className="fixed bottom-0 w-full mt-8">
-          <Footer />
-        </div>
-      </div>
+      </MainLayout>
     </>
   );
 }

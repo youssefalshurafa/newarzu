@@ -7,10 +7,15 @@ import Head from 'next/head';
 import NavBar from '@/components/nav';
 import DropDown from '@/components/dropDown';
 import dynamic from 'next/dynamic';
+import CheckoutProduct from '@/components/CheckoutProduct';
+import Link from 'next/link';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import MainLayout from '@/components/mainLayout';
 
 const Checkout = () => {
   const items = useSelector(selectItems);
-
+  const router = useRouter();
   const [customerName, setCustomerName] = useState('');
   const [gov, setGov] = useState('');
   const [city, setCity] = useState('');
@@ -21,24 +26,24 @@ const Checkout = () => {
   const subtotal = useSelector(selectTotal);
   const address = add + ',' + city + ',' + gov;
 
-  const [visible, setVisible] = useState(false);
-  const showBar = () => setVisible(!visible);
+  const total = useSelector(selectTotal);
+  const [shippingRate, setShippingRate] = useState(0);
 
-  const handleSubmit = async () => {
-    try {
-      const response = await axios.post('/newOrder', {
-        customerName,
-        phone,
-        phoneTwo,
-        email,
-        address,
-        items,
-        subtotal,
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+  useEffect(() => {
+    total > 1200 ? setShippingRate(0) : setShippingRate(15);
+  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await axios.post('/newOrder', {
+      customerName,
+      phone,
+      phoneTwo,
+      email,
+      address,
+      items,
+      subtotal,
+    });
+    router.push('/confirmed');
   };
   return (
     <>
@@ -48,98 +53,129 @@ const Checkout = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <div className=" fixed top-0 z-10 w-full">
-          <NavBar showBar={showBar} />
-        </div>
-        {visible ? (
-          <div className=" fixed overscroll-contain bg-opacity-80 bg-white h-screen  top-0 z-20 min-w-full">
-            <DropDown showBar={showBar} />
-          </div>
-        ) : (
-          <></>
-        )}
-        <div className="my-12">
-          <div>
-            <CheckoutWizard activeStep={1} />
-          </div>
-        </div>
-        <div className="md:grid md:grid-cols-5 ">
-          <form
-            onSubmit={handleSubmit}
-            className="border md:col-span-3 mx-5 shadow-md p-2 "
-          >
-            <div className="ml-2">
-              <label>Full Name :</label>
-              <span className="text-red-500"> *</span>
-              <br />
-              <input
-                className="border mb-2"
-                type="text"
-                onChange={(e) => setCustomerName(e.target.value)}
-              />
-              <br />
-              <label>Governorate :</label>
-              <span className="text-red-500"> *</span>
-              <br />
-              <input
-                className="border mb-2"
-                type="text"
-                onChange={(e) => setGov(e.target.value)}
-              />
-              <br />
-              <label>City :</label>
-              <span className="text-red-500"> *</span>
-              <br />
-              <input
-                className="border mb-2"
-                type="text"
-                onChange={(e) => setCity(e.target.value)}
-              />
-              <br />
-              <label>Address :</label>
-              <span className="text-red-500"> *</span>
-              <br />
-              <input
-                className="border mb-2"
-                type="text"
-                onChange={(e) => setAdd(e.target.value)}
-              />
-              <br />
-              <label>Phone Number :</label>
-              <span className="text-red-500"> *</span>
-              <br />
-              <input
-                className="border mb-2"
-                type="text"
-                onChange={(e) => setPhone(e.target.value)}
-              />
-              <br />
-              <label>Another Phone Number :</label>
-              <br />
-              <input
-                className="border mb-2"
-                type="text"
-                onChange={(e) => setPhoneTwo(e.target.value)}
-              />
-              <br />
-              <label>Email address :</label>
-              <br />
-              <input
-                className="border mb-2"
-                type="text"
-                onChange={(e) => setEmail(e.target.value)}
-              />
+      <MainLayout>
+        <div>
+          <div className="my-12">
+            <div>
+              <CheckoutWizard activeStep={1} />
             </div>
+          </div>
+          <div className=" space-y-4 md:flex justify-between">
+            <form
+              onSubmit={handleSubmit}
+              className=" w-full mx-5 p-2  font-poppins"
+            >
+              <h1 className=" ml-2 mb-4 text-xl font-bold">BILLING DETAILS</h1>
+              <div className="ml-2">
+                <label>Full Name :</label>
+                <span className="text-red-500"> *</span>
+                <br />
+                <input
+                  className="border mb-2 w-full p-1"
+                  type="text"
+                  onChange={(e) => setCustomerName(e.target.value)}
+                />
+                <br />
+                <label>Governorate :</label>
+                <span className="text-red-500"> *</span>
+                <br />
+                <input
+                  className="border mb-2 w-full p-1"
+                  type="text"
+                  onChange={(e) => setGov(e.target.value)}
+                />
+                <br />
+                <label>City :</label>
+                <span className="text-red-500"> *</span>
+                <br />
+                <input
+                  className="border mb-2 w-full p-1"
+                  type="text"
+                  onChange={(e) => setCity(e.target.value)}
+                />
+                <br />
+                <label>Address :</label>
+                <span className="text-red-500"> *</span>
+                <br />
+                <input
+                  className="border mb-2 w-full p-1"
+                  type="text"
+                  onChange={(e) => setAdd(e.target.value)}
+                />
+                <br />
+                <label>Phone Number :</label>
+                <span className="text-red-500"> *</span>
+                <br />
+                <input
+                  className="border mb-2 w-full p-1"
+                  type="text"
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+                <br />
+                <label>Another Phone Number :</label>
+                <br />
+                <input
+                  className="border  mb-2 w-full p-1"
+                  type="text"
+                  onChange={(e) => setPhoneTwo(e.target.value)}
+                />
+                <br />
+                <label>Email address :</label>
+                <br />
+                <input
+                  className="border  mb-2 w-full p-1"
+                  type="text"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
 
-            <div className="ml-2 my-3">
-              <button className=" flex border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white">
+              <button className=" flex ml-2 my-3 border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white">
                 Confirm Order
               </button>
+            </form>
+
+            <div className="mx-4  border-2 border-black p-4">
+              <div>
+                {items.map((product, i) => (
+                  <CheckoutProduct product={product} />
+                ))}
+              </div>
+              <div>
+                <div className="p-4  bg-gray-100 mt-4 font-poppins">
+                  <p className=" font-serif  pt-2 text-lg">Your Order</p>
+
+                  <div className="flex justify-between  pt-4 pb-4">
+                    <p className="font-semibold">Subtotal</p>
+                    <p>LE {total}</p>
+                  </div>
+
+                  {shippingRate > 0 ? (
+                    <div className="flex justify-between  py-4">
+                      <p className="font-semibold">Shipping</p>
+                      <p>LE {shippingRate}</p>
+                    </div>
+                  ) : shippingRate <= 0 ? (
+                    <div className="  py-4">
+                      <p>Your Order qualifies for free shipping!</p>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+
+                  <div className="py-4 flex justify-between">
+                    <p className="font-semibold">Total</p>
+                    <p>LE {total + shippingRate}</p>
+                  </div>
+                  <div className="py-4 flex justify-between">
+                    <p className="font-semibold">Payment</p>
+                    <p>Cash on Delivery</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
+      </MainLayout>
     </>
   );
 };

@@ -29,7 +29,25 @@ const AdminOrders = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredOrders, setFilteredOrders] = useState([]);
 
+  const getAllOrders = async () => {
+    try {
+      const response = await axiosPrivate.get('/getAllOrders');
+      setOrders([...response.data].reverse());
+      setTheOrdersHandler();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
+    getAllOrders();
+  }, []);
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleFiltered = () => {
     setFilteredOrders(
       orders.filter(
         (order) =>
@@ -37,7 +55,11 @@ const AdminOrders = () => {
           order.phone.includes(searchTerm)
       )
     );
-  }, [searchTerm]);
+  };
+  useMemo(() => {
+    handleFiltered();
+  }, [orders, searchTerm]);
+
   const handleDots = (order) => {
     setOrderId(order?.invoiceNumber);
     setDotsClicked(dotsClicked === order?._id ? null : order?._id);
@@ -52,9 +74,8 @@ const AdminOrders = () => {
   };
   useMemo(() => {
     setTheOrdersHandler();
-  }, [orders, filteredOrders, page, rowsPerPage]);
+  }, [filteredOrders, page, rowsPerPage]);
 
-  console.log(filteredOrders);
   const handlePageChange = useCallback((event, value) => {
     setPage(value);
   }, []);
@@ -77,20 +98,6 @@ const AdminOrders = () => {
       console.log(error);
     }
   };
-
-  const getAllOrders = async () => {
-    try {
-      const response = await axiosPrivate.get('/getAllOrders');
-      const allOrders = [...response.data].reverse();
-      setOrders(allOrders);
-      setTheOrdersHandler();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    getAllOrders();
-  }, []);
 
   const handleShipped = async () => {
     try {
@@ -117,10 +124,6 @@ const AdminOrders = () => {
     }
   };
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
   return (
     <Layout>
       <div>
@@ -138,7 +141,9 @@ const AdminOrders = () => {
             </button>
           </div>
         ) : (
-          <h1 className=" font-poppins ml-6 my-2 text-lg">{count} Orders</h1>
+          <h1 className=" font-poppins ml-6 my-2 text-lg">
+            {count > 1 && count < 10 ? `${count} orders` : `${count} order`}{' '}
+          </h1>
         )}
         <div className=" w-full space-y-6 mx-5 my-5 ">
           <div className="relative flex">
@@ -153,7 +158,7 @@ const AdminOrders = () => {
             </span>
           </div>
 
-          {screenSize <= 1000 ? (
+          {screenSize <= 600 ? (
             <div>
               {theOrders.map((order) => (
                 <Card key={order.invoiceNumber} className="hover:bg-gray-100 ">

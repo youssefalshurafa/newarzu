@@ -10,15 +10,14 @@ import { FiArrowLeft } from 'react-icons/fi';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import CheckoutProduct from '@/components/CheckoutProduct';
+import MainLayout from '@/components/mainLayout';
 
 function Cart() {
-  const [visible, setVisible] = useState(false);
-  const showBar = () => setVisible(!visible);
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
   const [shippingRate, setShippingRate] = useState(0);
   useEffect(() => {
-    total > 300 ? setShippingRate(0) : setShippingRate(15);
+    total > 1200 ? setShippingRate(0) : setShippingRate(15);
   });
 
   return (
@@ -29,85 +28,77 @@ function Cart() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen flex flex-col justify-between">
-        <div className=" fixed top-0 z-10 w-full">
-          <NavBar showBar={showBar} />
-        </div>
-        {visible ? (
-          <div className=" fixed overscroll-contain bg-opacity-80 bg-white h-screen  top-0 z-20 min-w-full">
-            <DropDown showBar={showBar} />
-          </div>
-        ) : (
-          <></>
-        )}
-        <div className="my-12">
-          <div>
-            <CheckoutWizard activeStep={0} />
-          </div>
-          <Link href={'/'}>
-            <div className="p-4">
-              <button className=" flex border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white">
-                <span className=" pt-1 px-1">
-                  <FiArrowLeft size={14} />
-                </span>{' '}
-                CONTINUE SHOPPING
-              </button>
-            </div>
-          </Link>
-          <div className="md:grid md:grid-cols-4">
-            <div className="md:col-span-3">
-              {items.map((product, i) => (
-                <CheckoutProduct product={product} />
-              ))}
-            </div>
+      <MainLayout>
+        <div className="min-h-screen flex flex-col justify-between">
+          <div className="my-12">
             <div>
-              {items.length > 0 ? (
-                <div className=" max-w-md md:max-w-4xl mx-auto bg-gray-100 mt-4 font-poppins">
-                  <p className=" font-serif text-center pt-4 text-lg">
-                    ORDER SUMMARY
-                  </p>
+              <CheckoutWizard activeStep={0} />
+            </div>
+            <Link href={'/'}>
+              <div className="p-4">
+                <button className=" flex border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white">
+                  <span className=" pt-1 px-1">
+                    <FiArrowLeft size={14} />
+                  </span>{' '}
+                  CONTINUE SHOPPING
+                </button>
+              </div>
+            </Link>
+            <div className="md:grid md:grid-cols-4">
+              <div className="md:col-span-3">
+                {items.map((product, i) => (
+                  <CheckoutProduct product={product} />
+                ))}
+              </div>
+              <div>
+                {items.length > 0 ? (
+                  <div className=" max-w-md md:max-w-4xl mx-auto bg-gray-100 mt-4 font-poppins">
+                    <p className=" font-serif text-center pt-4 text-lg">
+                      ORDER SUMMARY
+                    </p>
 
-                  <div className="flex justify-between mx-4 pt-4 pb-4">
-                    <p>Subtotal</p>
-                    <p>LE {total}</p>
-                  </div>
-
-                  {shippingRate > 0 ? (
-                    <div className="flex justify-between mx-4 py-4">
-                      <p>Shipping</p>
-                      <p>LE {shippingRate}</p>
+                    <div className="flex justify-between mx-4 pt-4 pb-4">
+                      <p>Subtotal</p>
+                      <p>LE {total}</p>
                     </div>
-                  ) : shippingRate <= 0 ? (
-                    <div className=" mx-4 py-4">
-                      <p>Your Order qualifies for free shipping!</p>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
 
-                  <div className="py-4 flex justify-between mx-4">
-                    <p>Total</p>
-                    <p>LE {total + shippingRate}</p>
+                    {shippingRate > 0 ? (
+                      <div className="flex justify-between mx-4 py-4">
+                        <p>Shipping</p>
+                        <p>LE {shippingRate}</p>
+                      </div>
+                    ) : shippingRate <= 0 ? (
+                      <div className=" mx-4 py-4">
+                        <p>Your Order qualifies for free shipping!</p>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
+                    <div className="py-4 flex justify-between mx-4">
+                      <p>Total</p>
+                      <p>LE {total + shippingRate}</p>
+                    </div>
+                    <div className=" text-center pb-4">
+                      <Link href={'/checkout'}>
+                        <button className="  border border-solid font-poppins border-neutral-700 px-2 bg-neutral-700 text-white hover:bg-white hover:text-neutral-700">
+                          Proceed To Checkout
+                        </button>
+                      </Link>
+                    </div>
                   </div>
-                  <div className=" text-center pb-4">
-                    <Link href={'/checkout'}>
-                      <button className="  border border-solid font-poppins border-neutral-700 px-2 bg-neutral-700 text-white hover:bg-white hover:text-neutral-700">
-                        Proceed To Checkout
-                      </button>
-                    </Link>
+                ) : (
+                  <div className="pl-8 font-poppins text-lg">
+                    <h1>Your Bag is Empty...</h1>
                   </div>
-                </div>
-              ) : (
-                <div className="pl-8 font-poppins text-lg">
-                  <h1>Your Bag is Empty...</h1>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </MainLayout>
     </>
   );
 }

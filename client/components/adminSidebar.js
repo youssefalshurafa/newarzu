@@ -22,18 +22,7 @@ const AdminSidebar = () => {
           <p className=" font-poppins font-semibold">Dashboard</p>
           <BsPieChartFill size={18} />
         </div>
-        <div
-          onClick={() => {
-            handleClick('customers');
-            setIsActiveMenu(!isActiveMenu);
-          }}
-          className={`mt-3 flex justify-between px-4 cursor-pointer hover:bg-indigo-500 hover:text-white  h-8 items-center rounded-md ${
-            isClicked.customers && 'bg-indigo-500 text-white '
-          }`}
-        >
-          <p className=" font-poppins font-semibold">Customers</p>
-          <ImUsers size={18} />
-        </div>
+
         <div
           className={`mt-3 flex justify-between px-4 cursor-pointer hover:bg-indigo-500 hover:text-white  h-8 items-center rounded-md ${
             isClicked.employees && 'bg-indigo-500 text-white '

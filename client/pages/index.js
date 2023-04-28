@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import axios from './api/axios';
+import MainLayout from '@/components/mainLayout';
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -28,8 +29,6 @@ function Home() {
   useEffect(() => {
     getCategories();
   }, []);
-  const [visible, setVisible] = useState(false);
-  const showBar = () => setVisible(!visible);
 
   return (
     <>
@@ -39,53 +38,47 @@ function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen flex flex-col justify-between">
-        <div className=" fixed top-0 z-10 w-full">
-          <NavBar showBar={showBar} />
-        </div>
-        {visible ? (
-          <div className=" fixed overscroll-contain bg-opacity-80 bg-white h-screen  top-0 z-20 min-w-full">
-            <DropDown showBar={showBar} />
+      <MainLayout>
+        <div className="min-h-screen flex flex-col justify-between">
+          <div className=" relative">
+            <Carousels />
           </div>
-        ) : (
-          <></>
-        )}
-
-        <div className=" relative">
-          <Carousels />
-        </div>
-        <CategorySection products={products} categories={categories} />
-        <div className="flex justify-center">
-          <h1 className=" font-poppins font-semibold text-xl">
-            {' '}
-            Latest Updates{' '}
-          </h1>
-        </div>
-        <div className="grid grid-cols-2 p-3">
-          <div>
-            <h4 className="text-xs  font-poppins font-thin"> Ready for New</h4>
-            <div className="text-3xl pt-2 space-y-2 font-dmSerif lg:text-8xl">
-              <h1>Get into</h1>
-              <h1>New Season</h1>
+          <CategorySection products={products} categories={categories} />
+          <div className="flex justify-center">
+            <h1 className=" font-poppins font-semibold text-xl">
+              {' '}
+              Latest Updates{' '}
+            </h1>
+          </div>
+          <div className="grid grid-cols-2 p-3">
+            <div>
+              <h4 className="text-xs  font-poppins font-thin">
+                {' '}
+                Ready for New
+              </h4>
+              <div className="text-3xl pt-2 space-y-2 font-dmSerif lg:text-8xl">
+                <h1>Get into</h1>
+                <h1>New Season</h1>
+              </div>
+              <div className="mt-1">
+                <button className="border-2 border-solid border-black text-xs font-poppins font-semibold lg:text-xl">
+                  <p className="p-1 ">SHOP ARZU FAVORITES</p>
+                </button>
+              </div>
             </div>
-            <div className="mt-1">
-              <button className="border-2 border-solid border-black text-xs font-poppins font-semibold lg:text-xl">
-                <p className="p-1 ">SHOP ARZU FAVORITES</p>
-              </button>
+            <div>
+              <img
+                src="https://naploungewear.com/wp-content/uploads/2023/01/nap-new-season_1.jpg"
+                alt=""
+              />
             </div>
           </div>
-          <div>
-            <img
-              src="https://naploungewear.com/wp-content/uploads/2023/01/nap-new-season_1.jpg"
-              alt=""
-            />
+
+          <div className="mt-8">
+            <Footer />
           </div>
         </div>
-
-        <div className="mt-8">
-          <Footer />
-        </div>
-      </div>
+      </MainLayout>
     </>
   );
 }

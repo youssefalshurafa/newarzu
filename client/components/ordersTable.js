@@ -1,3 +1,4 @@
+import { useStateContext } from '@/context/ContextProvider';
 import {
   Avatar,
   Box,
@@ -36,6 +37,7 @@ const OrdersTable = (props) => {
     handleShipped,
   } = props;
 
+  const { orders } = useStateContext();
   const selectedSome =
     selected.length > 0 && selected.length < theOrders.length;
 

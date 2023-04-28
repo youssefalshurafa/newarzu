@@ -9,14 +9,15 @@ import { useRouter } from 'next/router';
 import useAuth from '@/hooks/useAuth';
 import Cookies from 'js-cookie';
 import { toast, Toaster } from 'react-hot-toast';
+import MainLayout from '@/components/mainLayout';
 
 const LOGIN_URL = '/login';
 
 function Login() {
   const { setAuth } = useAuth();
-  const [visible, setVisible] = useState(false);
+
   const router = useRouter();
-  const showBar = () => setVisible(!visible);
+
   const [user, setUser] = useState('');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
@@ -78,55 +79,55 @@ function Login() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen flex flex-col justify-between">
-        <Toaster position="top-center"></Toaster>
-        <div className=" fixed top-0 z-10 w-full">
-          <NavBar showBar={showBar} />
-        </div>
-        <div className="relative top-20  mx-auto bg-gray-100  font-poppins px-4 pb-4 rounded-md border shadow-md">
-          <h1 className=" font-serif text-center pt-4 text-2xl">Login</h1>
+      <MainLayout>
+        <div className="min-h-screen flex flex-col justify-between">
+          <Toaster position="top-center"></Toaster>
 
-          <p className="text-center text-red-500">{errMsg}</p>
-          <form onSubmit={handleSubmit} className=" space-y-4">
-            <label htmlFor="username">Username :</label>
-            <input
-              className="bg-gray-100 border ml-1 rounded-md  "
-              type="text"
-              id="username"
-              autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
-              required
-            />
-            <br />
-            <label htmlFor="password">Password :</label>
-            <input
-              className="bg-gray-100 border ml-2 rounded-md  "
-              type="password"
-              id="password"
-              onChange={(e) => setPwd(e.target.value)}
-              value={pwd}
-              required
-            />
-            <br />
-            <div className="text-center">
-              <button className=" bg-gray-300 rounded-md w-full py-2 active:bg-black active:text-white">
-                Sign In
-              </button>
-            </div>
-          </form>
-          <p className="mt-4">
-            Need an account?
-            <br />
-            <span className=" text-blue-500 underline">
-              <Link href={'/register'}>Sign Up!</Link>
-            </span>
-          </p>
+          <div className="relative top-20  mx-auto bg-gray-100  font-poppins px-4 pb-4 rounded-md border shadow-md">
+            <h1 className=" font-serif text-center pt-4 text-2xl">Login</h1>
+
+            <p className="text-center text-red-500">{errMsg}</p>
+            <form onSubmit={handleSubmit} className=" space-y-4">
+              <label htmlFor="username">Username :</label>
+              <input
+                className="bg-gray-100 border ml-1 rounded-md  "
+                type="text"
+                id="username"
+                autoComplete="off"
+                onChange={(e) => setUser(e.target.value)}
+                value={user}
+                required
+              />
+              <br />
+              <label htmlFor="password">Password :</label>
+              <input
+                className="bg-gray-100 border ml-2 rounded-md  "
+                type="password"
+                id="password"
+                onChange={(e) => setPwd(e.target.value)}
+                value={pwd}
+                required
+              />
+              <br />
+              <div className="text-center">
+                <button className=" bg-gray-300 rounded-md w-full py-2 active:bg-black active:text-white">
+                  Sign In
+                </button>
+              </div>
+            </form>
+            <p className="mt-4">
+              Need an account?
+              <br />
+              <span className=" text-blue-500 underline">
+                <Link href={'/register'}>Sign Up!</Link>
+              </span>
+            </p>
+          </div>
+          <div className="mt-8">
+            <Footer />
+          </div>
         </div>
-        <div className="mt-8">
-          <Footer />
-        </div>
-      </div>
+      </MainLayout>
     </>
   );
 }
