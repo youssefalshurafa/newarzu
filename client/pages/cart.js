@@ -1,11 +1,9 @@
 import CheckoutWizard from '@/components/checkoutWizard';
-import DropDown from '@/components/dropDown';
 import Footer from '@/components/footer';
-import NavBar from '@/components/nav';
 import { selectItems, selectTotal } from '@/slices/bagSlice';
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FiArrowLeft } from 'react-icons/fi';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
@@ -19,6 +17,7 @@ function Cart() {
   useEffect(() => {
     total > 1200 ? setShippingRate(0) : setShippingRate(15);
   });
+  const dispatch = useDispatch();
 
   return (
     <>

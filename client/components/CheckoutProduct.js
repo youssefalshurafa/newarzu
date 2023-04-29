@@ -1,13 +1,8 @@
-import {
-  selectQuantity,
-  removeFromBag,
-  addToBag,
-  decrementFromBag,
-} from '@/slices/bagSlice';
+import { removeFromBag, addToBag, decrementFromBag } from '@/slices/bagSlice';
 import Link from 'next/link';
 import React from 'react';
 import { RiDeleteBinLine } from 'react-icons/ri';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function CheckoutProduct({ product }) {
   const dispatch = useDispatch();

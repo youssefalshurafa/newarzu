@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from './api/axios';
 import Head from 'next/head';
-import NavBar from '@/components/nav';
-import DropDown from '@/components/dropDown';
 import dynamic from 'next/dynamic';
 import CheckoutProduct from '@/components/CheckoutProduct';
-import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import MainLayout from '@/components/mainLayout';
+
+import { toast, Toaster } from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 const Checkout = () => {
   const items = useSelector(selectItems);
@@ -25,7 +25,6 @@ const Checkout = () => {
   const [email, setEmail] = useState('');
   const subtotal = useSelector(selectTotal);
   const address = add + ',' + city + ',' + gov;
-
   const total = useSelector(selectTotal);
   const [shippingRate, setShippingRate] = useState(0);
 
@@ -34,7 +33,8 @@ const Checkout = () => {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post('/newOrder', {
+
+    await axios.post('/newOrder', {
       customerName,
       phone,
       phoneTwo,
@@ -43,6 +43,8 @@ const Checkout = () => {
       items,
       subtotal,
     });
+    Cookies.remove('bag');
+    toast.success('Order Confirmed');
     router.push('/confirmed');
   };
   return (
@@ -55,6 +57,7 @@ const Checkout = () => {
       </Head>
       <MainLayout>
         <div>
+          <Toaster position="top-center"></Toaster>
           <div className="my-12">
             <div>
               <CheckoutWizard activeStep={1} />

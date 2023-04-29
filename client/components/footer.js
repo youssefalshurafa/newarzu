@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="bg-gray-100 h-96">
+    <footer className="bg-gray-100 h-max">
       <div className="grid grid-cols-2 md:grid-cols-4 pt-4">
         <div>
           <p className=" px-1 text-center font-poppins font-semibold text-base">
@@ -10,7 +10,7 @@ function Footer() {
           </p>
           <p className="text-center text-lg">------</p>
           <div className="text-center font-poppins font-thin space-y-3">
-            <p className=" text-xs">Return & Exchang</p>
+            <p className=" text-xs">Return & Exchange</p>
             <p className=" text-xs">Fabric care</p>
             <p className=" text-xs">Order Tracking</p>
           </div>

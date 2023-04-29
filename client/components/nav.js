@@ -2,7 +2,6 @@ import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import useLogout from '@/hooks/useLogout';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { selectItems } from '@/slices/bagSlice';
-
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -43,7 +42,6 @@ function NavBar({ showBar, filtered }) {
       }
     };
     getUser();
-
     return () => {
       isMounted = false;
       isMounted && controller.abort();

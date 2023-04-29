@@ -1,5 +1,6 @@
 import CheckoutWizard from '@/components/checkoutWizard';
 import MainLayout from '@/components/mainLayout';
+import { useStateContext } from '@/context/ContextProvider';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
