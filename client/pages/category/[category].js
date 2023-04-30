@@ -74,7 +74,9 @@ function CategoryPage() {
                     <p className=" text-xs text-left font-poppins mt-2">
                       {product.title}
                     </p>
-                    <p className=" text-xs font-semibold">${product.price}</p>
+                    <p className=" text-xs font-semibold">
+                      EGP {product.price}
+                    </p>
                   </CardContent>
                 </div>
               ))}

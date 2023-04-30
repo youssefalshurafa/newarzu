@@ -1,13 +1,13 @@
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import { useEffect, useMemo, useState, useCallback } from 'react';
-import Layout from '../components/layout';
+import Layout from '../components/adminFiles/layout';
 import { CiUser, CiLocationOn, CiPhone, CiSearch } from 'react-icons/ci';
 import { BsThreeDots } from 'react-icons/bs';
 import { toast, Toaster } from 'react-hot-toast';
-import { useStateContext } from '@/context/ContextProvider';
+import { useStateContext } from '../context/ContextProvider';
 import { Card, CardContent, TablePagination } from '@mui/material';
 import { useSelection } from '@/hooks/useSelection';
-import OrdersTable from '@/components/ordersTable';
+import OrdersTable from '../components/adminFiles/ordersTable';
 import Link from 'next/link';
 
 const useOrdersInv = (orders) => {

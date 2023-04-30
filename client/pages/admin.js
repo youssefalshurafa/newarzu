@@ -1,4 +1,4 @@
-import AdminNavbar from '@/components/adminNavbar';
+import AdminNavbar from '@/components/adminFiles/adminNavbar';
 import AdminSidebar from '@/components/adminSidebar';
 import AdminProducts from '@/pages/adminProducts';
 import { useStateContext } from '@/context/ContextProvider';

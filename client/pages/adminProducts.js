@@ -7,7 +7,7 @@ import { toast, Toaster } from 'react-hot-toast';
 import { RxCross2 } from 'react-icons/rx';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { AiFillMinusCircle } from 'react-icons/ai';
-import Layout from '../components/layout';
+import Layout from '../components/adminFiles/layout';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 
 const AdminProducts = () => {

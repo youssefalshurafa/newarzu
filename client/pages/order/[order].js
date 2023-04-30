@@ -1,4 +1,4 @@
-import Layout from '@/components/layout';
+import Layout from '../components/adminFiles/layout';
 import { useStateContext } from '@/context/ContextProvider';
 import { Box, Card } from '@mui/material';
 import Link from 'next/link';

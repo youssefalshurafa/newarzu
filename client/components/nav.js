@@ -1,3 +1,4 @@
+import useAuth from '@/hooks/useAuth';
 import useAxiosPrivate from '@/hooks/useAxiosPrivate';
 import useLogout from '@/hooks/useLogout';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
@@ -16,15 +17,16 @@ function NavBar({ showBar, filtered }) {
   const items = useSelector(selectItems);
   const total = items.map((item, i) => item.cartQuantity * 1);
   const sum = total.reduce((sum, a) => sum + a, 0);
-  const [data, setData] = useState({});
+  const { data, setData } = useAuth();
   const router = useRouter();
+  const axiosPrivate = useAxiosPrivate();
 
   const signout = async () => {
     await logout();
     setData({});
     router.push('/');
   };
-  const axiosPrivate = useAxiosPrivate();
+
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
@@ -62,7 +64,7 @@ function NavBar({ showBar, filtered }) {
         <div className=" lg:hidden cursor-pointer mr-2 " onClick={showBar}>
           <GiHamburgerMenu size={28} />
         </div>
-        <div className="text-2xl font-poppins font-semibold  tracking-wider justify-between ">
+        <div className="text-3xl font-dmSerif tracking-wider font-semibold   justify-between ">
           <Link href="/">
             <h1>Arzu</h1>
           </Link>
@@ -82,7 +84,7 @@ function NavBar({ showBar, filtered }) {
           {rolesObject?.hasOwnProperty('Admin') ? (
             <div>
               <Link href={'/adminProducts'}>
-                <p className=" hover:bg-black hover:text-white active:bg-black active:text-white font-poppins font-semibold bg-white text-black pt-1 rounded-md">
+                <p className="  hover:text-white hover:stroke-black  font-poppins font-semibold text-neutral-700 pt-1 rounded-md">
                   Admin
                 </p>
               </Link>

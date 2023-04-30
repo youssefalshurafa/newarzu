@@ -12,8 +12,11 @@ import MainLayout from '@/components/mainLayout';
 
 import { toast, Toaster } from 'react-hot-toast';
 import Cookies from 'js-cookie';
+import Link from 'next/link';
+import useAuth from '@/hooks/useAuth';
 
 const Checkout = () => {
+  const { data } = useAuth();
   const items = useSelector(selectItems);
   const router = useRouter();
   const [customerName, setCustomerName] = useState('');
@@ -28,6 +31,7 @@ const Checkout = () => {
   const total = useSelector(selectTotal);
   const [shippingRate, setShippingRate] = useState(0);
 
+  console.log(data);
   useEffect(() => {
     total > 1200 ? setShippingRate(0) : setShippingRate(15);
   });
@@ -76,6 +80,7 @@ const Checkout = () => {
                 <input
                   className="border mb-2 w-full p-1"
                   type="text"
+                  defaultValue={data.fullName}
                   onChange={(e) => setCustomerName(e.target.value)}
                 />
                 <br />
@@ -112,6 +117,7 @@ const Checkout = () => {
                 <input
                   className="border mb-2 w-full p-1"
                   type="text"
+                  defaultValue={data.mobile}
                   onChange={(e) => setPhone(e.target.value)}
                 />
                 <br />
@@ -128,6 +134,7 @@ const Checkout = () => {
                 <input
                   className="border  mb-2 w-full p-1"
                   type="text"
+                  defaultValue={data.email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -176,6 +183,14 @@ const Checkout = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="flex justify-center space-x-2">
+            <p>Returning customer? </p>
+            <Link href={'/login'}>
+              <p className=" cursor-pointer underline text-blue-500">
+                Click here to login
+              </p>
+            </Link>
           </div>
         </div>
       </MainLayout>

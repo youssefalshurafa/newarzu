@@ -1,6 +1,6 @@
-import AdminSidebar from '@/components/adminSidebar';
-import AdminNavbar from './adminNavbar';
-import { useStateContext } from '@/context/ContextProvider';
+import AdminSidebar from '../adminFiles/adminSidebar';
+import AdminNavbar from '../adminFiles/adminNavbar';
+import { useStateContext } from '../../context/ContextProvider';
 import { useEffect } from 'react';
 
 const Layout = ({ children }) => {
