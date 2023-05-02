@@ -201,6 +201,18 @@ export async function getAllOrders(req, res) {
   if (!orders) return res.status(404);
   res.json(orders);
 }
+export async function getOrder(req, res) {
+  try {
+    const { id } = req.params;
+    const order = await OrderModel.findOne({
+      invoiceNumber: id,
+    }).exec();
+    if (!order) return res.json({ msg: 'Order ID not found!' });
+    res.json(order);
+  } catch (error) {
+    return res.status(400).send({ error });
+  }
+}
 export async function deleteOrder(req, res) {
   try {
     OrderModel.findOneAndDelete(

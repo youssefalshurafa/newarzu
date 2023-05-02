@@ -35,6 +35,7 @@ const OrdersTable = (props) => {
     handleDots,
     handleNotShipped,
     handleShipped,
+    handleDelete,
   } = props;
 
   const { orders } = useStateContext();
@@ -109,12 +110,14 @@ const OrdersTable = (props) => {
                     </TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
-                        <Typography
-                          className=" font-poppins"
-                          variant="subtitle2"
-                        >
-                          {order.customerName}
-                        </Typography>
+                        <Link href={`/order/${order.invoiceNumber}`}>
+                          <Typography
+                            className=" font-poppins cursor-pointer"
+                            variant="subtitle2"
+                          >
+                            {order.customerName}
+                          </Typography>
+                        </Link>
                       </Stack>
                     </TableCell>
                     <TableCell className=" font-poppins">

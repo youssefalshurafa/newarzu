@@ -1,4 +1,4 @@
-import Layout from '../components/adminFiles/layout';
+import Layout from '../../components/adminFiles/layout';
 import { useStateContext } from '@/context/ContextProvider';
 import { Box, Card } from '@mui/material';
 import Link from 'next/link';
@@ -7,14 +7,53 @@ import { HiUser } from 'react-icons/hi';
 import { GoLocation } from 'react-icons/go';
 import { BsTelephone } from 'react-icons/bs';
 import Head from 'next/head';
+import useAxiosPrivate from '@/hooks/useAxiosPrivate';
+import { useEffect, useMemo, useState } from 'react';
 
 const OrderPage = () => {
   const { query } = useRouter();
   const { order } = query;
-  const { orders } = useStateContext();
+  const axiosPrivate = useAxiosPrivate();
+  const [theOrder, setTheOrder] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const getOrder = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axiosPrivate.get(`/order/${order}`);
+      setTheOrder(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useMemo(() => {
+    getOrder();
+  }, [order]);
 
-  const theOrder = orders.find((x) => x.customerName == order);
-  console.log(orders);
+  const handleShipped = async () => {
+    try {
+      await axiosPrivate.put('/editOrder', {
+        invNum: order,
+        shipped: true,
+      });
+      getOrder();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleNotShipped = async () => {
+    try {
+      await axiosPrivate.put('/editOrder', {
+        invNum: order,
+        shipped: false,
+      });
+      getOrder();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(theOrder);
   return (
     <Layout>
       <Head>
@@ -23,12 +62,30 @@ const OrderPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className=" ml-4 mt-4">
-        <Link href={'/adminOrders'}>
-          <button className="space-x-1 items-center mb-4 flex border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white">
-            Back to Orders
+      {isLoading && (
+        <div>
+          <h1 className=" text-xl font-semibold font-poppins m-5 text-center">
+            Loading data ....
+          </h1>
+        </div>
+      )}
+      <div className=" ml-4 mt-4 w-full">
+        <div className="flex justify-between">
+          <Link href={'/adminOrders'}>
+            <button className="space-x-1 items-center mb-4 flex border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white">
+              Back to Orders
+            </button>
+          </Link>
+
+          <button
+            onClick={theOrder.shipped ? handleNotShipped : handleShipped}
+            className={
+              'space-x-1 items-center mb-4 flex border border-solid font-poppins border-neutral-700 px-2 hover:bg-neutral-700 hover:text-white'
+            }
+          >
+            {theOrder.shipped ? 'Mark as not Shipped' : 'Mark as Shipped'}
           </button>
-        </Link>
+        </div>
 
         <div className="flex tracking-wide text-2xl font-poppins space-x-2">
           <p className="font-semibold ">Invoice number :</p>
@@ -36,21 +93,25 @@ const OrderPage = () => {
         </div>
         <div className=" flex font-poppins text-xl space-x-2 tracking-wide">
           <p className="font-semibold ">Status:</p>
-          <p>{theOrder?.shipped ? 'Shipped' : 'Not Shipped'}</p>
+          {theOrder?.shipped ? (
+            <p className="text-green-500">Shipped</p>
+          ) : (
+            <p className="text-red-500">Not Shipped</p>
+          )}
         </div>
         <div className=" flex font-poppins text-xl space-x-2 tracking-wide">
           <p className="font-semibold ">Order Date:</p>
-          <p>{theOrder?.date.slice(0, 10)}</p>
+          <p>{theOrder?.date?.slice(0, 10)}</p>
         </div>
         <div className=" flex font-poppins text-xl space-x-2 tracking-wide">
           <p className="font-semibold ">Order Time:</p>
-          <p>{theOrder?.date.slice(11, 16)}</p>
+          <p>{theOrder?.date?.slice(11, 16)}</p>
         </div>
         <div className=" space-y-4 mb-8">
           <Card className="mt-4">
             <Box sx={{ minWidth: 400 }}>
               <div>
-                {theOrder?.items.map((item, i) => (
+                {theOrder.items?.map((item, i) => (
                   <div
                     key={i}
                     className=" flex font-poppins justify-between mb-2 pr-4 items-center"

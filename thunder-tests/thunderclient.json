@@ -269,12 +269,12 @@
     "method": "GET",
     "sortNum": 20000,
     "created": "2023-04-11T19:21:06.827Z",
-    "modified": "2023-04-15T19:39:38.894Z",
+    "modified": "2023-05-01T17:34:07.323Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4MTU4NzU2MiwiZXhwIjoxNjgxNTg4NDYyfQ.W9YfXmUbmmvQIu7zEYn0tElgq9of2bbGh7Nj73W-LQE"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4Mjk2MjQzNiwiZXhwIjoxNjgyOTYzMzM2fQ.DNzI1p0ZyUZC7W7qzW2807gF0jWFXj5lRqidrCKkuj0"
     },
     "tests": []
   },
@@ -321,6 +321,25 @@
     "auth": {
       "type": "bearer",
       "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4MTU4NzU2MiwiZXhwIjoxNjgxNTg4NDYyfQ.W9YfXmUbmmvQIu7zEYn0tElgq9of2bbGh7Nj73W-LQE"
+    },
+    "tests": []
+  },
+  {
+    "_id": "992a9e7d-a13a-4840-9c1e-be633c111e45",
+    "colId": "e98aaa68-ca30-47c0-8cca-668a6a1f1b60",
+    "containerId": "",
+    "name": "getOrder",
+    "url": "http://localhost:5000/getOrder/",
+    "method": "GET",
+    "sortNum": 50000,
+    "created": "2023-05-02T12:59:31.193Z",
+    "modified": "2023-05-02T12:59:31.193Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"invNum\" : \"INV-5099\"\n}",
+      "form": []
     },
     "tests": []
   }

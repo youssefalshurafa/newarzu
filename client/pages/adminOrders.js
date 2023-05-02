@@ -95,7 +95,7 @@ const AdminOrders = () => {
       toast.success(`Deleted `);
       getAllOrders();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -172,7 +172,7 @@ const AdminOrders = () => {
                       </span>
                       {dotsClicked === order._id && (
                         <div className=" absolute right-10 bottom-0 space-y-2  shadow-md bg-white p-3 rounded-md">
-                          <Link href={`/order/${order.customerName}`}>
+                          <Link href={`/order/${order.invoiceNumber}`}>
                             <p className=" hover:bg-gray-100 p-1 rounded-md cursor-pointer">
                               Show Order
                             </p>
@@ -274,6 +274,7 @@ const AdminOrders = () => {
               handleDots={handleDots}
               handleNotShipped={handleNotShipped}
               handleShipped={handleShipped}
+              handleDelete={handleDelete}
             />
           )}
         </div>

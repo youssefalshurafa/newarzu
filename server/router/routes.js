@@ -7,6 +7,7 @@ import {
   editOrder,
   getAllOrders,
   getCategories,
+  getOrder,
   getUser,
   getUsers,
   Login,
@@ -40,6 +41,7 @@ router.route('/getCategories').get(getCategories);
 /* Private routes */
 router.route('/deleteOrder').delete(verifyJWT, deleteOrder);
 router.route('/getAllOrders').get(verifyJWT, getAllOrders);
+router.route('/order/:id').get(verifyJWT, getOrder);
 router.route('/editOrder').put(verifyJWT, editOrder);
 
 router.route('/createCategory').post(verifyJWT, createCategory);
