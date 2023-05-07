@@ -9,6 +9,7 @@ function CategorySection(props) {
     }
     return acc;
   }, []);
+  console.log(selectedProducts);
 
   return (
     <div>

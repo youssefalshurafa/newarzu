@@ -15,6 +15,7 @@ const AdminProducts = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [thumbnail, setThumbnail] = useState('');
+  const [material, setMaterial] = useState('');
   const [images, setImages] = useState([]);
   const [products, setProducts] = useState([]);
   const [confirm, setConfirm] = useState(false);
@@ -121,6 +122,7 @@ const AdminProducts = () => {
         thumbnail,
         images,
         category,
+        material,
       });
 
       if (response?.data?.success === true) {
@@ -148,7 +150,7 @@ const AdminProducts = () => {
   const getAllproducts = async () => {
     const response = await axios.get('/getAllProducts');
 
-    setProducts(response.data);
+    setProducts([...response.data].reverse());
   };
 
   useEffect(() => {
@@ -181,6 +183,7 @@ const AdminProducts = () => {
     setUpdateForm(true);
     setTitle(product.title);
     setDescription(product.description);
+    setMaterial(product.material);
     setPrice(product.price);
     setProductId(product._id);
     setThumbPreview(product.thumbnail.url);
@@ -200,6 +203,7 @@ const AdminProducts = () => {
         category,
         description,
         thumbnail,
+        material,
       });
 
       toast.dismiss();
@@ -240,11 +244,11 @@ const AdminProducts = () => {
   return (
     <Layout>
       <div className=" relative overflow-hidden mx-auto">
-        <Toaster position="top-center"></Toaster>
+        <Toaster position=" top-center"></Toaster>
 
         {category === 'Add a new category (+)' && (
-          <div className="fixed inset-0 bg-gray-800 opacity-90 z-50">
-            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-50 px-4 py-6 rounded-lg">
+          <div className="fixed inset-0 opacity-90 z-50">
+            <div className="fixed top-80 left-40 overscroll-contain shadow-md  bg-gray-100 z-50 px-4 py-6 rounded-lg">
               <div className="  space-y-2">
                 <span
                   onClick={() => setCategory('')}
@@ -355,6 +359,15 @@ const AdminProducts = () => {
                   type="text"
                   placeholder="enter description"
                   onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="title">Material:</label>
+                <input
+                  className="border w-full px-3 h-6 py-3 focus:outline-none rounded-md"
+                  type="text"
+                  placeholder="enter description"
+                  onChange={(e) => setMaterial(e.target.value)}
                 />
               </div>
               <div>
@@ -482,6 +495,16 @@ const AdminProducts = () => {
                   value={description}
                   placeholder="enter description"
                   onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="description">Material:</label>
+                <input
+                  className="border w-full px-3 h-6 py-3 focus:outline-none rounded-md"
+                  type="text"
+                  value={material}
+                  placeholder="enter description"
+                  onChange={(e) => setMaterial(e.target.value)}
                 />
               </div>
               <div>

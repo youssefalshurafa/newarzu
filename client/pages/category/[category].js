@@ -64,7 +64,7 @@ function CategoryPage() {
                         onMouseLeave={onMouseLeave(key)}
                         src={
                           isHovering[key]
-                            ? product.images[1].url
+                            ? product.images[0]?.url
                             : product.thumbnail.url
                         }
                         alt=""

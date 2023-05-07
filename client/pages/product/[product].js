@@ -1,10 +1,8 @@
-import DropDown from '@/components/dropDown';
 import Footer from '@/components/footer';
-import NavBar from '@/components/nav';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -31,6 +29,10 @@ function ProductPage() {
   const dispatch = useDispatch();
   const updatedProduct = { ...productName, size };
 
+  const imagesArray = productName?.images.map((image) => image.url);
+  const thumbnail = productName?.thumbnail.url;
+  const images = [thumbnail].concat(imagesArray);
+
   return (
     <>
       <Head>
@@ -40,63 +42,51 @@ function ProductPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainLayout>
-        <div className="min-h-screen flex flex-col justify-between">
+        <div className="min-h-screen flex flex-col mt-3 justify-between">
           <div className="relative top-8 pb-7 md:grid grid-cols-2 container mx-auto">
             <div>
               <Carousel showArrows={false} showStatus={false} showThumbs={true}>
-                {productName?.images?.map((image) => (
-                  <div>
-                    <img src={image.url} alt="" />
-                  </div>
-                ))}
+                {images?.map((image, i) => {
+                  return (
+                    <div key={i}>
+                      <img src={image} alt="" />
+                    </div>
+                  );
+                })}
               </Carousel>
             </div>
             <div className=" font-poppins pt-5 pl-5 text-xs">
-              <p className="text-sm ">{productName?.title}</p>
-              <p>${productName?.price}</p>
+              <p className="text-sm ">Code Name: {productName?.title}</p>
+              <p>Price: EGP {productName?.price}</p>
               <p className="pt-2">{`Size: ${size}`}</p>
               <div className="flex  space-x-4  pt-2">
                 <button
-                  onClick={() => setSize('S')}
+                  onClick={() => setSize('1')}
                   className={
-                    size == 'S'
+                    size == '1'
                       ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
                       : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
                   }
                 >
-                  S
+                  1
                 </button>
                 <button
-                  onClick={() => setSize('M')}
+                  onClick={() => setSize('2')}
                   className={
-                    size == 'M'
+                    size == '2'
                       ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
                       : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
                   }
                 >
-                  M
-                </button>
-                <button
-                  onClick={() => setSize('L')}
-                  className={
-                    size == 'L'
-                      ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
-                      : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
-                  }
-                >
-                  L
-                </button>
-                <button
-                  onClick={() => setSize('XL')}
-                  className={
-                    size == 'XL'
-                      ? 'bg-gray-800 text-white w-12 h-5 rounded-md'
-                      : 'bg-gray-200 w-12 h-5 rounded-md hover:bg-gray-800 hover:text-white'
-                  }
-                >
-                  XL
+                  2
                 </button>
               </div>
+              <p className="pt-4 font-xs font-extralight font-sans">
+                Size 1 : from 70KG to 100KG
+              </p>
+              <p className="pt-2 font-xs font-extralight font-sans">
+                Size 2 : from 100KG to 120KG
+              </p>
               <div>
                 <button
                   onClick={() => dispatch(addToBag(updatedProduct))}
@@ -117,6 +107,7 @@ function ProductPage() {
                   {productName?.material}
                 </p>
               </div>
+
               <Link href={`/category/${productName?.category}`}>
                 <div className="mt-5">
                   <button className="bg-gray-200 h-8 w-full cursor-pointer">

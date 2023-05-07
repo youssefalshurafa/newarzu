@@ -8,7 +8,7 @@ cloudinary.config({
 });
 
 export async function createProduct(req, res) {
-  const { title, description, price, thumbnail, category } = req.body;
+  const { title, description, price, thumbnail, category, material } = req.body;
   if (!title || !price) return res.status(400).json({ msg: 'Details missing' });
   try {
     const uploadedImage = await cloudinary.uploader.upload(thumbnail, {
@@ -36,6 +36,7 @@ export async function createProduct(req, res) {
       description,
       price,
       category,
+      material,
       thumbnail: {
         public_id: imagePublicId,
         url: imageURL,
@@ -48,13 +49,17 @@ export async function createProduct(req, res) {
   }
 }
 export async function getAllProducts(req, res) {
-  const products = await ProductModel.find();
-  if (!products) return res.status(404);
-  res.json(products);
-}
-export async function deleteProduct(req, res) {
-  if (!req?.body?.id) return res.status(400).json({ msg: 'id missing' });
   try {
+    const products = await ProductModel.find();
+    if (!products) return res.status(404);
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function deleteProduct(req, res, next) {
+  try {
+    if (!req?.body?.id) return res.status(400).json({ msg: 'id missing' });
     const foundProduct = await ProductModel.findOne({
       _id: req.body.id,
     }).exec();
@@ -70,8 +75,8 @@ export async function deleteProduct(req, res) {
 
     await ProductModel.deleteOne({ _id: foundProduct._id });
     res.status(200).json({ success: true, foundProduct });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    next(err);
   }
 }
 
@@ -116,6 +121,7 @@ export async function updateProduct(req, res) {
     description: req.body.description,
     price: req.body.price,
     category: req.body.category,
+    material: req.body.material,
   };
   try {
     const currentProduct = await ProductModel.findOne({

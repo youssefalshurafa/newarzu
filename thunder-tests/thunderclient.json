@@ -167,18 +167,13 @@
     "colId": "70164f75-9c9d-4715-8593-5d036fc0c9ca",
     "containerId": "",
     "name": "getAllProducts",
-    "url": "http://localhost:5000/deleteProduct",
-    "method": "DELETE",
+    "url": "http://localhost:5000/getAllProducts",
+    "method": "GET",
     "sortNum": 20000,
     "created": "2023-03-18T13:53:42.128Z",
-    "modified": "2023-03-21T18:18:34.247Z",
+    "modified": "2023-05-07T19:13:10.400Z",
     "headers": [],
     "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n\"_id\" : \"6415c031e2df0b31fc47fd9b\"\n}",
-      "form": []
-    },
     "tests": []
   },
   {
@@ -190,13 +185,17 @@
     "method": "DELETE",
     "sortNum": 30000,
     "created": "2023-03-21T18:25:32.893Z",
-    "modified": "2023-03-26T19:06:41.423Z",
+    "modified": "2023-05-07T19:13:37.890Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\" : \"Tunics\"\n}",
+      "raw": "{\n  \"id\" : \"642d8aba4e6d57a80cc16f3c\"\n}",
       "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4MzQ4NjgwNywiZXhwIjoxNjgzNDg3NzA3fQ.JUJRQrFUw0RKsravh-C6ihoNuIvUq1ovWYztH1Y_tTA"
     },
     "tests": []
   },
