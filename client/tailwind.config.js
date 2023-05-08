@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      height: {
+        128: '30rem',
+      },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
         passionOne: ['Passion One', 'cursive'],

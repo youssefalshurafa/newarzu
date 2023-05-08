@@ -57,7 +57,7 @@ export async function getAllProducts(req, res) {
     console.log(error);
   }
 }
-export async function deleteProduct(req, res, next) {
+export async function deleteProduct(req, res) {
   try {
     if (!req?.body?.id) return res.status(400).json({ msg: 'id missing' });
     const foundProduct = await ProductModel.findOne({
@@ -65,18 +65,28 @@ export async function deleteProduct(req, res, next) {
     }).exec();
     if (!foundProduct)
       return res.status(404).json({ msg: 'Product ID not found!' });
+
     const imgId = foundProduct.thumbnail.public_id;
     if (imgId) {
       await cloudinary.uploader.destroy(imgId);
     }
-    foundProduct.images.map(
-      async (product) => await cloudinary.uploader.destroy(product.public_id)
+    foundProduct.images.map((product) =>
+      cloudinary.uploader.destroy(product.public_id)
     );
 
-    await ProductModel.deleteOne({ _id: foundProduct._id });
-    res.status(200).json({ success: true, foundProduct });
-  } catch (err) {
-    next(err);
+    await ProductModel.findOneAndDelete(
+      { _id: foundProduct._id },
+      (err, deletedDoc) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(deletedDoc);
+          res.status(200).json({ msg: `deleted ${deletedDoc}` });
+        }
+      }
+    ).clone();
+  } catch (error) {
+    console.log(error);
   }
 }
 
