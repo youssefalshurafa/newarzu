@@ -12,8 +12,12 @@ import {
   getUsers,
   Login,
   Logout,
+  makeAdmin,
+  makeEditor,
   newOrder,
   Register,
+  removeAdmin,
+  removeEditor,
   updateUser,
 } from '../controllers/appController.js';
 import verifyJWT from '../middleware/verifyJWT.js';
@@ -50,6 +54,10 @@ router.route('/createProduct').post(verifyJWT, createProduct);
 router.route('/deleteProduct').delete(verifyJWT, deleteProduct);
 router.route('/deleteImage').delete(verifyJWT, deleteImage);
 router.route('/updateProduct').put(verifyJWT, updateProduct);
+router.route('/makeEditor').put(verifyJWT, makeEditor);
+router.route('/makeAdmin').put(verifyJWT, makeAdmin);
+router.route('/removeAdmin').put(verifyJWT, removeAdmin);
+router.route('/removeEditor').put(verifyJWT, removeEditor);
 
 router.route('/updateUser').put(verifyJWT, updateUser);
 router.route('/user').get(verifyJWT, getUser);

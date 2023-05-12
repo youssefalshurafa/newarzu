@@ -8,17 +8,17 @@
     "method": "DELETE",
     "sortNum": 10000,
     "created": "2023-02-23T12:27:45.162Z",
-    "modified": "2023-03-02T14:26:49.137Z",
+    "modified": "2023-05-12T11:24:23.143Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"id\" : \"6400aa6eb1ab2c9e70a35e0c\"\n}",
+      "raw": "{\n  \"id\" : \"640f5c7bb917b058389ff45e\"\n}",
       "form": []
     },
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY3Nzc2NzE5OSwiZXhwIjoxNjc3NzY3MjI5fQ.czAqfdFK_tv549ydAGhOE5423mbcJwSm9G7iLKuDkbU"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4Mzg5MDQyMSwiZXhwIjoxNjgzODkxMzIxfQ.HsnVhma9hanoLmCV8vsxUtkDgF50PoKsbkeZ-1WdYwg"
     },
     "tests": []
   },
@@ -31,12 +31,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-02-23T12:28:27.537Z",
-    "modified": "2023-03-13T16:33:18.989Z",
+    "modified": "2023-05-12T11:33:23.466Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"username\": \"noor5\",\n  \"email\": \"noor5@gmail.com\",\n  \"firstName\": \"Noor\",\n  \"lastName\": \"Hassan\",\n  \"pwd\": \"Aa@12345\"\n}",
+      "raw": "{\n  \"username\": \"mohsen\",\n  \"pwd\": \"Aa@12345\",\n  \"email\": \"mohsen@gmail.com\"\n}\n\n \n  \n  \n",
       "form": []
     },
     "tests": []
@@ -50,12 +50,12 @@
     "method": "GET",
     "sortNum": 30000,
     "created": "2023-02-23T12:28:41.405Z",
-    "modified": "2023-04-03T14:47:20.997Z",
+    "modified": "2023-05-12T11:54:18.013Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4MDUzMzIzMywiZXhwIjoxNjgwNTM0MTMzfQ.dyLT4qPMHUfesJnS91NcVsm57-Ieh1zRgkZLx6iUeGg"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4Mzg5MjQ1MCwiZXhwIjoxNjgzODkzMzUwfQ.DKa5iNQ0Vi_ISspTNEOMgxIiet6_CPU9z604gChxE9Y"
     },
     "tests": []
   },
@@ -115,17 +115,17 @@
     "method": "PUT",
     "sortNum": 70000,
     "created": "2023-03-10T11:36:26.161Z",
-    "modified": "2023-03-10T14:18:25.239Z",
+    "modified": "2023-05-12T11:20:18.578Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"fullName\": \"noor hassanss\"\n}",
+      "raw": "{\n  \"roles\": {\n    \"User\": 2001,\n    \"Editor\": 1984,\n    \"Admin\": 5150\n  }\n}",
       "form": []
     },
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6Im5vb3IyIiwicm9sZXMiOlsyMDAxXX0sImlhdCI6MTY3ODQ1Nzg4MiwiZXhwIjoxNjc4NTQ0MjgyfQ.hqPrwlDNuaXZsmcoTluLGFU5kNZf3Y4RFpL3xHGnwmM"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDFdfSwiaWF0IjoxNjgzODkwNDAxLCJleHAiOjE2ODM4OTEzMDF9.DaB6I78ULHnPs932eSoV8b9GyrFc5A_SOyLl-M9j8xw"
     },
     "tests": []
   },
@@ -339,6 +339,29 @@
       "type": "json",
       "raw": "{\n  \"invNum\" : \"INV-5099\"\n}",
       "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "de5ecb36-1386-49e6-ac8a-eee7d5f9269b",
+    "colId": "efb08442-c399-4484-958e-6934af526e73",
+    "containerId": "",
+    "name": "makeEditor",
+    "url": "http://localhost:5000/makeEditor",
+    "method": "PUT",
+    "sortNum": 90000,
+    "created": "2023-05-12T11:46:20.922Z",
+    "modified": "2023-05-12T11:46:20.922Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": \"640b0e2eb4fb314563ec58ed\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4Mzg5MTUxNywiZXhwIjoxNjgzODkyNDE3fQ.fEYGRrwBJgYkyJ7JTzGlYTUxNs3uA2V28H0DaAYfDbw"
     },
     "tests": []
   }

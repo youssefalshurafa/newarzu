@@ -110,11 +110,22 @@ export async function getUser(req, res) {
   res.json(foundUser);
 }
 export async function deleteUser(req, res) {
-  if (!req?.body?.id) return res.status(400).json({ msg: 'User ID required' });
-  const foundUser = await UserModel.findOne({ _id: req.body.id }).exec();
-  if (!foundUser) return res.status(404).json({ msg: 'User ID not found!' });
-  await UserModel.deleteOne({ foundUser });
-  res.status(200).json({ msg: `deleted user:${foundUser.username}` });
+  try {
+    const id = req.body.id;
+    if (!id) return res.status(400).json({ msg: 'User ID required' });
+    const foundUser = await UserModel.findOne({ _id: id }).exec();
+    if (!foundUser) return res.status(404).json({ msg: 'User ID not found!' });
+    await UserModel.findOneAndDelete({ _id: id }, (err, deletedDoc) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(deletedDoc);
+        res.status(200).json({ msg: `deleted ${deletedDoc}` });
+      }
+    }).clone();
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 }
 export async function updateUser(req, res) {
   const cookies = req.cookies;
@@ -134,6 +145,70 @@ export async function updateUser(req, res) {
     });
   } catch (error) {
     return res.status(401).send({ error });
+  }
+}
+export async function makeAdmin(req, res) {
+  try {
+    const id = req.body.id;
+    if (!id) return res.status(400).json({ msg: 'User ID required' });
+    const data = {
+      roles: {
+        User: 2001,
+        Editor: 1984,
+        Admin: 5150,
+      },
+    };
+    await UserModel.findByIdAndUpdate(id, data, { new: true });
+    res.status(201).json({ success: true });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+export async function makeEditor(req, res) {
+  try {
+    const id = req.body.id;
+    if (!id) return res.status(400).json({ msg: 'User ID required' });
+    const data = {
+      roles: {
+        User: 2001,
+        Editor: 1984,
+      },
+    };
+    await UserModel.findByIdAndUpdate(id, data, { new: true });
+    res.status(201).json({ success: true });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+export async function removeAdmin(req, res) {
+  try {
+    const id = req.body.id;
+    if (!id) return res.status(400).json({ msg: 'User ID required' });
+    const data = {
+      roles: {
+        User: 2001,
+        Editor: 1984,
+      },
+    };
+    await UserModel.findByIdAndUpdate(id, data, { new: true });
+    res.status(201).json({ success: true });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+export async function removeEditor(req, res) {
+  try {
+    const id = req.body.id;
+    if (!id) return res.status(400).json({ msg: 'User ID required' });
+    const data = {
+      roles: {
+        User: 2001,
+      },
+    };
+    await UserModel.findByIdAndUpdate(id, data, { new: true });
+    res.status(201).json({ success: true });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 }
 

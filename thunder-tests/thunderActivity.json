@@ -437,5 +437,74 @@
       "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4MzAzNjY1NiwiZXhwIjoxNjgzMDM3NTU2fQ.vBOwvghs3Q0IwHxdCxUd0W0-9jssEwLxL59TGPPxgOc"
     },
     "tests": []
+  },
+  {
+    "_id": "8d04fc05-5e9d-4e44-9b83-5e1b8f3496d5",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/makeEditor",
+    "url": "http://localhost:5000/makeEditor",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-05-12T11:39:21.704Z",
+    "modified": "2023-05-12T11:39:21.704Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": \"640b0e2eb4fb314563ec58ed\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4Mzg5MTUxNywiZXhwIjoxNjgzODkyNDE3fQ.fEYGRrwBJgYkyJ7JTzGlYTUxNs3uA2V28H0DaAYfDbw"
+    },
+    "tests": []
+  },
+  {
+    "_id": "242c407e-1346-4181-8e05-6ab8c00c7b0c",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/makeEditor",
+    "url": "http://localhost:5000/makeEditor",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-05-12T11:42:00.431Z",
+    "modified": "2023-05-12T11:42:00.431Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": \"640b0e2eb4fb314563ec58ed\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4Mzg5MTUxNywiZXhwIjoxNjgzODkyNDE3fQ.fEYGRrwBJgYkyJ7JTzGlYTUxNs3uA2V28H0DaAYfDbw"
+    },
+    "tests": []
+  },
+  {
+    "_id": "e2ec4d6d-d164-4020-a8f8-05e714b95362",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:5000/makeAdmin",
+    "url": "http://localhost:5000/makeAdmin",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-05-12T11:46:34.994Z",
+    "modified": "2023-05-12T11:58:29.898Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id\": \"640e3c2772f89cbadc492942\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJ1c2VybmFtZSI6InlvdXNzZWYiLCJyb2xlcyI6WzIwMDEsMTk4NCw1MTUwXX0sImlhdCI6MTY4Mzg5MjY5NywiZXhwIjoxNjgzODkzNTk3fQ.uel0Vsa7FFwIZxF00TYQVeREXSeaJARYo0KaLzN0qdk"
+    },
+    "tests": []
   }
 ]

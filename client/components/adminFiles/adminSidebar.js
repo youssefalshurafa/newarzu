@@ -33,14 +33,16 @@ const AdminSidebar = () => {
           <p className=" font-poppins font-semibold">Employees</p>
           <FaUserTie size={18} />
         </div>
-        <div
-          className={`mt-3 flex justify-between px-4 cursor-pointer hover:bg-indigo-500 hover:text-white  h-8 items-center rounded-md ${
-            isClicked.users && 'bg-indigo-500 text-white '
-          }`}
-        >
-          <p className=" font-poppins font-semibold">Users</p>
-          <FiUsers size={18} />
-        </div>
+        <Link href={'/users'}>
+          <div
+            className={`mt-3 flex justify-between px-4 cursor-pointer hover:bg-indigo-500 hover:text-white  h-8 items-center rounded-md ${
+              isClicked.users && 'bg-indigo-500 text-white '
+            }`}
+          >
+            <p className=" font-poppins font-semibold">Users</p>
+            <FiUsers size={18} />
+          </div>
+        </Link>
         <Link href={'/adminOrders'}>
           <div
             onClick={() => {

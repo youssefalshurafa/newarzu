@@ -90,39 +90,6 @@ export async function deleteProduct(req, res) {
   }
 }
 
-export async function supdateProduct(req, res) {
-  const productId = req.body.id;
-  if (!productId) return res.sendStatus(405);
-
-  try {
-    const currentProduct = await ProductModel.findOne({
-      _id: productId,
-    }).exec();
-
-    const updates = req.body.updates;
-
-    if (updates.thumbnail !== '') {
-      await cloudinary.uploader.destroy(currentProduct.thumbnail.public_id);
-
-      const newImage = await cloudinary.uploader.upload(updates.thumbnail, {
-        folder: 'products',
-      });
-
-      updates.thumbnail = {
-        public_id: newImage.public_id,
-        url: newImage.secure_url,
-      };
-    }
-
-    const product = await ProductModel.findByIdAndUpdate(productId, updates, {
-      new: true,
-    });
-    res.status(201).json({ success: true, product });
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 export async function updateProduct(req, res) {
   const productId = req.body.id;
   if (!productId) return res.sendStatus(405);
